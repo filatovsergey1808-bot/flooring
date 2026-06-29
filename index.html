@@ -136,40 +136,46 @@
             color: #1a73e8;
             margin-top: 8px;
         }
+        
+        /* --- НОВЫЙ СТИЛЬ ДЛЯ РЕКОМЕНДАЦИЙ --- */
         .recommendation {
-            background: #f0f7ff;
+            background: #faf4ed; /* Тёплый бежевый фон */
             border-radius: 12px;
             padding: 16px;
             margin-top: 16px;
-            border-left: 4px solid #1a73e8;
+            border-left: 4px solid #d4c5b2; /* Контур слева, более мягкий */
         }
         .recommendation .item {
             margin-bottom: 12px;
             padding-bottom: 12px;
-            border-bottom: 1px solid #e8e8e8;
+            border-bottom: 1px solid #e8ddd0; /* Тонкая линия между товарами */
         }
         .recommendation .item:last-child {
             margin-bottom: 0;
             padding-bottom: 0;
             border-bottom: none;
         }
+        /* --- Стиль кнопки "Перейти на сайт" --- */
         .btn-site {
             display: inline-block;
             margin-top: 8px;
             padding: 8px 20px;
-            background: #1a73e8;
-            color: #fff;
+            background: transparent; /* Прозрачный фон */
+            color: #4a3f35; /* Тёмный, благородный оттенок текста */
             text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
+            border-radius: 20px; /* Сильно скруглённые углы */
+            border: 1px solid #c9bdb0; /* Тонкий контур */
+            font-weight: 500;
             font-size: 14px;
-            border: none;
+            transition: all 0.2s ease;
             cursor: pointer;
-            transition: background 0.2s;
         }
         .btn-site:active {
-            background: #1557b0;
+            background: rgba(201, 189, 176, 0.2); /* Лёгкое затемнение при нажатии */
+            border-color: #a89584;
         }
+        /* --- КОНЕЦ НОВЫХ СТИЛЕЙ --- */
+
         .btn {
             display: block;
             width: 100%;
@@ -393,7 +399,7 @@
                 return;
             }
             
-            let html = '<div class="recommendation"><h4 style="margin-bottom:12px;">🛍️ Рекомендуемые товары</h4>';
+            let html = '<div class="recommendation"><h4 style="margin-bottom:12px; color: #4a3f35;">🛍️ Рекомендуемые товары</h4>';
             items.forEach(item => {
                 html += `
                     <div class="item">

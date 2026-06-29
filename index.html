@@ -143,19 +143,31 @@
             margin-top: 16px;
             border-left: 4px solid #1a73e8;
         }
-        .recommendation a {
+        .recommendation .item {
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e8e8e8;
+        }
+        .recommendation .item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        .recommendation .btn-site {
             display: inline-block;
             margin-top: 6px;
-            padding: 8px 16px;
+            padding: 8px 18px;
             background: #1a73e8;
             color: white;
             text-decoration: none;
             border-radius: 8px;
             font-weight: 600;
             font-size: 13px;
+            border: none;
+            cursor: pointer;
             transition: opacity 0.2s;
         }
-        .recommendation a:active {
+        .recommendation .btn-site:active {
             opacity: 0.7;
         }
         .btn {
@@ -384,12 +396,12 @@
             let html = '<div class="recommendation"><h4 style="margin-bottom:12px;">🛍️ Рекомендуемые товары</h4>';
             items.forEach(item => {
                 html += `
-                    <div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #eee;">
+                    <div class="item">
                         <b>${item.name}</b> (${item.brand})
                         <br>📝 ${item.desc}
                         <br>💰 <b>${item.price}</b>
                         <br>
-                        <a href="${item.url}" target="_blank">🔗 Перейти на сайт</a>
+                        <a href="${item.url}" target="_blank" class="btn-site">🔗 Перейти на сайт</a>
                     </div>
                 `;
             });

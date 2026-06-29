@@ -137,44 +137,48 @@
             margin-top: 8px;
         }
         
-        /* --- НОВЫЙ СТИЛЬ ДЛЯ РЕКОМЕНДАЦИЙ --- */
+        /* --- ОБНОВЛЁННЫЙ ДИЗАЙН РЕКОМЕНДАЦИЙ --- */
         .recommendation {
-            background: #faf4ed; /* Тёплый бежевый фон */
+            background: #fcf9f6; /* Очень светлый, почти белый с тёплым оттенком */
             border-radius: 12px;
-            padding: 16px;
+            padding: 18px 16px;
             margin-top: 16px;
-            border-left: 4px solid #d4c5b2; /* Контур слева, более мягкий */
+            border-left: 4px solid #ddd2c6; /* Более мягкий контур */
         }
         .recommendation .item {
-            margin-bottom: 12px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid #e8ddd0; /* Тонкая линия между товарами */
+            margin-bottom: 14px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid #f0ebe6; /* Едва заметная линия */
         }
         .recommendation .item:last-child {
             margin-bottom: 0;
             padding-bottom: 0;
             border-bottom: none;
         }
-        /* --- Стиль кнопки "Перейти на сайт" --- */
+        .recommendation .item b {
+            color: #2c3e50;
+        }
+        /* --- УВЕЛИЧЕННАЯ КНОПКА "Перейти на сайт" --- */
         .btn-site {
             display: inline-block;
-            margin-top: 8px;
-            padding: 8px 20px;
-            background: transparent; /* Прозрачный фон */
-            color: #4a3f35; /* Тёмный, благородный оттенок текста */
+            margin-top: 10px;
+            padding: 10px 28px; /* Увеличенный отступ */
+            background: transparent;
+            color: #4a3f35;
             text-decoration: none;
-            border-radius: 20px; /* Сильно скруглённые углы */
-            border: 1px solid #c9bdb0; /* Тонкий контур */
+            border-radius: 24px; /* Более скруглённая */
+            border: 1.5px solid #d5cbc0; /* Чуть толще и светлее контур */
             font-weight: 500;
-            font-size: 14px;
+            font-size: 15px; /* Крупнее текст */
             transition: all 0.2s ease;
             cursor: pointer;
+            text-align: center;
         }
         .btn-site:active {
-            background: rgba(201, 189, 176, 0.2); /* Лёгкое затемнение при нажатии */
-            border-color: #a89584;
+            background: rgba(213, 203, 192, 0.2);
+            border-color: #b8a898;
         }
-        /* --- КОНЕЦ НОВЫХ СТИЛЕЙ --- */
+        /* --- КОНЕЦ ОБНОВЛЁННЫХ СТИЛЕЙ --- */
 
         .btn {
             display: block;

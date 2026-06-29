@@ -69,10 +69,6 @@
             border-radius: 12px;
             margin-top: 4px;
         }
-        .card.selected {
-            border-color: #1a73e8;
-            background: #f0f7ff;
-        }
         .info-block {
             background: white;
             border-radius: 16px;
@@ -81,19 +77,45 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
         .info-block h3 {
-            font-size: 18px;
-            margin-bottom: 8px;
+            font-size: 22px;
+            margin-bottom: 12px;
         }
-        .info-block p {
+        .info-block .section {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #eee;
+        }
+        .info-block .section h4 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+        .info-block .section p {
             font-size: 14px;
             line-height: 1.6;
             color: #555;
+            white-space: pre-line;
         }
         .info-block .price {
             font-size: 20px;
             font-weight: 700;
             color: #1a73e8;
             margin-top: 8px;
+        }
+        .info-block .recommendation {
+            background: #f0f7ff;
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 16px;
+            border-left: 4px solid #1a73e8;
+        }
+        .info-block .recommendation a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .info-block .recommendation a:hover {
+            text-decoration: underline;
         }
         .btn {
             display: block;
@@ -119,6 +141,13 @@
             background: #e8f0fe;
             color: #1a73e8;
         }
+        .btn-success {
+            background: #34a853;
+            color: white;
+        }
+        .btn-success:active {
+            opacity: 0.8;
+        }
         .hidden {
             display: none !important;
         }
@@ -130,37 +159,66 @@
             cursor: pointer;
             margin-bottom: 12px;
         }
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 4px 4px 0 0;
+        }
+        .tag.green { background: #e6f7e6; color: #2e7d32; }
+        .tag.red { background: #fde8e8; color: #c62828; }
+        .tag.yellow { background: #fff8e1; color: #f57f17; }
+        .tag.blue { background: #e3f2fd; color: #0d47a1; }
     </style>
 </head>
 <body>
 
     <div id="app">
-        <!-- Шапка -->
         <div class="header">
             <h1>🏠 Напольные покрытия</h1>
             <p>Выберите материал для детальной информации</p>
         </div>
 
-        <!-- Сетка покрытий -->
-        <div class="grid" id="grid">
-            <!-- Карточки будут добавлены через JavaScript -->
-        </div>
+        <div class="grid" id="grid"></div>
 
-        <!-- Детальная информация -->
         <div class="info-block hidden" id="detail">
-            <button class="back-btn" id="backBtn">← Назад</button>
+            <button class="back-btn" id="backBtn">← Назад к списку</button>
             <h3 id="detailName"></h3>
-            <p id="detailDesc"></p>
-            <p id="detailPros"></p>
-            <p id="detailCons"></p>
+            <p id="detailDesc" style="font-size:15px;line-height:1.6;color:#333;margin-bottom:12px;"></p>
+            
+            <div class="section">
+                <h4>✅ Плюсы</h4>
+                <p id="detailPros"></p>
+            </div>
+            
+            <div class="section">
+                <h4>❌ Минусы</h4>
+                <p id="detailCons"></p>
+            </div>
+            
+            <div class="section">
+                <h4>🧼 Уход</h4>
+                <p id="detailCare"></p>
+            </div>
+            
+            <div class="section">
+                <h4>📊 Характеристики</h4>
+                <p id="detailSpecs"></p>
+            </div>
+            
             <div class="price" id="detailPrice"></div>
+            
+            <div id="recommendations"></div>
+            
             <button class="btn btn-primary" id="askBtn">❓ Задать вопрос о материале</button>
             <button class="btn btn-secondary" id="compareBtn">📊 Сравнить с другим</button>
+            <button class="btn btn-success" id="backToMenuBtn">🏠 В главное меню</button>
         </div>
     </div>
 
     <script>
-        // Данные о покрытиях (синхронизированы с ботом)
         const materials = [
             { id: 'ламинат', emoji: '🪵', name: 'Ламинат', badge: 'Популярный' },
             { id: 'композитный пол spc', emoji: '🧱', name: 'Композитный пол SPC', badge: 'Водостойкий' },
@@ -170,48 +228,75 @@
             { id: 'ковровое покрытие (рулонное)', emoji: '🧶', name: 'Ковровое покрытие', badge: 'Уютный' }
         ];
 
-        // Данные для детального просмотра (краткие версии из бота)
+        // Рекомендации товаров (синхронизированы с ботом)
+        const recommendations = {
+            'композитный пол spc': [
+                { name: 'Fargo Bevel', brand: 'Fargo', url: 'https://principfloor.ru/catalog/vinilovaya_plitka/kompozitnyy_pol_spc_fargo_bevel_dub_monako.html', price: '2 990 ₽/м²', desc: 'Премиальный SPC с фаской, водостойкий, класс 43' },
+                { name: 'Fargo Bevel Parquet', brand: 'Fargo', url: 'https://principfloor.ru/catalog/vinilovaya_plitka/kompozitnyy_pol_spc_fargo_bevel_parquet_dub_tikhuana.html', price: '3 090 ₽/м²', desc: 'SPC с паркетной фаской, дизайн под натуральное дерево' }
+            ],
+            'ламинат': [
+                { name: 'MyFloor Residence', brand: 'MyFloor', url: 'https://principfloor.ru/catalog/laminat/laminat_my_floor_residence_dub_leyk_korichnevyy_33kl_1845x244x10mm_faska_4v_ml1022_up_1_8m2_4sht.html', price: '3 890 ₽/м²', desc: 'Ламинат 33 класса с замком Megaloc, влагостойкий' },
+                { name: 'Pergo', brand: 'Pergo', url: 'https://principfloor.ru/catalog/laminat/laminat_pergo_uppsala_pro_dub_belostvolnyy_33kl_1200x190x8mm_faska_micro_8591_up_1_596m2_7sht.html', price: 'от 2 540 ₽/м²', desc: 'Премиальный ламинат с технологией TitanX, класс 33' }
+            ],
+            'swf': [
+                { name: 'SWF (Палуба)', brand: 'MyStep', url: 'https://principfloor.ru/catalog/laminat/kamennyy_laminat_swf_svf/kamennyy_laminat_swf_svf_mystep_stone_stoun_dub_templ_33kl_1220x196x8mm_faska_4v_ms8608_up_1_435m2_6.html', price: '5 790 ₽/м²', desc: 'Каменный ламинат с классическим дизайном прямой доски' },
+                { name: 'SWF (Английская ёлка)', brand: 'MyStep', url: 'https://principfloor.ru/catalog/laminat/kamennyy_laminat_swf_svf/kamennyy_laminat_swf_svf_mystep_stone_stoun_dub_templ_33kl_564x141x8mm_faska_4v_ms8618_up_1_431m2_18.html', price: '5 990 ₽/м²', desc: 'Каменный ламинат с дизайном английская ёлка, премиум-класс' }
+            ]
+        };
+
         const details = {
             'ламинат': {
-                desc: 'Многослойное покрытие на основе HDF-плиты. Доступная цена, простой монтаж.',
-                pros: '✅ Доступная цена, ✅ Простой монтаж, ✅ Широкий выбор дизайнов',
-                cons: '❌ Боится воды, ❌ Холодный на ощупь, ❌ Шумный при ходьбе',
+                desc: 'Ламинат — это многослойное покрытие на основе HDF-плиты. Состоит из верхнего защитного слоя, декоративного слоя, основы и стабилизирующего слоя.',
+                pros: '✅ Доступная цена\n✅ Простой монтаж (замковая система)\n✅ Устойчивость к истиранию\n✅ Широкий выбор дизайнов',
+                cons: '❌ Боится воды (не для ванной и кухни)\n❌ Холодный на ощупь (требует подогрева)\n❌ Шумный при ходьбе (нужна подложка)',
+                care: '🧹 Пылесосить или подметать ежедневно\n🧽 Мыть хорошо отжатой тряпкой (почти сухой)\n🚫 Не использовать абразивные средства и воск',
+                specs: '⏳ Срок службы: 15-25 лет\n📊 Класс износостойкости: 31-33 (для дома), 34 (для коммерции)\n💧 Водостойкость: ❌ Низкая — не рекомендуется для влажных помещений',
                 price: 'от 1 000 ₽/м²'
             },
             'композитный пол spc': {
-                desc: 'Жёсткий виниловый пол на основе каменного полимерного композита. Абсолютно водостойкий.',
-                pros: '✅ Водостойкость, ✅ Высокая прочность, ✅ Совместим с тёплым полом',
-                cons: '❌ Высокая цена, ❌ Требует ровного основания, ❌ Может быть шумным',
+                desc: 'SPC (Stone Polymer Composite) — это жёсткий виниловый пол на основе каменного полимерного композита. Состоит из ПВХ-подложки, декоративного слоя, SPC-сердечника (смесь кальцита и ПВХ) и износостойкого слоя. Абсолютно водостойкий, прочный и стабильный.',
+                pros: '✅ Полная водостойкость (подходит для ванных и кухонь)\n✅ Высокая прочность и ударная вязкость\n✅ Тёплая на ощупь\n✅ Совместим с системой тёплого пола (до 50°C на клей)\n✅ Простой замковый монтаж',
+                cons: '❌ Высокая цена\n❌ Требует идеально ровного основания\n❌ Может быть шумным при ходьбе (нужна подложка)',
+                care: '🧹 Пылесосить или подметать\n🧽 Мыть с нейтральными моющими средствами\n🚫 Избегать абразивных паст и щелочей',
+                specs: '⏳ Срок службы: 20-30 лет\n📊 Класс износостойкости: 43 (коммерческий класс)\n💧 Водостойкость: ✅ Высокая — абсолютно водостойкий',
                 price: 'от 2 500 ₽/м²'
             },
             'инженерная доска': {
-                desc: 'Трёхслойное покрытие из натурального дерева. Сочетает натуральность с устойчивостью к влажности.',
-                pros: '✅ Натуральный вид, ✅ Устойчивость к влажности, ✅ Можно шлифовать',
-                cons: '❌ Высокая цена, ❌ Профессиональный монтаж, ❌ Требует ухода',
+                desc: 'Инженерная доска — это трёхслойное покрытие из натурального дерева. Верхний слой — ценные породы (дуб, ясень), средний — влагостойкая фанера, нижний — стабилизирующий слой. Сочетает натуральность с устойчивостью к перепадам влажности.',
+                pros: '✅ Натуральный внешний вид\n✅ Устойчивость к перепадам влажности\n✅ Можно укладывать на тёплый пол (до 28°C)\n✅ Многократная шлифовка (5-7 раз)\n✅ Долговечность',
+                cons: '❌ Высокая цена\n❌ Требует профессионального монтажа\n❌ Боится царапин и ударов\n❌ Требует регулярного ухода',
+                care: '🧹 Пылесосить мягкой щеткой\n🧽 Мыть слегка влажной тряпкой\n🛡️ Использовать защитные средства для дерева\n🛠️ Обновлять лак каждые 3-5 лет',
+                specs: '⏳ Срок службы: 25-40 лет\n📊 Класс износостойкости: 33-34 (коммерческая нагрузка)\n💧 Водостойкость: 🟡 Средняя — допускается кратковременное воздействие влаги',
                 price: 'от 5 500 ₽/м²'
             },
             'quartz parquet': {
-                desc: 'Инженерная доска с кварцевым сердечником и верхним слоем из натурального шпона.',
-                pros: '✅ Натуральный шпон, ✅ Влагостойкость, ✅ Тёплый пол (до 28°C)',
-                cons: '❌ Высокая цена, ❌ Профессиональный монтаж, ❌ Царапины',
+                desc: 'Quartz Parquet — это инженерная доска с кварцевым сердечником (агломерат) и верхним слоем из натурального шпона. Сочетает стабильность кварцевого композита с эстетикой натурального дерева. Не боится влаги и перепадов температур.',
+                pros: '✅ Натуральный шпон (эстетика дерева)\n✅ Устойчивость к влаге и перепадам температур\n✅ Можно укладывать на тёплый пол (до 28°C)\n✅ Высокая износостойкость (класс 33-34)\n✅ Стабильная геометрия',
+                cons: '❌ Высокая цена\n❌ Требует профессионального монтажа\n❌ Боится царапин и ударов\n❌ Ограниченный выбор пород дерева',
+                care: '🧹 Пылесосить мягкой щеткой\n🧽 Мыть слегка влажной тряпкой\n🛡️ Использовать защитные средства для дерева\n🛠️ Обновлять лак каждые 3-5 лет',
+                specs: '⏳ Срок службы: 25-40 лет\n📊 Класс износостойкости: 33-34 (коммерческая нагрузка)\n💧 Водостойкость: 🟡 Средняя — устойчива к влажности, но требует защиты от залива',
                 price: 'от 6 500 ₽/м²'
             },
             'swf': {
-                desc: 'Композитный пол с улучшенной звукоизоляцией благодаря встроенной подложке.',
-                pros: '✅ Водостойкость, ✅ Звукоизоляция, ✅ Простой монтаж',
-                cons: '❌ Высокая цена, ❌ Требует ровного основания, ❌ Ограниченный дизайн',
+                desc: 'SWF (Stone Wood Floor) — это композитный пол на основе SPC-сердечника с улучшенной звукоизоляцией благодаря встроенной подложке. Сохраняет все преимущества SPC: водостойкость, прочность и стабильность.',
+                pros: '✅ Абсолютная водостойкость (подходит для ванных и кухонь)\n✅ Повышенная звукоизоляция (встроенная подложка)\n✅ Высокая ударная прочность\n✅ Простой замковый монтаж\n✅ Совместим с тёплым полом (до 28°C)',
+                cons: '❌ Высокая цена (премиальный сегмент)\n❌ Требует идеально ровного основания\n❌ Ограниченный выбор дизайнов',
+                care: '🧹 Пылесосить или подметать\n🧽 Мыть с нейтральными моющими средствами\n🚫 Избегать абразивных паст и щелочей',
+                specs: '⏳ Срок службы: 20-30 лет\n📊 Класс износостойкости: 43 (коммерческий класс)\n💧 Водостойкость: ✅ Высокая — абсолютно водостойкий',
                 price: 'от 4 000 ₽/м²'
             },
             'ковровое покрытие (рулонное)': {
-                desc: 'Текстильный напольный материал для тепла и уюта. Подходит для спален и гостиных.',
-                pros: '✅ Мягкое и тёплое, ✅ Звукоизоляция, ✅ Доступная цена',
-                cons: '❌ Сложный уход, ❌ Недолговечный, ❌ Не для влажных помещений',
+                desc: 'Ковровое покрытие (рулонное) — это текстильный напольный материал, который обеспечивает тепло, уют и звукоизоляцию. Подходит для спален, детских и гостиных.',
+                pros: '✅ Мягкое и тёплое\n✅ Хорошая звукоизоляция\n✅ Скрывает неровности пола\n✅ Огромный выбор цветов и текстур\n✅ Доступная цена',
+                cons: '❌ Сложный уход (пыль, пятна, запахи)\n❌ Недолговечный (вытирается)\n❌ Не подходит для влажных помещений\n❌ Требует регулярной чистки',
+                care: '🧹 Регулярно пылесосить\n🧽 Пятна удалять специальными средствами\n🧼 Профессиональная химчистка 1-2 раза в год',
+                specs: '⏳ Срок службы: 5-10 лет в зависимости от нагрузки\n📊 Класс износостойкости: 32-34 (коммерческая нагрузка)\n💧 Водостойкость: ❌ Низкая — не для влажных помещений',
                 price: 'от 1 000 ₽/м²'
             }
         };
 
         const tg = window.Telegram.WebApp;
-        tg.expand(); // Растягиваем приложение на весь экран
+        tg.expand();
 
         let selectedMaterial = null;
 
@@ -231,6 +316,29 @@
             });
         }
 
+        function renderRecommendations(materialId) {
+            const container = document.getElementById('recommendations');
+            const items = recommendations[materialId];
+            if (!items || items.length === 0) {
+                container.innerHTML = '';
+                return;
+            }
+            
+            let html = '<div class="recommendation"><h4 style="margin-bottom:12px;">🛍️ Рекомендуемые товары</h4>';
+            items.forEach(item => {
+                html += `
+                    <div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #eee;">
+                        <b>${item.name}</b> (${item.brand})
+                        <br>📝 ${item.desc}
+                        <br>💰 <b>${item.price}</b>
+                        <br><a href="${item.url}" target="_blank">🔗 Перейти на сайт</a>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
         function showDetail(id) {
             selectedMaterial = id;
             const data = details[id];
@@ -243,15 +351,21 @@
             document.getElementById('detailDesc').textContent = data.desc;
             document.getElementById('detailPros').textContent = data.pros;
             document.getElementById('detailCons').textContent = data.cons;
+            document.getElementById('detailCare').textContent = data.care;
+            document.getElementById('detailSpecs').textContent = data.specs;
             document.getElementById('detailPrice').textContent = data.price;
 
-            // Настройка кнопок
+            renderRecommendations(id);
+
             document.getElementById('askBtn').onclick = () => {
                 tg.sendData(JSON.stringify({ action: 'ask', material: id }));
                 tg.close();
             };
             document.getElementById('compareBtn').onclick = () => {
                 tg.sendData(JSON.stringify({ action: 'compare', material: id }));
+                tg.close();
+            };
+            document.getElementById('backToMenuBtn').onclick = () => {
                 tg.close();
             };
 
@@ -264,18 +378,8 @@
             selectedMaterial = null;
         };
 
-        // Обработка данных от бота (если нужно)
-        tg.onEvent('mainButtonClicked', () => {
-            if (selectedMaterial) {
-                tg.sendData(JSON.stringify({ action: 'select', material: selectedMaterial }));
-                tg.close();
-            }
-        });
-
-        // Инициализация
         renderGrid();
 
-        // Показываем кнопку "Готово" в Telegram
         tg.MainButton.setText('Выбрать');
         tg.MainButton.show();
         tg.MainButton.onClick(() => {

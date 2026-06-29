@@ -13,41 +13,83 @@
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f5f5f5;
+            min-height: 100vh;
             padding: 16px;
             color: #1a1a1a;
-            min-height: 100vh;
+            /* --- НОВЫЙ ФОН: текстура дерева через градиент --- */
+            background: #e8ddd2;
+            background-image: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(139, 115, 85, 0.03) 2px,
+                    rgba(139, 115, 85, 0.03) 4px
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 30px,
+                    rgba(139, 115, 85, 0.04) 30px,
+                    rgba(139, 115, 85, 0.04) 31px
+                ),
+                linear-gradient(135deg, #e8ddd2 0%, #d5c8b8 100%);
+            background-attachment: fixed;
         }
+        /* --- НОВАЯ ШАПКА --- */
         .header {
-            background: #2c3e50;
-            color: white;
-            padding: 20px;
-            border-radius: 16px;
+            background: rgba(255, 252, 249, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 24px 20px 20px 20px;
             margin-bottom: 20px;
             text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(255,255,255,0.5);
         }
         .header h1 {
-            font-size: 24px;
-            font-weight: 700;
+            font-size: 22px;
+            font-weight: 300;
+            letter-spacing: 1.5px;
+            color: #4a3f35;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .header h1 span {
+            font-weight: 600;
+            color: #8b7355;
         }
         .header p {
-            font-size: 14px;
-            opacity: 0.8;
-            margin-top: 4px;
+            font-size: 13px;
+            color: #9a8a7a;
+            letter-spacing: 0.5px;
+            font-weight: 300;
+            margin-top: 2px;
         }
+        .header .accent-line {
+            width: 40px;
+            height: 2px;
+            background: #d5c8b8;
+            margin: 8px auto 0 auto;
+            border-radius: 2px;
+        }
+        /* --- ОСТАЛЬНЫЕ СТИЛИ --- */
         .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
         }
         .card {
-            background: white;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
-            border: 2px solid transparent;
+            border: 1px solid rgba(255,255,255,0.6);
         }
         .card:active {
             transform: scale(0.96);
@@ -56,7 +98,7 @@
             width: 100%;
             height: 120px;
             object-fit: cover;
-            background: #e0e0e0;
+            background: #e0d6cc;
             display: block;
         }
         .card .image-placeholder {
@@ -66,7 +108,7 @@
             align-items: center;
             justify-content: center;
             font-size: 48px;
-            background: #e8f0fe;
+            background: #f0ebe6;
         }
         .card .info {
             padding: 12px 14px 14px 14px;
@@ -74,22 +116,28 @@
         .card .name {
             font-weight: 600;
             font-size: 14px;
+            color: #3d352c;
         }
         .card .badge {
             display: inline-block;
             font-size: 10px;
-            background: #e8f0fe;
-            color: #1a73e8;
-            padding: 2px 8px;
+            background: #e8e0d8;
+            color: #7a6a5a;
+            padding: 2px 10px;
             border-radius: 12px;
             margin-top: 4px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
         }
         .info-block {
-            background: white;
+            background: rgba(255, 252, 249, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-radius: 16px;
             padding: 20px;
             margin-top: 16px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(255,255,255,0.5);
         }
         .info-block .image-full {
             width: 100%;
@@ -97,7 +145,7 @@
             object-fit: cover;
             border-radius: 12px;
             margin-bottom: 16px;
-            background: #e0e0e0;
+            background: #e0d6cc;
         }
         .info-block .image-full-placeholder {
             width: 100%;
@@ -106,49 +154,55 @@
             align-items: center;
             justify-content: center;
             font-size: 64px;
-            background: #e8f0fe;
+            background: #f0ebe6;
             border-radius: 12px;
             margin-bottom: 16px;
         }
         .info-block h3 {
-            font-size: 22px;
-            margin-bottom: 12px;
+            font-size: 20px;
+            font-weight: 600;
+            color: #3d352c;
+            margin-bottom: 8px;
         }
         .info-block .section {
             margin-top: 16px;
             padding-top: 16px;
-            border-top: 1px solid #eee;
+            border-top: 1px solid rgba(0,0,0,0.06);
         }
         .info-block .section h4 {
-            font-size: 16px;
-            margin-bottom: 8px;
-            color: #2c3e50;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #7a6a5a;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-size: 11px;
         }
         .info-block .section p {
             font-size: 14px;
             line-height: 1.6;
-            color: #555;
+            color: #4a3f35;
             white-space: pre-line;
         }
         .info-block .price {
             font-size: 20px;
             font-weight: 700;
-            color: #1a73e8;
+            color: #8b7355;
             margin-top: 8px;
         }
         
-        /* --- СТИЛИ РЕКОМЕНДАЦИЙ --- */
+        /* --- РЕКОМЕНДАЦИИ --- */
         .recommendation {
-            background: #fcf9f6;
+            background: rgba(245, 240, 235, 0.6);
             border-radius: 12px;
             padding: 18px 16px;
             margin-top: 16px;
-            border-left: 4px solid #ddd2c6;
+            border-left: 3px solid #d5c8b8;
         }
         .recommendation .item {
             margin-bottom: 14px;
             padding-bottom: 14px;
-            border-bottom: 1px solid #f0ebe6;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
         }
         .recommendation .item:last-child {
             margin-bottom: 0;
@@ -156,25 +210,25 @@
             border-bottom: none;
         }
         .recommendation .item b {
-            color: #2c3e50;
+            color: #3d352c;
         }
         .btn-site {
             display: inline-block;
             margin-top: 10px;
             padding: 10px 28px;
             background: transparent;
-            color: #4a3f35;
+            color: #6a5a4a;
             text-decoration: none;
             border-radius: 24px;
-            border: 1.5px solid #d5cbc0;
+            border: 1.5px solid #d5c8b8;
             font-weight: 500;
-            font-size: 15px;
+            font-size: 14px;
             transition: all 0.2s ease;
             cursor: pointer;
             text-align: center;
         }
         .btn-site:active {
-            background: rgba(213, 203, 192, 0.2);
+            background: rgba(213, 200, 184, 0.25);
             border-color: #b8a898;
         }
 
@@ -185,14 +239,14 @@
             border: none;
             border-radius: 12px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
             transition: opacity 0.2s;
             text-align: center;
             margin-top: 12px;
         }
         .btn-success {
-            background: #34a853;
+            background: #8b7355;
             color: white;
         }
         .btn-success:active {
@@ -204,19 +258,25 @@
         .back-btn {
             background: none;
             border: none;
-            color: #1a73e8;
+            color: #8b7355;
             font-size: 14px;
             cursor: pointer;
             margin-bottom: 12px;
+            padding: 0;
+        }
+        .back-btn:active {
+            opacity: 0.6;
         }
     </style>
 </head>
 <body>
 
     <div id="app">
+        <!-- НОВАЯ ШАПКА -->
         <div class="header">
-            <h1>🏠 Напольные покрытия</h1>
+            <h1>🏠 <span>Напольные</span> покрытия</h1>
             <p>Выберите материал для детальной информации</p>
+            <div class="accent-line"></div>
         </div>
 
         <div class="grid" id="grid"></div>
@@ -225,7 +285,7 @@
             <button class="back-btn" id="backBtn">← Назад к списку</button>
             <div id="detailImageContainer"></div>
             <h3 id="detailName"></h3>
-            <p id="detailDesc" style="font-size:15px;line-height:1.6;color:#333;margin-bottom:12px;"></p>
+            <p id="detailDesc" style="font-size:15px;line-height:1.6;color:#4a3f35;margin-bottom:12px;"></p>
             
             <div class="section">
                 <h4>✅ Плюсы</h4>
@@ -257,7 +317,7 @@
 
     <script>
         // ================================================================
-        // 1. ДАННЫЕ С НОВЫМИ КАРТИНКАМИ (PEXELS)
+        // 1. ДАННЫЕ С КАРТИНКАМИ
         // ================================================================
 
         const IMAGES = {
@@ -401,7 +461,7 @@
                 return;
             }
             
-            let html = '<div class="recommendation"><h4 style="margin-bottom:12px; color: #4a3f35;">🛍️ Рекомендуемые товары</h4>';
+            let html = '<div class="recommendation"><h4 style="margin-bottom:12px; color: #6a5a4a; font-weight:500; letter-spacing:0.5px;">🛍️ Рекомендуемые товары</h4>';
             items.forEach(item => {
                 html += `
                     <div class="item">

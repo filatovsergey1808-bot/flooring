@@ -6,7 +6,6 @@
     <title>Напольные покрытия</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        /* --- ОБЩИЕ СТИЛИ --- */
         * {
             margin: 0;
             padding: 0;
@@ -18,7 +17,6 @@
             padding: 16px;
             color: #1a1a1a;
         }
-        /* --- ШАПКА --- */
         .header {
             background: #2c3e50;
             color: white;
@@ -36,7 +34,6 @@
             opacity: 0.8;
             margin-top: 4px;
         }
-        /* --- СЕТКА КАРТОЧЕК --- */
         .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -73,7 +70,6 @@
             border-radius: 12px;
             margin-top: 4px;
         }
-        /* --- БЛОК ДЕТАЛЬНОЙ ИНФОРМАЦИИ --- */
         .info-block {
             background: white;
             border-radius: 16px;
@@ -107,7 +103,6 @@
             color: #1a73e8;
             margin-top: 8px;
         }
-        /* --- БЛОК РЕКОМЕНДАЦИЙ (ТОВАРЫ + ССЫЛКИ) --- */
         .recommendation {
             background: #f0f7ff;
             border-radius: 12px;
@@ -123,7 +118,6 @@
         .recommendation a:hover {
             text-decoration: underline;
         }
-        /* --- КНОПКИ --- */
         .btn {
             display: block;
             width: 100%;
@@ -137,10 +131,6 @@
             text-align: center;
             margin-top: 12px;
         }
-        .btn-secondary {
-            background: #e8f0fe;
-            color: #1a73e8;
-        }
         .btn-success {
             background: #34a853;
             color: white;
@@ -148,7 +138,13 @@
         .btn-success:active {
             opacity: 0.8;
         }
-        /* --- ВСПОМОГАТЕЛЬНЫЕ КЛАССЫ --- */
+        .btn-secondary {
+            background: #e8f0fe;
+            color: #1a73e8;
+        }
+        .btn-secondary:active {
+            opacity: 0.8;
+        }
         .hidden {
             display: none !important;
         }
@@ -160,18 +156,15 @@
             cursor: pointer;
             margin-bottom: 12px;
         }
-        .tag {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            margin: 4px 4px 0 0;
+        .menu-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
         }
-        .tag.green { background: #e6f7e6; color: #2e7d32; }
-        .tag.red { background: #fde8e8; color: #c62828; }
-        .tag.yellow { background: #fff8e1; color: #f57f17; }
-        .tag.blue { background: #e3f2fd; color: #0d47a1; }
+        .menu-actions .btn {
+            margin-top: 0;
+            flex: 1;
+        }
     </style>
 </head>
 <body>
@@ -217,7 +210,7 @@
             <!-- БЛОК РЕКОМЕНДАЦИЙ (ТОВАРЫ) -->
             <div id="recommendations"></div>
             
-            <!-- КНОПКА "В ГЛАВНОЕ МЕНЮ" (ВОЗВРАТ К СПИСКУ ПОКРЫТИЙ ВНУТРИ ПРИЛОЖЕНИЯ) -->
+            <!-- КНОПКА "В ГЛАВНОЕ МЕНЮ" -->
             <button class="btn btn-success" id="backToMenuBtn">🏠 В главное меню</button>
         </div>
     </div>
@@ -227,7 +220,6 @@
         // 1. ДАННЫЕ
         // ================================================================
 
-        // Список покрытий для карточек
         const materials = [
             { id: 'ламинат', emoji: '🪵', name: 'Ламинат', badge: 'Популярный' },
             { id: 'композитный пол spc', emoji: '🧱', name: 'Композитный пол SPC', badge: 'Водостойкий' },
@@ -237,7 +229,6 @@
             { id: 'ковровое покрытие (рулонное)', emoji: '🧶', name: 'Ковровое покрытие', badge: 'Уютный' }
         ];
 
-        // Рекомендуемые товары (синхронизированы с ботом)
         const recommendations = {
             'композитный пол spc': [
                 { name: 'Fargo Bevel', brand: 'Fargo', url: 'https://principfloor.ru/catalog/vinilovaya_plitka/kompozitnyy_pol_spc_fargo_bevel_dub_monako.html', price: '2 990 ₽/м²', desc: 'Премиальный SPC с фаской, водостойкий, класс 43' },
@@ -253,7 +244,6 @@
             ]
         };
 
-        // Детальная информация по каждому покрытию
         const details = {
             'ламинат': {
                 desc: 'Ламинат — это многослойное покрытие на основе HDF-плиты. Состоит из верхнего защитного слоя, декоративного слоя, основы и стабилизирующего слоя.',
@@ -306,7 +296,7 @@
         };
 
         // ================================================================
-        // 2. ЛОГИКА ПРИЛОЖЕНИЯ
+        // 2. ЛОГИКА
         // ================================================================
 
         const tg = window.Telegram.WebApp;
@@ -314,7 +304,6 @@
 
         let selectedMaterial = null;
 
-        // --- ОТОБРАЖЕНИЕ СЕТКИ (ГЛАВНОЕ МЕНЮ) ---
         function renderGrid() {
             const grid = document.getElementById('grid');
             grid.innerHTML = '';
@@ -331,7 +320,6 @@
             });
         }
 
-        // --- ОТОБРАЖЕНИЕ РЕКОМЕНДАЦИЙ ---
         function renderRecommendations(materialId) {
             const container = document.getElementById('recommendations');
             const items = recommendations[materialId];
@@ -355,7 +343,6 @@
             container.innerHTML = html;
         }
 
-        // --- ПОКАЗ ДЕТАЛЬНОЙ ИНФОРМАЦИИ ---
         function showDetail(id) {
             selectedMaterial = id;
             const data = details[id];
@@ -377,7 +364,6 @@
             tg.HapticFeedback.impactOccurred('medium');
         }
 
-        // --- ВОЗВРАТ В ГЛАВНОЕ МЕНЮ (СПИСОК ПОКРЫТИЙ) ---
         function goToMainMenu() {
             document.getElementById('grid').classList.remove('hidden');
             document.getElementById('detail').classList.add('hidden');
@@ -385,13 +371,10 @@
         }
 
         // ================================================================
-        // 3. ОБРАБОТЧИКИ СОБЫТИЙ
+        // 3. ОБРАБОТЧИКИ
         // ================================================================
 
-        // Кнопка "Назад к списку"
         document.getElementById('backBtn').onclick = goToMainMenu;
-
-        // Кнопка "🏠 В главное меню" — возврат в список покрытий
         document.getElementById('backToMenuBtn').onclick = goToMainMenu;
 
         // ================================================================
@@ -400,7 +383,6 @@
 
         renderGrid();
 
-        // Показываем кнопку "Выбрать" в Telegram
         tg.MainButton.setText('Выбрать');
         tg.MainButton.show();
         tg.MainButton.onClick(() => {

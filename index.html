@@ -6,6 +6,7 @@
     <title>Напольные покрытия</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
+        /* --- ОБЩИЕ СТИЛИ --- */
         * {
             margin: 0;
             padding: 0;
@@ -17,6 +18,7 @@
             padding: 16px;
             color: #1a1a1a;
         }
+        /* --- ШАПКА --- */
         .header {
             background: #2c3e50;
             color: white;
@@ -34,6 +36,7 @@
             opacity: 0.8;
             margin-top: 4px;
         }
+        /* --- СЕТКА КАРТОЧЕК --- */
         .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -47,6 +50,7 @@
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
             border: 2px solid transparent;
+            text-align: center;
         }
         .card:active {
             transform: scale(0.96);
@@ -69,6 +73,7 @@
             border-radius: 12px;
             margin-top: 4px;
         }
+        /* --- БЛОК ДЕТАЛЬНОЙ ИНФОРМАЦИИ --- */
         .info-block {
             background: white;
             border-radius: 16px;
@@ -102,21 +107,23 @@
             color: #1a73e8;
             margin-top: 8px;
         }
-        .info-block .recommendation {
+        /* --- БЛОК РЕКОМЕНДАЦИЙ (ТОВАРЫ + ССЫЛКИ) --- */
+        .recommendation {
             background: #f0f7ff;
             border-radius: 12px;
             padding: 16px;
             margin-top: 16px;
             border-left: 4px solid #1a73e8;
         }
-        .info-block .recommendation a {
+        .recommendation a {
             color: #1a73e8;
             text-decoration: none;
             font-weight: 600;
         }
-        .info-block .recommendation a:hover {
+        .recommendation a:hover {
             text-decoration: underline;
         }
+        /* --- КНОПКИ --- */
         .btn {
             display: block;
             width: 100%;
@@ -130,13 +137,6 @@
             text-align: center;
             margin-top: 12px;
         }
-        .btn-primary {
-            background: #1a73e8;
-            color: white;
-        }
-        .btn-primary:active {
-            opacity: 0.8;
-        }
         .btn-secondary {
             background: #e8f0fe;
             color: #1a73e8;
@@ -148,6 +148,7 @@
         .btn-success:active {
             opacity: 0.8;
         }
+        /* --- ВСПОМОГАТЕЛЬНЫЕ КЛАССЫ --- */
         .hidden {
             display: none !important;
         }
@@ -176,13 +177,16 @@
 <body>
 
     <div id="app">
+        <!-- ШАПКА -->
         <div class="header">
             <h1>🏠 Напольные покрытия</h1>
             <p>Выберите материал для детальной информации</p>
         </div>
 
+        <!-- СЕТКА ПОКРЫТИЙ (ГЛАВНОЕ МЕНЮ) -->
         <div class="grid" id="grid"></div>
 
+        <!-- БЛОК ДЕТАЛЬНОЙ ИНФОРМАЦИИ -->
         <div class="info-block hidden" id="detail">
             <button class="back-btn" id="backBtn">← Назад к списку</button>
             <h3 id="detailName"></h3>
@@ -210,15 +214,20 @@
             
             <div class="price" id="detailPrice"></div>
             
+            <!-- БЛОК РЕКОМЕНДАЦИЙ (ТОВАРЫ) -->
             <div id="recommendations"></div>
             
-            <button class="btn btn-primary" id="askBtn">❓ Задать вопрос о материале</button>
-            <button class="btn btn-secondary" id="compareBtn">📊 Сравнить с другим</button>
+            <!-- КНОПКА "В ГЛАВНОЕ МЕНЮ" (ВОЗВРАТ К СПИСКУ ПОКРЫТИЙ ВНУТРИ ПРИЛОЖЕНИЯ) -->
             <button class="btn btn-success" id="backToMenuBtn">🏠 В главное меню</button>
         </div>
     </div>
 
     <script>
+        // ================================================================
+        // 1. ДАННЫЕ
+        // ================================================================
+
+        // Список покрытий для карточек
         const materials = [
             { id: 'ламинат', emoji: '🪵', name: 'Ламинат', badge: 'Популярный' },
             { id: 'композитный пол spc', emoji: '🧱', name: 'Композитный пол SPC', badge: 'Водостойкий' },
@@ -228,7 +237,7 @@
             { id: 'ковровое покрытие (рулонное)', emoji: '🧶', name: 'Ковровое покрытие', badge: 'Уютный' }
         ];
 
-        // Рекомендации товаров (синхронизированы с ботом)
+        // Рекомендуемые товары (синхронизированы с ботом)
         const recommendations = {
             'композитный пол spc': [
                 { name: 'Fargo Bevel', brand: 'Fargo', url: 'https://principfloor.ru/catalog/vinilovaya_plitka/kompozitnyy_pol_spc_fargo_bevel_dub_monako.html', price: '2 990 ₽/м²', desc: 'Премиальный SPC с фаской, водостойкий, класс 43' },
@@ -244,6 +253,7 @@
             ]
         };
 
+        // Детальная информация по каждому покрытию
         const details = {
             'ламинат': {
                 desc: 'Ламинат — это многослойное покрытие на основе HDF-плиты. Состоит из верхнего защитного слоя, декоративного слоя, основы и стабилизирующего слоя.',
@@ -295,11 +305,16 @@
             }
         };
 
+        // ================================================================
+        // 2. ЛОГИКА ПРИЛОЖЕНИЯ
+        // ================================================================
+
         const tg = window.Telegram.WebApp;
         tg.expand();
 
         let selectedMaterial = null;
 
+        // --- ОТОБРАЖЕНИЕ СЕТКИ (ГЛАВНОЕ МЕНЮ) ---
         function renderGrid() {
             const grid = document.getElementById('grid');
             grid.innerHTML = '';
@@ -316,6 +331,7 @@
             });
         }
 
+        // --- ОТОБРАЖЕНИЕ РЕКОМЕНДАЦИЙ ---
         function renderRecommendations(materialId) {
             const container = document.getElementById('recommendations');
             const items = recommendations[materialId];
@@ -339,6 +355,7 @@
             container.innerHTML = html;
         }
 
+        // --- ПОКАЗ ДЕТАЛЬНОЙ ИНФОРМАЦИИ ---
         function showDetail(id) {
             selectedMaterial = id;
             const data = details[id];
@@ -357,29 +374,33 @@
 
             renderRecommendations(id);
 
-            document.getElementById('askBtn').onclick = () => {
-                tg.sendData(JSON.stringify({ action: 'ask', material: id }));
-                tg.close();
-            };
-            document.getElementById('compareBtn').onclick = () => {
-                tg.sendData(JSON.stringify({ action: 'compare', material: id }));
-                tg.close();
-            };
-            document.getElementById('backToMenuBtn').onclick = () => {
-                tg.close();
-            };
-
             tg.HapticFeedback.impactOccurred('medium');
         }
 
-        document.getElementById('backBtn').onclick = () => {
+        // --- ВОЗВРАТ В ГЛАВНОЕ МЕНЮ (СПИСОК ПОКРЫТИЙ) ---
+        function goToMainMenu() {
             document.getElementById('grid').classList.remove('hidden');
             document.getElementById('detail').classList.add('hidden');
             selectedMaterial = null;
-        };
+        }
+
+        // ================================================================
+        // 3. ОБРАБОТЧИКИ СОБЫТИЙ
+        // ================================================================
+
+        // Кнопка "Назад к списку"
+        document.getElementById('backBtn').onclick = goToMainMenu;
+
+        // Кнопка "🏠 В главное меню" — возврат в список покрытий
+        document.getElementById('backToMenuBtn').onclick = goToMainMenu;
+
+        // ================================================================
+        // 4. ЗАПУСК
+        // ================================================================
 
         renderGrid();
 
+        // Показываем кнопку "Выбрать" в Telegram
         tg.MainButton.setText('Выбрать');
         tg.MainButton.show();
         tg.MainButton.onClick(() => {

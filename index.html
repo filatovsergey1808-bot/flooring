@@ -16,6 +16,7 @@
             background: #f5f5f5;
             padding: 16px;
             color: #1a1a1a;
+            min-height: 100vh;
         }
         .header {
             background: #2c3e50;
@@ -42,20 +43,33 @@
         .card {
             background: white;
             border-radius: 16px;
-            padding: 16px;
+            overflow: hidden;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
             border: 2px solid transparent;
-            text-align: center;
         }
         .card:active {
             transform: scale(0.96);
         }
-        .card .emoji {
-            font-size: 32px;
+        .card .image {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            background: #e0e0e0;
             display: block;
-            margin-bottom: 8px;
+        }
+        .card .image-placeholder {
+            width: 100%;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            background: #e8f0fe;
+        }
+        .card .info {
+            padding: 12px 14px 14px 14px;
         }
         .card .name {
             font-weight: 600;
@@ -76,6 +90,25 @@
             padding: 20px;
             margin-top: 16px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .info-block .image-full {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            background: #e0e0e0;
+        }
+        .info-block .image-full-placeholder {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            background: #e8f0fe;
+            border-radius: 12px;
+            margin-bottom: 16px;
         }
         .info-block h3 {
             font-size: 22px;
@@ -138,13 +171,6 @@
         .btn-success:active {
             opacity: 0.8;
         }
-        .btn-secondary {
-            background: #e8f0fe;
-            color: #1a73e8;
-        }
-        .btn-secondary:active {
-            opacity: 0.8;
-        }
         .hidden {
             display: none !important;
         }
@@ -156,32 +182,21 @@
             cursor: pointer;
             margin-bottom: 12px;
         }
-        .menu-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 12px;
-        }
-        .menu-actions .btn {
-            margin-top: 0;
-            flex: 1;
-        }
     </style>
 </head>
 <body>
 
     <div id="app">
-        <!-- ШАПКА -->
         <div class="header">
             <h1>🏠 Напольные покрытия</h1>
             <p>Выберите материал для детальной информации</p>
         </div>
 
-        <!-- СЕТКА ПОКРЫТИЙ (ГЛАВНОЕ МЕНЮ) -->
         <div class="grid" id="grid"></div>
 
-        <!-- БЛОК ДЕТАЛЬНОЙ ИНФОРМАЦИИ -->
         <div class="info-block hidden" id="detail">
             <button class="back-btn" id="backBtn">← Назад к списку</button>
+            <div id="detailImageContainer"></div>
             <h3 id="detailName"></h3>
             <p id="detailDesc" style="font-size:15px;line-height:1.6;color:#333;margin-bottom:12px;"></p>
             
@@ -207,26 +222,44 @@
             
             <div class="price" id="detailPrice"></div>
             
-            <!-- БЛОК РЕКОМЕНДАЦИЙ (ТОВАРЫ) -->
             <div id="recommendations"></div>
             
-            <!-- КНОПКА "В ГЛАВНОЕ МЕНЮ" -->
             <button class="btn btn-success" id="backToMenuBtn">🏠 В главное меню</button>
         </div>
     </div>
 
     <script>
         // ================================================================
-        // 1. ДАННЫЕ
+        // 1. ДАННЫЕ С КАРТИНКАМИ
         // ================================================================
 
+        // --- Бесплатные изображения с Unsplash (можно заменить на свои) ---
+        const IMAGES = {
+            'ламинат': 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
+            'композитный пол spc': 'https://images.unsplash.com/photo-1625139824712-5c9f96bc4cd8?w=400&h=300&fit=crop',
+            'инженерная доска': 'https://images.unsplash.com/photo-1631884795763-09b0f3b7e9b8?w=400&h=300&fit=crop',
+            'quartz parquet': 'https://images.unsplash.com/photo-1631884795763-09b0f3b7e9b8?w=400&h=300&fit=crop',
+            'swf': 'https://images.unsplash.com/photo-1625139824712-5c9f96bc4cd8?w=400&h=300&fit=crop',
+            'ковровое покрытие (рулонное)': 'https://images.unsplash.com/photo-1563089145-599997674d42?w=400&h=300&fit=crop'
+        };
+
+        // --- Плейсхолдеры на случай, если картинка не загрузится ---
+        const EMOJI_PLACEHOLDER = {
+            'ламинат': '🪵',
+            'композитный пол spc': '🧱',
+            'инженерная доска': '🪚',
+            'quartz parquet': '🪵',
+            'swf': '🪨',
+            'ковровое покрытие (рулонное)': '🧶'
+        };
+
         const materials = [
-            { id: 'ламинат', emoji: '🪵', name: 'Ламинат', badge: 'Популярный' },
-            { id: 'композитный пол spc', emoji: '🧱', name: 'Композитный пол SPC', badge: 'Водостойкий' },
-            { id: 'инженерная доска', emoji: '🪚', name: 'Инженерная доска', badge: 'Натуральный' },
-            { id: 'quartz parquet', emoji: '🪵', name: 'Quartz Parquet', badge: 'Премиум' },
-            { id: 'swf', emoji: '🪨', name: 'SWF', badge: 'Звукоизоляция' },
-            { id: 'ковровое покрытие (рулонное)', emoji: '🧶', name: 'Ковровое покрытие', badge: 'Уютный' }
+            { id: 'ламинат', name: 'Ламинат', badge: 'Популярный' },
+            { id: 'композитный пол spc', name: 'Композитный пол SPC', badge: 'Водостойкий' },
+            { id: 'инженерная доска', name: 'Инженерная доска', badge: 'Натуральный' },
+            { id: 'quartz parquet', name: 'Quartz Parquet', badge: 'Премиум' },
+            { id: 'swf', name: 'SWF', badge: 'Звукоизоляция' },
+            { id: 'ковровое покрытие (рулонное)', name: 'Ковровое покрытие', badge: 'Уютный' }
         ];
 
         const recommendations = {
@@ -304,16 +337,31 @@
 
         let selectedMaterial = null;
 
+        function getImageUrl(id) {
+            return IMAGES[id] || null;
+        }
+
+        function getEmoji(id) {
+            return EMOJI_PLACEHOLDER[id] || '📦';
+        }
+
         function renderGrid() {
             const grid = document.getElementById('grid');
             grid.innerHTML = '';
             materials.forEach(m => {
                 const card = document.createElement('div');
                 card.className = 'card';
+                const imgUrl = getImageUrl(m.id);
                 card.innerHTML = `
-                    <span class="emoji">${m.emoji}</span>
-                    <div class="name">${m.name}</div>
-                    <span class="badge">${m.badge}</span>
+                    ${imgUrl 
+                        ? `<img class="image" src="${imgUrl}" alt="${m.name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`
+                        : ''
+                    }
+                    <div class="image-placeholder" style="${imgUrl ? 'display:none;' : ''}">${getEmoji(m.id)}</div>
+                    <div class="info">
+                        <div class="name">${m.name}</div>
+                        <span class="badge">${m.badge}</span>
+                    </div>
                 `;
                 card.onclick = () => showDetail(m.id);
                 grid.appendChild(card);
@@ -347,11 +395,19 @@
             selectedMaterial = id;
             const data = details[id];
             const material = materials.find(m => m.id === id);
+            const imgUrl = getImageUrl(id);
 
             document.getElementById('grid').classList.add('hidden');
             document.getElementById('detail').classList.remove('hidden');
 
-            document.getElementById('detailName').textContent = `${material.emoji} ${material.name}`;
+            const container = document.getElementById('detailImageContainer');
+            if (imgUrl) {
+                container.innerHTML = `<img class="image-full" src="${imgUrl}" alt="${material.name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`;
+            } else {
+                container.innerHTML = `<div class="image-full-placeholder">${getEmoji(id)}</div>`;
+            }
+
+            document.getElementById('detailName').textContent = `${material.name}`;
             document.getElementById('detailDesc').textContent = data.desc;
             document.getElementById('detailPros').textContent = data.pros;
             document.getElementById('detailCons').textContent = data.cons;

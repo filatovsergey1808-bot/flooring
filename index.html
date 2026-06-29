@@ -144,12 +144,19 @@
             border-left: 4px solid #1a73e8;
         }
         .recommendation a {
-            color: #1a73e8;
+            display: inline-block;
+            margin-top: 6px;
+            padding: 8px 16px;
+            background: #1a73e8;
+            color: white;
             text-decoration: none;
+            border-radius: 8px;
             font-weight: 600;
+            font-size: 13px;
+            transition: opacity 0.2s;
         }
-        .recommendation a:hover {
-            text-decoration: underline;
+        .recommendation a:active {
+            opacity: 0.7;
         }
         .btn {
             display: block;
@@ -230,7 +237,7 @@
 
     <script>
         // ================================================================
-        // 1. ДАННЫЕ С КАРТИНКАМИ
+        // 1. ДАННЫЕ
         // ================================================================
 
         const IMAGES = {
@@ -239,10 +246,9 @@
             'инженерная доска': 'https://images.unsplash.com/photo-1631884795763-09b0f3b7e9b8?w=400&h=300&fit=crop',
             'quartz parquet': 'https://images.unsplash.com/photo-1618220179428-22790b461013?w=400&h=300&fit=crop',
             'swf': 'https://images.unsplash.com/photo-1625139824712-5c9f96bc4cd8?w=400&h=300&fit=crop',
-            'ковровое покрытие (рулонное)': 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop'
+            'ковровое покрытие (рулонное)': 'https://images.unsplash.com/photo-1563089145-599997674d42?w=400&h=300&fit=crop'
         };
 
-        // --- Плейсхолдеры на случай, если картинка не загрузится ---
         const EMOJI_PLACEHOLDER = {
             'ламинат': '🪵',
             'композитный пол spc': '🧱',
@@ -382,7 +388,8 @@
                         <b>${item.name}</b> (${item.brand})
                         <br>📝 ${item.desc}
                         <br>💰 <b>${item.price}</b>
-                        <br><a href="${item.url}" target="_blank">🔗 Перейти на сайт</a>
+                        <br>
+                        <a href="${item.url}" target="_blank">🔗 Перейти на сайт</a>
                     </div>
                 `;
             });

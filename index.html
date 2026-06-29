@@ -137,18 +137,18 @@
             margin-top: 8px;
         }
         
-        /* --- ОБНОВЛЁННЫЙ ДИЗАЙН РЕКОМЕНДАЦИЙ --- */
+        /* --- СТИЛИ РЕКОМЕНДАЦИЙ --- */
         .recommendation {
-            background: #fcf9f6; /* Очень светлый, почти белый с тёплым оттенком */
+            background: #fcf9f6;
             border-radius: 12px;
             padding: 18px 16px;
             margin-top: 16px;
-            border-left: 4px solid #ddd2c6; /* Более мягкий контур */
+            border-left: 4px solid #ddd2c6;
         }
         .recommendation .item {
             margin-bottom: 14px;
             padding-bottom: 14px;
-            border-bottom: 1px solid #f0ebe6; /* Едва заметная линия */
+            border-bottom: 1px solid #f0ebe6;
         }
         .recommendation .item:last-child {
             margin-bottom: 0;
@@ -158,18 +158,17 @@
         .recommendation .item b {
             color: #2c3e50;
         }
-        /* --- УВЕЛИЧЕННАЯ КНОПКА "Перейти на сайт" --- */
         .btn-site {
             display: inline-block;
             margin-top: 10px;
-            padding: 10px 28px; /* Увеличенный отступ */
+            padding: 10px 28px;
             background: transparent;
             color: #4a3f35;
             text-decoration: none;
-            border-radius: 24px; /* Более скруглённая */
-            border: 1.5px solid #d5cbc0; /* Чуть толще и светлее контур */
+            border-radius: 24px;
+            border: 1.5px solid #d5cbc0;
             font-weight: 500;
-            font-size: 15px; /* Крупнее текст */
+            font-size: 15px;
             transition: all 0.2s ease;
             cursor: pointer;
             text-align: center;
@@ -178,7 +177,6 @@
             background: rgba(213, 203, 192, 0.2);
             border-color: #b8a898;
         }
-        /* --- КОНЕЦ ОБНОВЛЁННЫХ СТИЛЕЙ --- */
 
         .btn {
             display: block;
@@ -259,16 +257,16 @@
 
     <script>
         // ================================================================
-        // 1. ДАННЫЕ
+        // 1. ДАННЫЕ С НОВЫМИ КАРТИНКАМИ (PEXELS)
         // ================================================================
 
         const IMAGES = {
-            'ламинат': 'https://principfloor.ru/catalog/laminat/laminat_my_floor_chalet_dub_zhirona_33kl_1380x193x10mm_faska_4v_m1019_up_1_598m2_6sht.html',
-            'композитный пол spc': 'https://images.unsplash.com/photo-1618220179428-22790b461013?w=400&h=300&fit=crop',
-            'инженерная доска': 'https://images.unsplash.com/photo-1631884795763-09b0f3b7e9b8?w=400&h=300&fit=crop',
-            'quartz parquet': 'https://images.unsplash.com/photo-1618220179428-22790b461013?w=400&h=300&fit=crop',
-            'swf': 'https://images.unsplash.com/photo-1625139824712-5c9f96bc4cd8?w=400&h=300&fit=crop',
-            'ковровое покрытие (рулонное)': 'https://images.unsplash.com/photo-1563089145-599997674d42?w=400&h=300&fit=crop'
+            'ламинат': 'https://images.pexels.com/photos/1648768/pexels-photo-1648768.jpeg?w=400&h=300&fit=crop',
+            'композитный пол spc': 'https://images.pexels.com/photos/2797069/pexels-photo-2797069.jpeg?w=400&h=300&fit=crop',
+            'инженерная доска': 'https://images.pexels.com/photos/2697369/pexels-photo-2697369.jpeg?w=400&h=300&fit=crop',
+            'quartz parquet': 'https://images.pexels.com/photos/2802323/pexels-photo-2802323.jpeg?w=400&h=300&fit=crop',
+            'swf': 'https://images.pexels.com/photos/2097027/pexels-photo-2097027.jpeg?w=400&h=300&fit=crop',
+            'ковровое покрытие (рулонное)': 'https://images.pexels.com/photos/2765890/pexels-photo-2765890.jpeg?w=400&h=300&fit=crop'
         };
 
         const EMOJI_PLACEHOLDER = {

@@ -16,13 +16,11 @@
             min-height: 100vh;
             padding: 16px;
             color: #1a1a1a;
-            /* --- ФОН С ФОТО ТЕРРАСНОЙ ДОСКИ --- */
             background-image: url('https://images.pexels.com/photos/2097027/pexels-photo-2097027.jpeg?w=800&h=600&fit=crop');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
         }
-        /* --- ПОЛУПРОЗРАЧНАЯ ПОДЛОЖКА ДЛЯ ЧИТАЕМОСТИ --- */
         body::before {
             content: '';
             position: fixed;
@@ -56,13 +54,6 @@
             text-transform: uppercase;
             margin-bottom: 4px;
         }
-        .header p {
-            font-size: 13px;
-            color: #9a8a7a;
-            letter-spacing: 0.5px;
-            font-weight: 300;
-            margin-top: 2px;
-        }
         .header .accent-line {
             width: 40px;
             height: 2px;
@@ -70,10 +61,12 @@
             margin: 8px auto 0 auto;
             border-radius: 2px;
         }
+        /* --- СЕТКА НА ВСЮ ШИРИНУ --- */
         .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
+            width: 100%;
         }
         .card {
             background: rgba(255, 255, 255, 0.92);
@@ -85,6 +78,7 @@
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
             border: 1px solid rgba(255,255,255,0.6);
+            width: 100%;
         }
         .card:active {
             transform: scale(0.96);
@@ -107,11 +101,15 @@
         }
         .card .info {
             padding: 12px 14px 14px 14px;
+            text-align: center;
         }
+        /* --- НОВЫЙ ШРИФТ ДЛЯ КНОПОК (КАК В ЗАГОЛОВКЕ) --- */
         .card .name {
-            font-weight: 600;
-            font-size: 14px;
-            color: #3d352c;
+            font-weight: 300;
+            font-size: 16px;
+            letter-spacing: 1px;
+            color: #4a3f35;
+            text-transform: uppercase;
         }
         .card .badge {
             display: inline-block;
@@ -269,7 +267,6 @@
     <div id="app">
         <div class="header">
             <h1>Террасная доска</h1>
-            <p>Выберите материал для детальной информации</p>
             <div class="accent-line"></div>
         </div>
 
@@ -311,7 +308,7 @@
 
     <script>
         // ================================================================
-        // 1. ДАННЫЕ (НОВЫЙ ПОРЯДОК)
+        // 1. ДАННЫЕ
         // ================================================================
 
         const IMAGES = {
@@ -330,7 +327,6 @@
             'монтаж': '🔧'
         };
 
-        // --- НОВЫЙ ПОРЯДОК: Кумару, Ясень, Лиственница, Декинг, Монтаж ---
         const materials = [
             { id: 'кумару', name: 'Кумару', badge: 'Экзотика' },
             { id: 'ясень', name: 'Ясень', badge: 'Натуральный' },

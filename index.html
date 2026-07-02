@@ -319,6 +319,83 @@
         .back-btn:active {
             opacity: 0.6;
         }
+
+        /* --- СТИЛИ ДЛЯ ФОРМЫ ЗАЯВКИ --- */
+        .consult-form {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 24px 20px;
+            margin-top: 16px;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        .consult-form h3 {
+            font-size: 18px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            color: #f5f0eb;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        .consult-form input {
+            width: 100%;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 12px;
+            color: #f5f0eb;
+            font-size: 15px;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .consult-form input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+        .consult-form input:focus {
+            border-color: rgba(201, 168, 124, 0.6);
+        }
+        .consult-form .btn-send {
+            width: 100%;
+            padding: 14px;
+            margin-top: 4px;
+            background: #c9a87c;
+            color: #1a1410;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+        }
+        .consult-form .btn-send:active {
+            opacity: 0.85;
+            transform: scale(0.98);
+        }
+        .consult-form .btn-close {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            background: transparent;
+            color: rgba(255,255,255,0.5);
+            border: none;
+            font-size: 14px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        .consult-form .btn-close:active {
+            color: rgba(255,255,255,0.8);
+        }
+        /* --- КОНЕЦ СТИЛЕЙ ФОРМЫ --- */
     </style>
 </head>
 <body>
@@ -365,6 +442,9 @@
             
             <button class="btn btn-success" id="backToMenuBtn">В главное меню</button>
         </div>
+
+        <!-- КОНТЕЙНЕР ДЛЯ ФОРМЫ ЗАЯВКИ -->
+        <div id="consultFormContainer"></div>
     </div>
 
     <script>
@@ -531,6 +611,7 @@
 
         let currentView = 'main';
         let currentCategoryId = null;
+        let showForm = false;
 
         function getImageUrl(id) {
             return IMAGES[id] || null;
@@ -538,6 +619,60 @@
 
         function getEmoji(id) {
             return EMOJI_PLACEHOLDER[id] || '📦';
+        }
+
+        // --- ФОРМА ЗАЯВКИ ---
+        function renderConsultForm() {
+            const container = document.getElementById('consultFormContainer');
+            container.innerHTML = `
+                <div class="consult-form">
+                    <h3>Заявка на консультацию</h3>
+                    <input type="text" id="consultName" placeholder="Ваше имя" />
+                    <input type="text" id="consultPhone" placeholder="Номер телефона" />
+                    <input type="text" id="consultMessage" placeholder="Комментарий (необязательно)" />
+                    <button class="btn-send" id="consultSendBtn">Отправить</button>
+                    <button class="btn-close" id="consultCloseBtn">Закрыть</button>
+                </div>
+            `;
+
+            document.getElementById('consultSendBtn').onclick = () => {
+                const name = document.getElementById('consultName').value.trim();
+                const phone = document.getElementById('consultPhone').value.trim();
+                const message = document.getElementById('consultMessage').value.trim();
+
+                if (!name || !phone) {
+                    tg.showPopup({
+                        title: 'Ошибка',
+                        message: 'Пожалуйста, заполните имя и номер телефона.',
+                        buttons: [{ type: 'ok' }]
+                    });
+                    return;
+                }
+
+                tg.sendData(JSON.stringify({
+                    action: 'consult',
+                    name: name,
+                    phone: phone,
+                    message: message
+                }));
+
+                // Закрываем форму
+                container.innerHTML = '';
+                showForm = false;
+                renderMainMenu();
+
+                tg.showPopup({
+                    title: 'Отправлено!',
+                    message: 'Спасибо! Мы свяжемся с вами в ближайшее время.',
+                    buttons: [{ type: 'ok' }]
+                });
+            };
+
+            document.getElementById('consultCloseBtn').onclick = () => {
+                container.innerHTML = '';
+                showForm = false;
+                renderMainMenu();
+            };
         }
 
         function renderMainMenu() {
@@ -560,28 +695,21 @@
                 grid.appendChild(card);
             });
             
-            // Кнопка "Консультация" на всю ширину (единый стиль)
+            // Кнопка "Консультация" на всю ширину
             const consultCard = document.createElement('div');
             consultCard.className = 'card';
-            consultCard.style.cssText = 'grid-column: 1 / -1; background: rgba(201, 168, 124, 0.2); border-color: rgba(201, 168, 124, 0.4); margin: 0 -4px;';
+            consultCard.style.cssText = 'grid-column: 1 / -1; background: rgba(201, 168, 124, 0.2); border-color: rgba(201, 168, 124, 0.4); margin: 0 -8px;';
             consultCard.innerHTML = `
-                <div class="info" style="padding: 18px 14px;">
+                <div class="info" style="padding: 20px 14px;">
                     <div class="name" style="font-size: 16px; letter-spacing: 1px; color: #f5f0eb;">Консультация</div>
                 </div>
             `;
             consultCard.onclick = () => {
-                tg.showPopup({
-                    title: 'Консультация',
-                    message: 'Оставьте заявку, и мы свяжемся с вами для подбора террасной доски.',
-                    buttons: [
-                        { type: 'ok', text: 'Отправить заявку' },
-                        { type: 'cancel', text: 'Отмена' }
-                    ]
-                }, (buttonId) => {
-                    if (buttonId === 'ok') {
-                        tg.sendData(JSON.stringify({ action: 'consult' }));
-                    }
-                });
+                if (!showForm) {
+                    showForm = true;
+                    renderConsultForm();
+                    document.getElementById('gridContainer').style.display = 'none';
+                }
             };
             grid.appendChild(consultCard);
         }
@@ -601,7 +729,10 @@
                 <span class="category-title">${category.name}</span>
             `;
             grid.appendChild(header);
-            header.querySelector('#submenuBackBtn').onclick = renderMainMenu;
+            header.querySelector('#submenuBackBtn').onclick = () => {
+                document.getElementById('gridContainer').style.display = 'block';
+                renderMainMenu();
+            };
 
             category.materials.forEach(mat => {
                 const card = document.createElement('div');
@@ -679,6 +810,9 @@
             currentView = 'main';
             document.getElementById('grid').classList.remove('hidden');
             document.getElementById('detail').classList.add('hidden');
+            document.getElementById('consultFormContainer').innerHTML = '';
+            showForm = false;
+            document.getElementById('gridContainer').style.display = 'block';
             renderMainMenu();
         }
 
@@ -705,11 +839,13 @@
 
         renderMainMenu();
 
-        tg.MainButton.setText('Выбрать');
-        tg.MainButton.show();
-        tg.MainButton.onClick(() => {
-            tg.close();
-        });
+        // Убираем синюю кнопку "Выбрать" (MainButton)
+        tg.MainButton.hide();
+        // tg.MainButton.setText('Выбрать');
+        // tg.MainButton.show();
+        // tg.MainButton.onClick(() => {
+        //     tg.close();
+        // });
     </script>
 </body>
 </html>

@@ -61,7 +61,6 @@
             margin: 8px auto 0 auto;
             border-radius: 2px;
         }
-        /* --- СЕТКА НА ВСЮ ШИРИНУ --- */
         .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -103,7 +102,6 @@
             padding: 12px 14px 14px 14px;
             text-align: center;
         }
-        /* --- НОВЫЙ ШРИФТ ДЛЯ КНОПОК (КАК В ЗАГОЛОВКЕ) --- */
         .card .name {
             font-weight: 300;
             font-size: 16px;
@@ -111,16 +109,9 @@
             color: #4a3f35;
             text-transform: uppercase;
         }
+        /* --- БЕЙДЖ УБРАН --- */
         .card .badge {
-            display: inline-block;
-            font-size: 10px;
-            background: #e8e0d8;
-            color: #7a6a5a;
-            padding: 2px 10px;
-            border-radius: 12px;
-            margin-top: 4px;
-            font-weight: 500;
-            letter-spacing: 0.3px;
+            display: none;
         }
         .info-block {
             background: rgba(255, 252, 249, 0.92);
@@ -328,11 +319,11 @@
         };
 
         const materials = [
-            { id: 'кумару', name: 'Кумару', badge: 'Экзотика' },
-            { id: 'ясень', name: 'Ясень', badge: 'Натуральный' },
-            { id: 'лиственница', name: 'Лиственница', badge: 'Морозостойкая' },
-            { id: 'декинг', name: 'Декинг', badge: 'Популярный' },
-            { id: 'монтаж', name: 'Монтаж', badge: 'Инструкция' }
+            { id: 'кумару', name: 'Кумару', badge: '' },
+            { id: 'ясень', name: 'Ясень', badge: '' },
+            { id: 'лиственница', name: 'Лиственница', badge: '' },
+            { id: 'декинг', name: 'Декинг', badge: '' },
+            { id: 'монтаж', name: 'Монтаж', badge: '' }
         ];
 
         const recommendations = {
@@ -426,7 +417,6 @@
                     <div class="image-placeholder" style="${imgUrl ? 'display:none;' : ''}">${getEmoji(m.id)}</div>
                     <div class="info">
                         <div class="name">${m.name}</div>
-                        <span class="badge">${m.badge}</span>
                     </div>
                 `;
                 card.onclick = () => showDetail(m.id);

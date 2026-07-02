@@ -67,6 +67,10 @@
             gap: 12px;
             width: 100%;
         }
+        /* --- ПОДМЕНЮ: 1 КОЛОНКА --- */
+        .grid.submenu {
+            grid-template-columns: 1fr;
+        }
         .card {
             background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(8px);
@@ -112,6 +116,44 @@
         .card .badge {
             display: none;
         }
+
+        /* --- АККУРАТНАЯ КНОПКА "НАЗАД" --- */
+        .back-link {
+            display: inline-block;
+            padding: 6px 14px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            font-weight: 400;
+            color: #8b7355;
+            background: rgba(255, 252, 249, 0.6);
+            backdrop-filter: blur(4px);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-align: center;
+            border: 1px solid rgba(139, 115, 85, 0.15);
+            width: fit-content;
+        }
+        .back-link:active {
+            background: rgba(139, 115, 85, 0.15);
+        }
+        .submenu-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding: 0 4px;
+        }
+        .submenu-header .back-link {
+            margin-bottom: 0;
+        }
+        .submenu-header .category-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #4a3f35;
+            letter-spacing: 0.5px;
+        }
+
         .info-block {
             background: rgba(255, 252, 249, 0.92);
             backdrop-filter: blur(12px);
@@ -261,7 +303,9 @@
         </div>
 
         <!-- Главное меню / Подменю -->
-        <div class="grid" id="grid"></div>
+        <div id="gridContainer">
+            <div class="grid" id="grid"></div>
+        </div>
 
         <!-- Детальная информация -->
         <div class="info-block hidden" id="detail">
@@ -303,7 +347,6 @@
         // 1. ДАННЫЕ
         // ================================================================
 
-        // --- НОВАЯ СТРУКТУРА: КАТЕГОРИИ И ПОДКАТЕГОРИИ ---
         const categories = [
             {
                 id: 'local',
@@ -342,7 +385,6 @@
             }
         ];
 
-        // --- КАРТИНКИ ДЛЯ МАТЕРИАЛОВ ---
         const IMAGES = {
             'лиственница': 'https://i.pinimg.com/736x/f4/85/f1/f485f13473e78c8fe19022f9c529d084.jpg',
             'ясень': 'https://i.pinimg.com/736x/fb/7c/eb/fb7ceb406f68979c665a5f324a68e57b.jpg',
@@ -363,7 +405,6 @@
             'монтаж': '🔧'
         };
 
-        // --- ОПИСАНИЯ МАТЕРИАЛОВ ---
         const details = {
             'лиственница': {
                 desc: 'Сибирская лиственница — это морозостойкая и влагостойкая древесина. Идеально подходит для террас в регионах с холодным климатом. Со временем становится только прочнее.',
@@ -423,7 +464,6 @@
             }
         };
 
-        // --- РЕКОМЕНДАЦИИ ДЛЯ МАТЕРИАЛОВ ---
         const recommendations = {
             'декинг': [
                 { name: 'Декинг ДПК', brand: 'WoodLine', url: 'https://principfloor.ru/catalog/decking/dpk/', price: 'от 3 500 ₽/м²', desc: 'Композитная доска, не требует покраски' },
@@ -453,7 +493,7 @@
         const tg = window.Telegram.WebApp;
         tg.expand();
 
-        let currentView = 'main'; // 'main' | 'submenu' | 'detail'
+        let currentView = 'main';
         let currentCategoryId = null;
 
         function getImageUrl(id) {
@@ -467,6 +507,7 @@
         function renderMainMenu() {
             currentView = 'main';
             const grid = document.getElementById('grid');
+            grid.className = 'grid'; // убираем submenu
             grid.innerHTML = '';
             categories.forEach(cat => {
                 const card = document.createElement('div');
@@ -488,19 +529,18 @@
             currentCategoryId = categoryId;
             const category = categories.find(c => c.id === categoryId);
             const grid = document.getElementById('grid');
+            grid.className = 'grid submenu'; // 1 колонка
             grid.innerHTML = '';
-            
-            // Кнопка "Назад"
-            const backCard = document.createElement('div');
-            backCard.className = 'card';
-            backCard.style.background = 'rgba(255,252,249,0.6)';
-            backCard.innerHTML = `
-                <div class="info" style="padding:20px;">
-                    <div class="name" style="font-size:14px;color:#8b7355;">← Назад</div>
-                </div>
+
+            // Шапка подменю: название категории + аккуратная кнопка "Назад"
+            const header = document.createElement('div');
+            header.className = 'submenu-header';
+            header.innerHTML = `
+                <span class="back-link" id="submenuBackBtn">← Назад</span>
+                <span class="category-title">${category.name}</span>
             `;
-            backCard.onclick = renderMainMenu;
-            grid.appendChild(backCard);
+            grid.appendChild(header);
+            header.querySelector('#submenuBackBtn').onclick = renderMainMenu;
 
             // Материалы категории
             category.materials.forEach(mat => {
@@ -588,7 +628,6 @@
 
         document.getElementById('backBtn').onclick = () => {
             if (currentView === 'detail') {
-                // Возвращаемся в подменю категории
                 document.getElementById('detail').classList.add('hidden');
                 document.getElementById('grid').classList.remove('hidden');
                 if (currentCategoryId) {

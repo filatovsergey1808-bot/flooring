@@ -274,6 +274,8 @@
         .btn-site:active {
             background: rgba(255,255,255,0.15);
         }
+
+        /* --- ОБЩИЙ СТИЛЬ ДЛЯ ВСЕХ КНОПОК --- */
         .btn {
             display: block;
             width: 100%;
@@ -289,6 +291,7 @@
             margin-top: 12px;
             text-transform: uppercase;
         }
+        /* --- КНОПКА "В ГЛАВНОЕ МЕНЮ" (ПРОЗРАЧНАЯ) --- */
         .btn-success {
             background: transparent;
             color: #f5f0eb;
@@ -300,6 +303,21 @@
             background: rgba(255,255,255,0.08);
             transform: scale(0.98);
         }
+        /* --- НОВАЯ КНОПКА "КОНСУЛЬТАЦИЯ" (НА ВСЮ ШИРИНУ) --- */
+        .btn-consult {
+            background: #c9a87c;
+            color: #1a1410;
+            border: none;
+            box-shadow: 0 2px 12px rgba(201, 168, 124, 0.3);
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        .btn-consult:active {
+            opacity: 0.85;
+            transform: scale(0.98);
+        }
+        /* --- КОНЕЦ НОВОЙ КНОПКИ --- */
+
         .hidden {
             display: none !important;
         }
@@ -499,7 +517,6 @@
             }
         };
 
-        // Рекомендации пока оставим только для материалов, у которых они есть
         const recommendations = {
             'декинг': [
                 { name: 'Декинг ДПК', brand: 'WoodLine', url: 'https://principfloor.ru/catalog/decking/dpk/', price: 'от 3 500 ₽/м²', desc: 'Композитная доска, не требует покраски' },
@@ -545,6 +562,8 @@
             const grid = document.getElementById('grid');
             grid.className = 'grid';
             grid.innerHTML = '';
+            
+            // Добавляем карточки категорий
             categories.forEach(cat => {
                 const card = document.createElement('div');
                 card.className = 'card';
@@ -558,6 +577,32 @@
                 card.onclick = () => renderSubMenu(cat.id);
                 grid.appendChild(card);
             });
+            
+            // Добавляем отдельную кнопку "Консультация" на всю ширину
+            const consultCard = document.createElement('div');
+            consultCard.className = 'card';
+            consultCard.style.cssText = 'grid-column: 1 / -1; background: rgba(201, 168, 124, 0.15); border-color: rgba(201, 168, 124, 0.3);';
+            consultCard.innerHTML = `
+                <div class="info" style="padding: 20px;">
+                    <div class="name" style="font-size: 18px; letter-spacing: 2px; color: #e8c9a0;">📞 Консультация</div>
+                </div>
+            `;
+            consultCard.onclick = () => {
+                tg.showPopup({
+                    title: 'Консультация',
+                    message: 'Оставьте заявку, и мы свяжемся с вами для подбора террасной доски.',
+                    buttons: [
+                        { type: 'ok', text: 'Отправить заявку' },
+                        { type: 'cancel', text: 'Отмена' }
+                    ]
+                }, (buttonId) => {
+                    if (buttonId === 'ok') {
+                        tg.sendData(JSON.stringify({ action: 'consult' }));
+                        tg.close();
+                    }
+                });
+            };
+            grid.appendChild(consultCard);
         }
 
         function renderSubMenu(categoryId) {

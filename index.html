@@ -560,13 +560,13 @@
                 grid.appendChild(card);
             });
             
-            // Кнопка "Консультация" на всю ширину (без эмодзи)
+            // Кнопка "Консультация" на всю ширину (единый стиль)
             const consultCard = document.createElement('div');
             consultCard.className = 'card';
-            consultCard.style.cssText = 'grid-column: 1 / -1; background: rgba(201, 168, 124, 0.2); border-color: rgba(201, 168, 124, 0.4);';
+            consultCard.style.cssText = 'grid-column: 1 / -1; background: rgba(201, 168, 124, 0.2); border-color: rgba(201, 168, 124, 0.4); margin: 0 -4px;';
             consultCard.innerHTML = `
-                <div class="info" style="padding: 20px;">
-                    <div class="name" style="font-size: 18px; letter-spacing: 2px; color: #e8c9a0;">Консультация</div>
+                <div class="info" style="padding: 18px 14px;">
+                    <div class="name" style="font-size: 16px; letter-spacing: 1px; color: #f5f0eb;">Консультация</div>
                 </div>
             `;
             consultCard.onclick = () => {

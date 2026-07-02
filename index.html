@@ -289,15 +289,19 @@
             margin-top: 12px;
             text-transform: uppercase;
         }
+        /* --- НОВАЯ КНОПКА: ПРОЗРАЧНАЯ --- */
         .btn-success {
-            background: #c9a87c;
+            background: transparent;
             color: #f5f0eb;
-            box-shadow: 0 2px 12px rgba(201, 168, 124, 0.3);
+            border: 1px solid rgba(255,255,255,0.25);
+            box-shadow: none;
+            transition: all 0.2s ease;
         }
         .btn-success:active {
-            opacity: 0.85;
+            background: rgba(255,255,255,0.08);
             transform: scale(0.98);
         }
+        /* --- КОНЕЦ НОВОЙ КНОПКИ --- */
         .hidden {
             display: none !important;
         }

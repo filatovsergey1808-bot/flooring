@@ -109,7 +109,6 @@
             color: #4a3f35;
             text-transform: uppercase;
         }
-        /* --- БЕЙДЖ УБРАН --- */
         .card .badge {
             display: none;
         }
@@ -261,10 +260,12 @@
             <div class="accent-line"></div>
         </div>
 
+        <!-- Главное меню / Подменю -->
         <div class="grid" id="grid"></div>
 
+        <!-- Детальная информация -->
         <div class="info-block hidden" id="detail">
-            <button class="back-btn" id="backBtn">← Назад к списку</button>
+            <button class="back-btn" id="backBtn">← Назад</button>
             <div id="detailImageContainer"></div>
             <h3 id="detailName"></h3>
             <p id="detailDesc" style="font-size:15px;line-height:1.7;color:#4a3f35;margin-bottom:12px;"></p>
@@ -302,54 +303,75 @@
         // 1. ДАННЫЕ
         // ================================================================
 
+        // --- НОВАЯ СТРУКТУРА: КАТЕГОРИИ И ПОДКАТЕГОРИИ ---
+        const categories = [
+            {
+                id: 'local',
+                name: 'Местные породы',
+                image: 'https://i.pinimg.com/736x/f4/85/f1/f485f13473e78c8fe19022f9c529d084.jpg',
+                materials: [
+                    { id: 'лиственница', name: 'Лиственница', badge: '' },
+                    { id: 'ясень', name: 'Ясень', badge: '' }
+                ]
+            },
+            {
+                id: 'exotic',
+                name: 'Экзотические породы',
+                image: 'https://i.pinimg.com/736x/37/ea/40/37ea400092963c619c00589fbc7cd146.jpg',
+                materials: [
+                    { id: 'кумару', name: 'Кумару', badge: '' },
+                    { id: 'ипе', name: 'Ипе', badge: '' },
+                    { id: 'тик', name: 'Тик', badge: '' }
+                ]
+            },
+            {
+                id: 'dpk',
+                name: 'ДПК',
+                image: 'https://i.pinimg.com/1200x/91/f6/a4/91f6a467c6f8ba04366db84b50ab542d.jpg',
+                materials: [
+                    { id: 'декинг', name: 'Декинг', badge: '' }
+                ]
+            },
+            {
+                id: 'montazh',
+                name: 'Монтаж',
+                image: 'https://i.pinimg.com/736x/3a/ff/75/3aff750d269c307cf95f01c21aedb07a.jpg',
+                materials: [
+                    { id: 'монтаж', name: 'Монтаж', badge: '' }
+                ]
+            }
+        ];
+
+        // --- КАРТИНКИ ДЛЯ МАТЕРИАЛОВ ---
         const IMAGES = {
-            'кумару': 'https://i.pinimg.com/736x/37/ea/40/37ea400092963c619c00589fbc7cd146.jpg',
-            'ясень': 'https://i.pinimg.com/736x/fb/7c/eb/fb7ceb406f68979c665a5f324a68e57b.jpg',
             'лиственница': 'https://i.pinimg.com/736x/f4/85/f1/f485f13473e78c8fe19022f9c529d084.jpg',
+            'ясень': 'https://i.pinimg.com/736x/fb/7c/eb/fb7ceb406f68979c665a5f324a68e57b.jpg',
+            'кумару': 'https://i.pinimg.com/736x/37/ea/40/37ea400092963c619c00589fbc7cd146.jpg',
+            'ипе': 'https://i.pinimg.com/736x/37/ea/40/37ea400092963c619c00589fbc7cd146.jpg',
+            'тик': 'https://i.pinimg.com/736x/37/ea/40/37ea400092963c619c00589fbc7cd146.jpg',
             'декинг': 'https://i.pinimg.com/1200x/91/f6/a4/91f6a467c6f8ba04366db84b50ab542d.jpg',
             'монтаж': 'https://i.pinimg.com/736x/3a/ff/75/3aff750d269c307cf95f01c21aedb07a.jpg'
         };
 
         const EMOJI_PLACEHOLDER = {
-            'кумару': '🪵',
-            'ясень': '🌳',
             'лиственница': '🌲',
+            'ясень': '🌳',
+            'кумару': '🪵',
+            'ипе': '🪵',
+            'тик': '🪵',
             'декинг': '🪵',
             'монтаж': '🔧'
         };
 
-        const materials = [
-            { id: 'кумару', name: 'Кумару', badge: '' },
-            { id: 'ясень', name: 'Ясень', badge: '' },
-            { id: 'лиственница', name: 'Лиственница', badge: '' },
-            { id: 'декинг', name: 'Декинг', badge: '' },
-            { id: 'монтаж', name: 'Монтаж', badge: '' }
-        ];
-
-        const recommendations = {
-            'декинг': [
-                { name: 'Декинг ДПК', brand: 'WoodLine', url: 'https://principfloor.ru/catalog/decking/dpk/', price: 'от 3 500 ₽/м²', desc: 'Композитная доска, не требует покраски' },
-                { name: 'Декинг термоясень', brand: 'WoodLine', url: 'https://principfloor.ru/catalog/decking/termoyasen/', price: 'от 5 900 ₽/м²', desc: 'Термообработанный ясень для террас' }
-            ],
-            'кумару': [
-                { name: 'Кумару премиум', brand: 'Tropical', url: 'https://principfloor.ru/catalog/decking/kumaru/', price: 'от 8 500 ₽/м²', desc: 'Экзотическая порода, высокая плотность' }
-            ],
-            'ясень': [
-                { name: 'Термоясень', brand: 'WoodLine', url: 'https://principfloor.ru/catalog/decking/termoyasen/', price: 'от 5 900 ₽/м²', desc: 'Термообработанный ясень для террас' }
-            ],
-            'лиственница': [
-                { name: 'Лиственница Сибирская', brand: 'SiberianWood', url: 'https://principfloor.ru/catalog/decking/larch/', price: 'от 4 500 ₽/м²', desc: 'Морозостойкая, влагостойкая' }
-            ]
-        };
-
+        // --- ОПИСАНИЯ МАТЕРИАЛОВ ---
         const details = {
-            'кумару': {
-                desc: 'Кумару — это экзотическая порода дерева из Южной Америки. Отличается высокой плотностью, твёрдостью и устойчивостью к гниению. Идеальна для террас в сложных климатических условиях.',
-                pros: '✅ Экзотический вид\n✅ Высокая плотность и твёрдость\n✅ Устойчивость к гниению\n✅ Не боится насекомых',
-                cons: '❌ Высокая цена\n❌ Тяжёлый материал\n❌ Требует специального крепежа',
-                care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Рекомендуется масляная пропитка раз в 2 года',
-                specs: '⏳ Срок службы: 30-40 лет\n📊 Класс: Экзотическая древесина\n💧 Водостойкость: Высокая',
-                price: 'от 8 500 ₽/м²'
+            'лиственница': {
+                desc: 'Сибирская лиственница — это морозостойкая и влагостойкая древесина. Идеально подходит для террас в регионах с холодным климатом. Со временем становится только прочнее.',
+                pros: '✅ Морозостойкость\n✅ Влагостойкость\n✅ Доступная цена\n✅ Экологичный материал',
+                cons: '❌ Требует ухода (масло/лак)\n❌ Может трескаться\n❌ Со временем темнеет',
+                care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка раз в год',
+                specs: '⏳ Срок службы: 20-30 лет\n📊 Класс: Хвойная древесина\n💧 Водостойкость: Высокая',
+                price: 'от 4 500 ₽/м²'
             },
             'ясень': {
                 desc: 'Термообработанный ясень — это натуральная древесина, прошедшая термическую обработку при высоких температурах. Становится более устойчивой к влаге и перепадам температур.',
@@ -359,17 +381,33 @@
                 specs: '⏳ Срок службы: 20-25 лет\n📊 Класс: Термодревесина\n💧 Водостойкость: Высокая',
                 price: 'от 5 900 ₽/м²'
             },
-            'лиственница': {
-                desc: 'Сибирская лиственница — это морозостойкая и влагостойкая древесина. Идеально подходит для террас в регионах с холодным климатом. Со временем становится только прочнее.',
-                pros: '✅ Морозостойкость\n✅ Влагостойкость\n✅ Доступная цена\n✅ Экологичный материал',
-                cons: '❌ Требует ухода (масло/лак)\n❌ Может трескаться\n❌ Со временем темнеет',
-                care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка раз в год',
-                specs: '⏳ Срок службы: 20-30 лет\n📊 Класс: Хвойная древесина\n💧 Водостойкость: Высокая',
-                price: 'от 4 500 ₽/м²'
+            'кумару': {
+                desc: 'Кумару — это экзотическая порода дерева из Южной Америки. Отличается высокой плотностью, твёрдостью и устойчивостью к гниению. Идеальна для террас в сложных климатических условиях.',
+                pros: '✅ Экзотический вид\n✅ Высокая плотность и твёрдость\n✅ Устойчивость к гниению\n✅ Не боится насекомых',
+                cons: '❌ Высокая цена\n❌ Тяжёлый материал\n❌ Требует специального крепежа',
+                care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Рекомендуется масляная пропитка раз в 2 года',
+                specs: '⏳ Срок службы: 30-40 лет\n📊 Класс: Экзотическая древесина\n💧 Водостойкость: Высокая',
+                price: 'от 8 500 ₽/м²'
+            },
+            'ипе': {
+                desc: 'Ипе (бразильский орех) — одна из самых твёрдых и долговечных экзотических пород. Почти не гниёт и не поражается насекомыми. Идеальна для террас, причалов и зон с интенсивной нагрузкой.',
+                pros: '✅ Максимальная твёрдость\n✅ Устойчивость к гниению\n✅ Долговечность (до 50 лет)\n✅ Не боится насекомых',
+                cons: '❌ Очень высокая цена\n❌ Требует специального крепежа\n❌ Тяжёлый материал',
+                care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка раз в 2-3 года',
+                specs: '⏳ Срок службы: 40-50 лет\n📊 Класс: Экзотическая древесина\n💧 Водостойкость: Максимальная',
+                price: 'от 12 000 ₽/м²'
+            },
+            'тик': {
+                desc: 'Тик — это элитная экзотическая порода из Юго-Восточной Азии. Содержит природные масла, которые защищают древесину от влаги, грибка и насекомых. Ценится за красивую текстуру и золотистый оттенок.',
+                pros: '✅ Природная защита от влаги\n✅ Красивая текстура\n✅ Долговечность\n✅ Не требует частого ухода',
+                cons: '❌ Высокая цена\n❌ Ограниченный ресурс\n❌ Сложность обработки',
+                care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка по желанию',
+                specs: '⏳ Срок службы: 30-50 лет\n📊 Класс: Экзотическая древесина\n💧 Водостойкость: Максимальная',
+                price: 'от 11 000 ₽/м²'
             },
             'декинг': {
-                desc: 'Декинг (террасная доска) — это покрытие для открытых пространств, устойчивое к влаге и перепадам температур. Изготавливается из ДПК (древесно-полимерного композита) или натуральной древесины.',
-                pros: '✅ Устойчивость к влаге\n✅ Не требует покраски (ДПК)\n✅ Противоскользящая поверхность\n✅ Долговечность (25-30 лет)',
+                desc: 'Декинг (террасная доска) — это современное покрытие для открытых пространств. Изготавливается из ДПК (древесно-полимерного композита), который сочетает в себе эстетику дерева и практичность пластика. Не требует ухода, не гниёт и не выцветает.',
+                pros: '✅ Устойчивость к влаге\n✅ Не требует покраски\n✅ Противоскользящая поверхность\n✅ Долговечность (25-30 лет)',
                 cons: '❌ Высокая цена\n❌ Может нагреваться на солнце\n❌ Требует правильного монтажа',
                 care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🧽 Для пятен — мягкие моющие средства',
                 specs: '⏳ Срок службы: 25-30 лет\n📊 Класс: ДПК / Натуральная древесина\n💧 Водостойкость: Высокая',
@@ -385,6 +423,29 @@
             }
         };
 
+        // --- РЕКОМЕНДАЦИИ ДЛЯ МАТЕРИАЛОВ ---
+        const recommendations = {
+            'декинг': [
+                { name: 'Декинг ДПК', brand: 'WoodLine', url: 'https://principfloor.ru/catalog/decking/dpk/', price: 'от 3 500 ₽/м²', desc: 'Композитная доска, не требует покраски' },
+                { name: 'Декинг термоясень', brand: 'WoodLine', url: 'https://principfloor.ru/catalog/decking/termoyasen/', price: 'от 5 900 ₽/м²', desc: 'Термообработанный ясень для террас' }
+            ],
+            'кумару': [
+                { name: 'Кумару премиум', brand: 'Tropical', url: 'https://principfloor.ru/catalog/decking/kumaru/', price: 'от 8 500 ₽/м²', desc: 'Экзотическая порода, высокая плотность' }
+            ],
+            'ясень': [
+                { name: 'Термоясень', brand: 'WoodLine', url: 'https://principfloor.ru/catalog/decking/termoyasen/', price: 'от 5 900 ₽/м²', desc: 'Термообработанный ясень для террас' }
+            ],
+            'лиственница': [
+                { name: 'Лиственница Сибирская', brand: 'SiberianWood', url: 'https://principfloor.ru/catalog/decking/larch/', price: 'от 4 500 ₽/м²', desc: 'Морозостойкая, влагостойкая' }
+            ],
+            'ипе': [
+                { name: 'Ипе премиум', brand: 'Tropical', url: 'https://principfloor.ru/catalog/decking/ipe/', price: 'от 12 000 ₽/м²', desc: 'Самый твёрдый и долговечный материал' }
+            ],
+            'тик': [
+                { name: 'Тик элит', brand: 'Tropical', url: 'https://principfloor.ru/catalog/decking/teak/', price: 'от 11 000 ₽/м²', desc: 'Элитная древесина с природными маслами' }
+            ]
+        };
+
         // ================================================================
         // 2. ЛОГИКА
         // ================================================================
@@ -392,7 +453,8 @@
         const tg = window.Telegram.WebApp;
         tg.expand();
 
-        let selectedMaterial = null;
+        let currentView = 'main'; // 'main' | 'submenu' | 'detail'
+        let currentCategoryId = null;
 
         function getImageUrl(id) {
             return IMAGES[id] || null;
@@ -402,24 +464,60 @@
             return EMOJI_PLACEHOLDER[id] || '📦';
         }
 
-        function renderGrid() {
+        function renderMainMenu() {
+            currentView = 'main';
             const grid = document.getElementById('grid');
             grid.innerHTML = '';
-            materials.forEach(m => {
+            categories.forEach(cat => {
                 const card = document.createElement('div');
                 card.className = 'card';
-                const imgUrl = getImageUrl(m.id);
                 card.innerHTML = `
-                    ${imgUrl 
-                        ? `<img class="image" src="${imgUrl}" alt="${m.name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`
-                        : ''
-                    }
-                    <div class="image-placeholder" style="${imgUrl ? 'display:none;' : ''}">${getEmoji(m.id)}</div>
+                    <img class="image" src="${cat.image}" alt="${cat.name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="image-placeholder" style="display:none;">📦</div>
                     <div class="info">
-                        <div class="name">${m.name}</div>
+                        <div class="name">${cat.name}</div>
                     </div>
                 `;
-                card.onclick = () => showDetail(m.id);
+                card.onclick = () => renderSubMenu(cat.id);
+                grid.appendChild(card);
+            });
+        }
+
+        function renderSubMenu(categoryId) {
+            currentView = 'submenu';
+            currentCategoryId = categoryId;
+            const category = categories.find(c => c.id === categoryId);
+            const grid = document.getElementById('grid');
+            grid.innerHTML = '';
+            
+            // Кнопка "Назад"
+            const backCard = document.createElement('div');
+            backCard.className = 'card';
+            backCard.style.background = 'rgba(255,252,249,0.6)';
+            backCard.innerHTML = `
+                <div class="info" style="padding:20px;">
+                    <div class="name" style="font-size:14px;color:#8b7355;">← Назад</div>
+                </div>
+            `;
+            backCard.onclick = renderMainMenu;
+            grid.appendChild(backCard);
+
+            // Материалы категории
+            category.materials.forEach(mat => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                const imgUrl = getImageUrl(mat.id);
+                card.innerHTML = `
+                    ${imgUrl 
+                        ? `<img class="image" src="${imgUrl}" alt="${mat.name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`
+                        : ''
+                    }
+                    <div class="image-placeholder" style="${imgUrl ? 'display:none;' : ''}">${getEmoji(mat.id)}</div>
+                    <div class="info">
+                        <div class="name">${mat.name}</div>
+                    </div>
+                `;
+                card.onclick = () => showDetail(mat.id);
                 grid.appendChild(card);
             });
         }
@@ -449,22 +547,22 @@
         }
 
         function showDetail(id) {
-            selectedMaterial = id;
+            currentView = 'detail';
             const data = details[id];
-            const material = materials.find(m => m.id === id);
             const imgUrl = getImageUrl(id);
+            const name = id.charAt(0).toUpperCase() + id.slice(1);
 
             document.getElementById('grid').classList.add('hidden');
             document.getElementById('detail').classList.remove('hidden');
 
             const container = document.getElementById('detailImageContainer');
             if (imgUrl) {
-                container.innerHTML = `<img class="image-full" src="${imgUrl}" alt="${material.name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`;
+                container.innerHTML = `<img class="image-full" src="${imgUrl}" alt="${name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`;
             } else {
                 container.innerHTML = `<div class="image-full-placeholder">${getEmoji(id)}</div>`;
             }
 
-            document.getElementById('detailName').textContent = `${material.name}`;
+            document.getElementById('detailName').textContent = name;
             document.getElementById('detailDesc').textContent = data.desc;
             document.getElementById('detailPros').textContent = data.pros;
             document.getElementById('detailCons').textContent = data.cons;
@@ -478,37 +576,40 @@
         }
 
         function goToMainMenu() {
+            currentView = 'main';
             document.getElementById('grid').classList.remove('hidden');
             document.getElementById('detail').classList.add('hidden');
-            selectedMaterial = null;
+            renderMainMenu();
         }
 
         // ================================================================
         // 3. ОБРАБОТЧИКИ
         // ================================================================
 
-        document.getElementById('backBtn').onclick = goToMainMenu;
+        document.getElementById('backBtn').onclick = () => {
+            if (currentView === 'detail') {
+                // Возвращаемся в подменю категории
+                document.getElementById('detail').classList.add('hidden');
+                document.getElementById('grid').classList.remove('hidden');
+                if (currentCategoryId) {
+                    renderSubMenu(currentCategoryId);
+                } else {
+                    renderMainMenu();
+                }
+            }
+        };
         document.getElementById('backToMenuBtn').onclick = goToMainMenu;
 
         // ================================================================
         // 4. ЗАПУСК
         // ================================================================
 
-        renderGrid();
+        renderMainMenu();
 
         tg.MainButton.setText('Выбрать');
         tg.MainButton.show();
         tg.MainButton.onClick(() => {
-            if (selectedMaterial) {
-                tg.sendData(JSON.stringify({ action: 'select', material: selectedMaterial }));
-                tg.close();
-            } else {
-                tg.showPopup({
-                    title: 'Внимание',
-                    message: 'Выберите материал',
-                    buttons: [{ type: 'ok' }]
-                });
-            }
+            tg.close();
         });
     </script>
 </body>

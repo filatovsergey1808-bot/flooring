@@ -275,7 +275,6 @@
             background: rgba(255,255,255,0.15);
         }
 
-        /* --- ОБЩИЙ СТИЛЬ ДЛЯ ВСЕХ КНОПОК --- */
         .btn {
             display: block;
             width: 100%;
@@ -291,7 +290,6 @@
             margin-top: 12px;
             text-transform: uppercase;
         }
-        /* --- КНОПКА "В ГЛАВНОЕ МЕНЮ" (ПРОЗРАЧНАЯ) --- */
         .btn-success {
             background: transparent;
             color: #f5f0eb;
@@ -303,21 +301,6 @@
             background: rgba(255,255,255,0.08);
             transform: scale(0.98);
         }
-        /* --- НОВАЯ КНОПКА "КОНСУЛЬТАЦИЯ" (НА ВСЮ ШИРИНУ) --- */
-        .btn-consult {
-            background: #c9a87c;
-            color: #1a1410;
-            border: none;
-            box-shadow: 0 2px 12px rgba(201, 168, 124, 0.3);
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-        .btn-consult:active {
-            opacity: 0.85;
-            transform: scale(0.98);
-        }
-        /* --- КОНЕЦ НОВОЙ КНОПКИ --- */
-
         .hidden {
             display: none !important;
         }
@@ -563,7 +546,6 @@
             grid.className = 'grid';
             grid.innerHTML = '';
             
-            // Добавляем карточки категорий
             categories.forEach(cat => {
                 const card = document.createElement('div');
                 card.className = 'card';
@@ -578,7 +560,7 @@
                 grid.appendChild(card);
             });
             
-            // Добавляем отдельную кнопку "Консультация" на всю ширину
+            // Кнопка "Консультация" на всю ширину
             const consultCard = document.createElement('div');
             consultCard.className = 'card';
             consultCard.style.cssText = 'grid-column: 1 / -1; background: rgba(201, 168, 124, 0.15); border-color: rgba(201, 168, 124, 0.3);';
@@ -598,7 +580,7 @@
                 }, (buttonId) => {
                     if (buttonId === 'ok') {
                         tg.sendData(JSON.stringify({ action: 'consult' }));
-                        tg.close();
+                        // Не закрываем приложение сразу, чтобы избежать timeout
                     }
                 });
             };

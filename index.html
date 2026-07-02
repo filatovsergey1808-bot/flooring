@@ -394,6 +394,69 @@
         .consult-form .btn-close:active {
             color: rgba(255,255,255,0.8);
         }
+
+        .contacts-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 24px 20px;
+            margin-top: 16px;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        .contacts-card h3 {
+            font-size: 18px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            color: #f5f0eb;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        .contacts-card .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+        .contacts-card .contact-item:active {
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .contacts-card .contact-item .icon {
+            font-size: 18px;
+            min-width: 28px;
+            color: #c9a87c;
+        }
+        .contacts-card .contact-item .text {
+            font-size: 14px;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+            color: #f5f0eb;
+            word-break: break-all;
+        }
+        .contacts-card .btn-close-contacts {
+            width: 100%;
+            padding: 12px;
+            margin-top: 12px;
+            background: transparent;
+            color: rgba(255,255,255,0.5);
+            border: none;
+            font-size: 14px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        .contacts-card .btn-close-contacts:active {
+            color: rgba(255,255,255,0.8);
+        }
     </style>
 </head>
 <body>
@@ -442,6 +505,7 @@
         </div>
 
         <div id="consultFormContainer"></div>
+        <div id="contactsContainer"></div>
     </div>
 
     <script>
@@ -609,6 +673,7 @@
         let currentView = 'main';
         let currentCategoryId = null;
         let showForm = false;
+        let showContacts = false;
 
         function getImageUrl(id) {
             return IMAGES[id] || null;
@@ -672,6 +737,35 @@
             };
         }
 
+        function renderContactsCard() {
+            const container = document.getElementById('contactsContainer');
+            container.innerHTML = `
+                <div class="contacts-card">
+                    <h3>Контакты</h3>
+                    <div class="contact-item" onclick="tg.sendData(JSON.stringify({ action: 'call' }));">
+                        <span class="icon">📞</span>
+                        <span class="text">+7 (343) 328-27-72</span>
+                    </div>
+                    <div class="contact-item" onclick="tg.sendData(JSON.stringify({ action: 'email' }));">
+                        <span class="icon">✉️</span>
+                        <span class="text">sl@principfloor.ru</span>
+                    </div>
+                    <div class="contact-item" onclick="tg.sendData(JSON.stringify({ action: 'site' }));">
+                        <span class="icon">🌐</span>
+                        <span class="text">principfloor.ru</span>
+                    </div>
+                    <button class="btn-close-contacts" id="contactsCloseBtn">Закрыть</button>
+                </div>
+            `;
+
+            document.getElementById('contactsCloseBtn').onclick = () => {
+                container.innerHTML = '';
+                showContacts = false;
+                document.getElementById('gridContainer').style.display = 'block';
+                renderMainMenu();
+            };
+        }
+
         function renderMainMenu() {
             currentView = 'main';
             const grid = document.getElementById('grid');
@@ -695,7 +789,7 @@
             // Кнопка "Консультация"
             const consultCard = document.createElement('div');
             consultCard.className = 'card';
-            consultCard.style.cssText = 'grid-column: 1 / -1; background: rgba(201, 168, 124, 0.2); border-color: rgba(201, 168, 124, 0.4);';
+            consultCard.style.cssText = 'grid-column: 1 / -1; background: rgba(255, 255, 255, 0.04); border-color: rgba(255, 255, 255, 0.1);';
             consultCard.innerHTML = `
                 <div class="info" style="padding: 28px 14px;">
                     <div class="name" style="font-size: 16px; letter-spacing: 1px; color: #f5f0eb;">Консультация</div>
@@ -715,16 +809,16 @@
             contactsCard.className = 'card';
             contactsCard.style.cssText = 'grid-column: 1 / -1; background: rgba(255, 255, 255, 0.04); border-color: rgba(255, 255, 255, 0.1);';
             contactsCard.innerHTML = `
-                <div class="info" style="padding: 20px 14px;">
+                <div class="info" style="padding: 28px 14px;">
                     <div class="name" style="font-size: 16px; letter-spacing: 1px; color: #f5f0eb;">Контакты</div>
                 </div>
             `;
             contactsCard.onclick = () => {
-                tg.showPopup({
-                    title: 'Контакты',
-                    message: '📞 +7 (343) 328-27-72\n✉️ sl@principfloor.ru\n🌐 principfloor.ru',
-                    buttons: [{ type: 'ok', text: 'Закрыть' }]
-                });
+                if (!showContacts) {
+                    showContacts = true;
+                    document.getElementById('gridContainer').style.display = 'none';
+                    renderContactsCard();
+                }
             };
             grid.appendChild(contactsCard);
         }
@@ -826,7 +920,9 @@
             document.getElementById('grid').classList.remove('hidden');
             document.getElementById('detail').classList.add('hidden');
             document.getElementById('consultFormContainer').innerHTML = '';
+            document.getElementById('contactsContainer').innerHTML = '';
             showForm = false;
+            showContacts = false;
             document.getElementById('gridContainer').style.display = 'block';
             renderMainMenu();
         }

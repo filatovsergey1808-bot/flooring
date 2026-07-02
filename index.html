@@ -67,7 +67,6 @@
             gap: 12px;
             width: 100%;
         }
-        /* --- ПОДМЕНЮ: 1 КОЛОНКА --- */
         .grid.submenu {
             grid-template-columns: 1fr;
         }
@@ -117,13 +116,12 @@
             display: none;
         }
 
-        /* --- АККУРАТНАЯ КНОПКА "НАЗАД" --- */
         .back-link {
             display: inline-block;
             padding: 6px 14px;
             margin-bottom: 12px;
             font-size: 13px;
-            font-weight: 400;
+            font-weight: 300;
             color: #8b7355;
             background: rgba(255, 252, 249, 0.6);
             backdrop-filter: blur(4px);
@@ -133,6 +131,7 @@
             text-align: center;
             border: 1px solid rgba(139, 115, 85, 0.15);
             width: fit-content;
+            letter-spacing: 0.5px;
         }
         .back-link:active {
             background: rgba(139, 115, 85, 0.15);
@@ -149,11 +148,13 @@
         }
         .submenu-header .category-title {
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 300;
             color: #4a3f35;
             letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
+        /* --- ЕДИНЫЙ СТИЛЬ ДЛЯ ОПИСАНИЯ --- */
         .info-block {
             background: rgba(255, 252, 249, 0.92);
             backdrop-filter: blur(12px);
@@ -185,8 +186,10 @@
         }
         .info-block h3 {
             font-size: 20px;
-            font-weight: 600;
-            color: #3d352c;
+            font-weight: 300;
+            letter-spacing: 1px;
+            color: #4a3f35;
+            text-transform: uppercase;
             margin-bottom: 8px;
         }
         .info-block .section {
@@ -196,24 +199,30 @@
         }
         .info-block .section h4 {
             font-size: 13px;
-            font-weight: 700;
+            font-weight: 300;
+            letter-spacing: 1px;
             margin-bottom: 8px;
             color: #7a6a5a;
-            letter-spacing: 0.8px;
             text-transform: uppercase;
         }
         .info-block .section p {
             font-size: 15px;
+            font-weight: 300;
             line-height: 1.7;
             color: #4a3f35;
             white-space: pre-line;
+            letter-spacing: 0.3px;
         }
         .info-block .price {
             font-size: 20px;
-            font-weight: 700;
+            font-weight: 300;
+            letter-spacing: 1px;
             color: #8b7355;
             margin-top: 8px;
+            text-transform: uppercase;
         }
+        /* --- КОНЕЦ ЕДИНОГО СТИЛЯ --- */
+
         .recommendation {
             background: rgba(245, 240, 235, 0.6);
             border-radius: 12px;
@@ -233,6 +242,7 @@
         }
         .recommendation .item b {
             color: #3d352c;
+            font-weight: 400;
         }
         .btn-site {
             display: inline-block;
@@ -243,11 +253,12 @@
             text-decoration: none;
             border-radius: 24px;
             border: 1.5px solid #d5c8b8;
-            font-weight: 500;
+            font-weight: 300;
             font-size: 14px;
             transition: all 0.2s ease;
             cursor: pointer;
             text-align: center;
+            letter-spacing: 0.5px;
         }
         .btn-site:active {
             background: rgba(213, 200, 184, 0.25);
@@ -260,17 +271,17 @@
             border: none;
             border-radius: 12px;
             font-size: 16px;
-            font-weight: 500;
+            font-weight: 300;
+            letter-spacing: 1px;
             cursor: pointer;
             transition: all 0.2s ease;
             text-align: center;
             margin-top: 12px;
+            text-transform: uppercase;
         }
         .btn-success {
             background: #c97b5a;
             color: white;
-            font-weight: 600;
-            letter-spacing: 0.5px;
             box-shadow: 0 2px 8px rgba(201, 123, 90, 0.3);
         }
         .btn-success:active {
@@ -285,6 +296,8 @@
             border: none;
             color: #8b7355;
             font-size: 14px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
             cursor: pointer;
             margin-bottom: 12px;
             padding: 0;
@@ -302,17 +315,15 @@
             <div class="accent-line"></div>
         </div>
 
-        <!-- Главное меню / Подменю -->
         <div id="gridContainer">
             <div class="grid" id="grid"></div>
         </div>
 
-        <!-- Детальная информация -->
         <div class="info-block hidden" id="detail">
             <button class="back-btn" id="backBtn">← Назад</button>
             <div id="detailImageContainer"></div>
             <h3 id="detailName"></h3>
-            <p id="detailDesc" style="font-size:15px;line-height:1.7;color:#4a3f35;margin-bottom:12px;"></p>
+            <p id="detailDesc" style="font-size:15px;font-weight:300;line-height:1.7;color:#4a3f35;letter-spacing:0.3px;margin-bottom:12px;"></p>
             
             <div class="section">
                 <h4>➕ Плюсы</h4>
@@ -507,7 +518,7 @@
         function renderMainMenu() {
             currentView = 'main';
             const grid = document.getElementById('grid');
-            grid.className = 'grid'; // убираем submenu
+            grid.className = 'grid';
             grid.innerHTML = '';
             categories.forEach(cat => {
                 const card = document.createElement('div');
@@ -529,10 +540,9 @@
             currentCategoryId = categoryId;
             const category = categories.find(c => c.id === categoryId);
             const grid = document.getElementById('grid');
-            grid.className = 'grid submenu'; // 1 колонка
+            grid.className = 'grid submenu';
             grid.innerHTML = '';
 
-            // Шапка подменю: название категории + аккуратная кнопка "Назад"
             const header = document.createElement('div');
             header.className = 'submenu-header';
             header.innerHTML = `
@@ -542,7 +552,6 @@
             grid.appendChild(header);
             header.querySelector('#submenuBackBtn').onclick = renderMainMenu;
 
-            // Материалы категории
             category.materials.forEach(mat => {
                 const card = document.createElement('div');
                 card.className = 'card';
@@ -570,7 +579,7 @@
                 return;
             }
             
-            let html = '<div class="recommendation"><h4 style="margin-bottom:12px; color: #6a5a4a; font-weight:500; letter-spacing:0.5px;">🛍️ Рекомендуемые товары</h4>';
+            let html = '<div class="recommendation"><h4 style="margin-bottom:12px; color: #6a5a4a; font-weight:300; letter-spacing:0.5px; text-transform:uppercase;">🛍️ Рекомендуемые товары</h4>';
             items.forEach(item => {
                 html += `
                     <div class="item">

@@ -16,34 +16,36 @@
             min-height: 100vh;
             padding: 16px;
             color: #1a1a1a;
-            background: #e8ddd2;
-            background-image: 
-                repeating-linear-gradient(
-                    90deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(139, 115, 85, 0.03) 2px,
-                    rgba(139, 115, 85, 0.03) 4px
-                ),
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 30px,
-                    rgba(139, 115, 85, 0.04) 30px,
-                    rgba(139, 115, 85, 0.04) 31px
-                ),
-                linear-gradient(135deg, #e8ddd2 0%, #d5c8b8 100%);
+            /* --- ФОН С ФОТО ТЕРРАСНОЙ ДОСКИ --- */
+            background-image: url('https://images.pexels.com/photos/2097027/pexels-photo-2097027.jpeg?w=800&h=600&fit=crop');
+            background-size: cover;
+            background-position: center;
             background-attachment: fixed;
         }
+        /* --- ПОЛУПРОЗРАЧНАЯ ПОДЛОЖКА ДЛЯ ЧИТАЕМОСТИ --- */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(44, 40, 35, 0.45);
+            z-index: 0;
+        }
+        #app {
+            position: relative;
+            z-index: 1;
+        }
         .header {
-            background: rgba(255, 252, 249, 0.85);
+            background: rgba(255, 252, 249, 0.88);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-radius: 20px;
             padding: 24px 20px 20px 20px;
             margin-bottom: 20px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
             border: 1px solid rgba(255,255,255,0.5);
         }
         .header h1 {
@@ -79,7 +81,7 @@
             -webkit-backdrop-filter: blur(8px);
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
             border: 1px solid rgba(255,255,255,0.6);
@@ -129,7 +131,7 @@
             border-radius: 16px;
             padding: 20px;
             margin-top: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             border: 1px solid rgba(255,255,255,0.5);
         }
         .info-block .image-full {
@@ -309,30 +311,31 @@
 
     <script>
         // ================================================================
-        // 1. ДАННЫЕ (ТЕРРАСНАЯ ДОСКА)
+        // 1. ДАННЫЕ (НОВЫЙ ПОРЯДОК)
         // ================================================================
 
         const IMAGES = {
-            'декинг': 'https://images.pexels.com/photos/2097027/pexels-photo-2097027.jpeg?w=400&h=300&fit=crop',
             'кумару': 'https://images.pexels.com/photos/2697369/pexels-photo-2697369.jpeg?w=400&h=300&fit=crop',
             'ясень': 'https://images.pexels.com/photos/1648768/pexels-photo-1648768.jpeg?w=400&h=300&fit=crop',
             'лиственница': 'https://images.pexels.com/photos/2802323/pexels-photo-2802323.jpeg?w=400&h=300&fit=crop',
+            'декинг': 'https://images.pexels.com/photos/2097027/pexels-photo-2097027.jpeg?w=400&h=300&fit=crop',
             'монтаж': 'https://images.pexels.com/photos/2765890/pexels-photo-2765890.jpeg?w=400&h=300&fit=crop'
         };
 
         const EMOJI_PLACEHOLDER = {
-            'декинг': '🪵',
             'кумару': '🪵',
             'ясень': '🌳',
             'лиственница': '🌲',
+            'декинг': '🪵',
             'монтаж': '🔧'
         };
 
+        // --- НОВЫЙ ПОРЯДОК: Кумару, Ясень, Лиственница, Декинг, Монтаж ---
         const materials = [
-            { id: 'декинг', name: 'Декинг', badge: 'Популярный' },
             { id: 'кумару', name: 'Кумару', badge: 'Экзотика' },
             { id: 'ясень', name: 'Ясень', badge: 'Натуральный' },
             { id: 'лиственница', name: 'Лиственница', badge: 'Морозостойкая' },
+            { id: 'декинг', name: 'Декинг', badge: 'Популярный' },
             { id: 'монтаж', name: 'Монтаж', badge: 'Инструкция' }
         ];
 
@@ -353,14 +356,6 @@
         };
 
         const details = {
-            'декинг': {
-                desc: 'Декинг (террасная доска) — это покрытие для открытых пространств, устойчивое к влаге и перепадам температур. Изготавливается из ДПК (древесно-полимерного композита) или натуральной древесины.',
-                pros: '✅ Устойчивость к влаге\n✅ Не требует покраски (ДПК)\n✅ Противоскользящая поверхность\n✅ Долговечность (25-30 лет)',
-                cons: '❌ Высокая цена\n❌ Может нагреваться на солнце\n❌ Требует правильного монтажа',
-                care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🧽 Для пятен — мягкие моющие средства',
-                specs: '⏳ Срок службы: 25-30 лет\n📊 Класс: ДПК / Натуральная древесина\n💧 Водостойкость: Высокая',
-                price: 'от 3 500 ₽/м²'
-            },
             'кумару': {
                 desc: 'Кумару — это экзотическая порода дерева из Южной Америки. Отличается высокой плотностью, твёрдостью и устойчивостью к гниению. Идеальна для террас в сложных климатических условиях.',
                 pros: '✅ Экзотический вид\n✅ Высокая плотность и твёрдость\n✅ Устойчивость к гниению\n✅ Не боится насекомых',
@@ -384,6 +379,14 @@
                 care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка раз в год',
                 specs: '⏳ Срок службы: 20-30 лет\n📊 Класс: Хвойная древесина\n💧 Водостойкость: Высокая',
                 price: 'от 4 500 ₽/м²'
+            },
+            'декинг': {
+                desc: 'Декинг (террасная доска) — это покрытие для открытых пространств, устойчивое к влаге и перепадам температур. Изготавливается из ДПК (древесно-полимерного композита) или натуральной древесины.',
+                pros: '✅ Устойчивость к влаге\n✅ Не требует покраски (ДПК)\n✅ Противоскользящая поверхность\n✅ Долговечность (25-30 лет)',
+                cons: '❌ Высокая цена\n❌ Может нагреваться на солнце\n❌ Требует правильного монтажа',
+                care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🧽 Для пятен — мягкие моющие средства',
+                specs: '⏳ Срок службы: 25-30 лет\n📊 Класс: ДПК / Натуральная древесина\n💧 Водостойкость: Высокая',
+                price: 'от 3 500 ₽/м²'
             },
             'монтаж': {
                 desc: 'Правильный монтаж террасной доски — залог долговечности. Важно выбрать правильный крепёж (скрытый или открытый), оставить зазоры для расширения и использовать качественные лаги.',

@@ -692,7 +692,7 @@
                 grid.appendChild(card);
             });
             
-            // Кнопка "Консультация" — ровно по ширине, но выше
+            // Кнопка "Консультация"
             const consultCard = document.createElement('div');
             consultCard.className = 'card';
             consultCard.style.cssText = 'grid-column: 1 / -1; background: rgba(201, 168, 124, 0.2); border-color: rgba(201, 168, 124, 0.4);';
@@ -709,6 +709,24 @@
                 }
             };
             grid.appendChild(consultCard);
+
+            // Кнопка "Контакты"
+            const contactsCard = document.createElement('div');
+            contactsCard.className = 'card';
+            contactsCard.style.cssText = 'grid-column: 1 / -1; background: rgba(255, 255, 255, 0.04); border-color: rgba(255, 255, 255, 0.1);';
+            contactsCard.innerHTML = `
+                <div class="info" style="padding: 20px 14px;">
+                    <div class="name" style="font-size: 16px; letter-spacing: 1px; color: #f5f0eb;">Контакты</div>
+                </div>
+            `;
+            contactsCard.onclick = () => {
+                tg.showPopup({
+                    title: 'Контакты',
+                    message: '📞 +7 (343) 328-27-72\n✉️ sl@principfloor.ru\n🌐 principfloor.ru',
+                    buttons: [{ type: 'ok', text: 'Закрыть' }]
+                });
+            };
+            grid.appendChild(contactsCard);
         }
 
         function renderSubMenu(categoryId) {

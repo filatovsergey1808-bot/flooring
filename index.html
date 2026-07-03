@@ -75,6 +75,7 @@
             transition: transform 0.2s, box-shadow 0.2s;
             border: 1px solid rgba(255,255,255,0.2);
             width: 100%;
+            position: relative;
         }
         .card:active {
             transform: scale(0.96);
@@ -461,7 +462,7 @@
             position: relative;
             overflow: visible;
             transition: transform 0.3s ease;
-            min-height: 120px;
+            min-height: 80px;
         }
         
         .logo-wrapper:hover {
@@ -502,109 +503,176 @@
             animation: logoFloat 3s ease-in-out infinite;
         }
         
-        /* ===== ПЕРСОНАЖ ===== */
-        .character {
-            position: absolute;
-            font-size: 36px;
-            z-index: 3;
-            left: 10%;
-            top: 50%;
-            transform: translateY(-50%);
-            animation: walkAcross 8s linear infinite;
-            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
-            pointer-events: none;
+        /* ===== ПАНДА НА КНОПКЕ "КОНСУЛЬТАЦИЯ" ===== */
+        .panda-container {
+            position: relative;
+            grid-column: 1 / -1;
+            overflow: hidden;
+            min-height: 140px;
         }
         
-        @keyframes walkAcross {
+        .panda-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 28px 14px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+            position: relative;
+            overflow: hidden;
+            min-height: 140px;
+        }
+        
+        .panda-card:active {
+            transform: scale(0.96);
+        }
+        
+        .panda-card .name {
+            font-weight: 300;
+            font-size: 16px;
+            letter-spacing: 1px;
+            color: #f5f0eb;
+            text-transform: uppercase;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .panda {
+            position: absolute;
+            font-size: 48px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 3;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+            pointer-events: none;
+            left: -10%;
+            animation: pandaWalk 6s ease-in-out infinite;
+        }
+        
+        @keyframes pandaWalk {
             0% {
                 left: -10%;
                 transform: translateY(-50%) scaleX(1);
             }
-            25% {
+            10% {
+                transform: translateY(-70%) scaleX(1);
+            }
+            20% {
+                transform: translateY(-30%) scaleX(1);
+            }
+            30% {
                 transform: translateY(-60%) scaleX(1);
             }
-            50% {
+            40% {
                 transform: translateY(-40%) scaleX(1);
             }
-            75% {
+            50% {
+                transform: translateY(-65%) scaleX(1);
+            }
+            60% {
+                transform: translateY(-35%) scaleX(1);
+            }
+            70% {
                 transform: translateY(-55%) scaleX(1);
             }
+            80% {
+                transform: translateY(-45%) scaleX(1);
+            }
+            90% {
+                transform: translateY(-60%) scaleX(1);
+            }
             100% {
-                left: 110%;
+                left: 85%;
                 transform: translateY(-50%) scaleX(1);
             }
         }
         
-        /* Второй персонаж (шагает в обратную сторону) */
-        .character2 {
+        /* Панда сидит в конце */
+        .panda-sitting {
             position: absolute;
-            font-size: 28px;
+            font-size: 48px;
+            top: 50%;
+            right: 5%;
+            transform: translateY(-50%);
             z-index: 3;
-            right: 10%;
-            top: 30%;
-            animation: walkBack 10s linear infinite;
             filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
             pointer-events: none;
-            animation-delay: 2s;
+            opacity: 0;
+            animation: pandaSit 6s ease-in-out infinite;
         }
         
-        @keyframes walkBack {
-            0% {
-                right: -10%;
-                transform: translateY(-50%) scaleX(-1);
+        @keyframes pandaSit {
+            0%, 70% {
+                opacity: 0;
+                transform: translateY(-50%) scale(0.5);
             }
-            25% {
-                transform: translateY(-65%) scaleX(-1);
+            85% {
+                opacity: 1;
+                transform: translateY(-50%) scale(1.2);
             }
-            50% {
-                transform: translateY(-35%) scaleX(-1);
-            }
-            75% {
-                transform: translateY(-60%) scaleX(-1);
+            95% {
+                transform: translateY(-50%) scale(0.9);
             }
             100% {
-                right: 110%;
-                transform: translateY(-50%) scaleX(-1);
+                opacity: 1;
+                transform: translateY(-50%) scale(1);
             }
         }
         
-        /* Следы персонажа */
-        .footprints {
+        /* Следы панды */
+        .panda-footprints {
             position: absolute;
-            font-size: 14px;
-            opacity: 0.3;
+            font-size: 16px;
+            opacity: 0;
             z-index: 1;
             pointer-events: none;
+            animation: pandaFootprints 6s ease-in-out infinite;
         }
         
-        .footprint1 {
-            bottom: 10%;
+        .footprint-1 {
             left: 20%;
-            animation: fadeFootprint 8s linear infinite;
+            top: 70%;
+            animation-delay: 0.5s;
         }
         
-        .footprint2 {
-            bottom: 15%;
-            left: 45%;
-            animation: fadeFootprint 8s linear infinite;
-            animation-delay: 2s;
+        .footprint-2 {
+            left: 40%;
+            top: 75%;
+            animation-delay: 1.5s;
         }
         
-        .footprint3 {
-            bottom: 8%;
-            left: 70%;
-            animation: fadeFootprint 8s linear infinite;
-            animation-delay: 4s;
+        .footprint-3 {
+            left: 60%;
+            top: 65%;
+            animation-delay: 2.5s;
         }
         
-        @keyframes fadeFootprint {
-            0%, 100% {
+        .footprint-4 {
+            left: 75%;
+            top: 70%;
+            animation-delay: 3.5s;
+        }
+        
+        @keyframes pandaFootprints {
+            0%, 10% {
                 opacity: 0;
                 transform: scale(0.5);
             }
-            50% {
-                opacity: 0.3;
+            20% {
+                opacity: 0.4;
                 transform: scale(1);
+            }
+            40% {
+                opacity: 0.2;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.3);
             }
         }
         
@@ -951,23 +1019,29 @@
                 grid.appendChild(card);
             });
             
-            // Консультация
-            const consultCard = document.createElement('div');
-            consultCard.className = 'card';
-            consultCard.style.cssText = 'grid-column: 1 / -1; background: rgba(255, 255, 255, 0.04); border-color: rgba(255, 255, 255, 0.1);';
-            consultCard.innerHTML = `
-                <div class="info" style="padding: 28px 14px;">
-                    <div class="name" style="font-size: 16px; letter-spacing: 1px; color: #f5f0eb;">Консультация</div>
+            // Кнопка "Консультация" с пандой
+            const consultContainer = document.createElement('div');
+            consultContainer.className = 'panda-container';
+            consultContainer.innerHTML = `
+                <div class="panda-card" id="consultPandaBtn">
+                    <div class="panda" id="walkingPanda">🐼</div>
+                    <div class="panda-sitting" id="sittingPanda">🐼</div>
+                    <div class="panda-footprints footprint-1">🐾</div>
+                    <div class="panda-footprints footprint-2">🐾</div>
+                    <div class="panda-footprints footprint-3">🐾</div>
+                    <div class="panda-footprints footprint-4">🐾</div>
+                    <div class="name">Консультация</div>
                 </div>
             `;
-            consultCard.onclick = () => {
+            
+            consultContainer.querySelector('#consultPandaBtn').onclick = () => {
                 if (!showForm) {
                     showForm = true;
                     document.getElementById('gridContainer').style.display = 'none';
                     renderConsultForm();
                 }
             };
-            grid.appendChild(consultCard);
+            grid.appendChild(consultContainer);
 
             // Контакты
             const contactsCard = document.createElement('div');
@@ -987,15 +1061,10 @@
             };
             grid.appendChild(contactsCard);
 
-            // --- ЛОГОТИП С ПЕРСОНАЖАМИ ---
+            // --- ЛОГОТИП ---
             const logoWrapper = document.createElement('div');
             logoWrapper.className = 'logo-wrapper';
             logoWrapper.innerHTML = `
-                <div class="character">🚶</div>
-                <div class="character2">🧑</div>
-                <div class="footprints footprint1">👣</div>
-                <div class="footprints footprint2">👣</div>
-                <div class="footprints footprint3">👣</div>
                 <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390" 
                      alt="PRINCIP FLOOR">
             `;

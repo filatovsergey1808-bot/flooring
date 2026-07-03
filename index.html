@@ -457,6 +457,22 @@
         .contacts-card .btn-close-contacts:active {
             color: rgba(255,255,255,0.8);
         }
+
+        /* Стиль для прозрачного логотипа */
+        .logo-wrapper {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 20px 14px 8px 14px;
+            background: transparent !important;
+            cursor: pointer;
+        }
+        .logo-wrapper img {
+            display: block;
+            width: 200px;
+            height: auto;
+            margin: 0 auto;
+            background: transparent !important;
+        }
     </style>
 </head>
 <body>
@@ -664,7 +680,8 @@
         };
 
         // ================================================================
-        // 2. ЛОГИКА        // ================================================================
+        // 2. ЛОГИКА
+        // ================================================================
 
         const tg = window.Telegram.WebApp;
         tg.expand();
@@ -785,7 +802,7 @@
                 grid.appendChild(card);
             });
             
-            // Кнопка "Консультация"
+            // Консультация
             const consultCard = document.createElement('div');
             consultCard.className = 'card';
             consultCard.style.cssText = 'grid-column: 1 / -1; background: rgba(255, 255, 255, 0.04); border-color: rgba(255, 255, 255, 0.1);';
@@ -803,7 +820,7 @@
             };
             grid.appendChild(consultCard);
 
-            // Кнопка "Контакты"
+            // Контакты
             const contactsCard = document.createElement('div');
             contactsCard.className = 'card';
             contactsCard.style.cssText = 'grid-column: 1 / -1; background: rgba(255, 255, 255, 0.04); border-color: rgba(255, 255, 255, 0.1);';
@@ -821,21 +838,17 @@
             };
             grid.appendChild(contactsCard);
 
-            // --- ЛОГОТИП (АБСОЛЮТНО ПРОЗРАЧНЫЙ, ОРИГИНАЛЬНЫЙ ЦВЕТ) ---
-            const logoCard = document.createElement('div');
-            logoCard.className = 'card';
-            logoCard.style.cssText = 'grid-column: 1 / -1; background: transparent !important; border: none !important; box-shadow: none !important; cursor: pointer;';
-            logoCard.innerHTML = `
-                <div class="info" style="padding: 20px 14px 8px 14px; background: transparent !important;">
-                    <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390" 
-                         alt="PRINCIP FLOOR" 
-                         style="display: block; width: 200px; height: auto; margin: 0 auto;">
-                </div>
+            // --- ЛОГОТИП (ПРОЗРАЧНЫЙ ФОН) ---
+            const logoWrapper = document.createElement('div');
+            logoWrapper.className = 'logo-wrapper';
+            logoWrapper.innerHTML = `
+                <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390" 
+                     alt="PRINCIP FLOOR">
             `;
-            logoCard.onclick = () => {
+            logoWrapper.onclick = () => {
                 tg.openLink('https://principfloor.ru/');
             };
-            grid.appendChild(logoCard);
+            grid.appendChild(logoWrapper);
         }
 
         function renderSubMenu(categoryId) {

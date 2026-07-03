@@ -822,20 +822,20 @@
             };
             grid.appendChild(contactsCard);
 
-            // --- ЛОГОТИП В ПОДВАЛЕ ---
+            // --- ЛОГОТИП С ССЫЛКОЙ НА САЙТ ---
             const logoCard = document.createElement('div');
             logoCard.className = 'card';
-            logoCard.style.cssText = 'grid-column: 1 / -1; background: transparent; border: none; box-shadow: none; cursor: default;';
+            logoCard.style.cssText = 'grid-column: 1 / -1; background: transparent; border: none; box-shadow: none; cursor: pointer;';
             logoCard.innerHTML = `
-                <div class="info" style="padding: 20px 14px 8px 14px;">
-                    <div style="font-size: 12px; letter-spacing: 3px; color: rgba(255,255,255,0.2); text-transform: uppercase; text-align: center;">
-                        PRINCIP FLOOR
-                    </div>
-                    <div style="font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,0.1); text-transform: uppercase; text-align: center; margin-top: 4px;">
-                        напольные покрытия
-                    </div>
+                <div class="info" style="padding: 16px 14px 8px 14px;">
+                    <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390" 
+                         alt="PRINCIP FLOOR" 
+                         style="display: block; width: 120px; height: auto; margin: 0 auto; opacity: 0.6; filter: brightness(10);">
                 </div>
             `;
+            logoCard.onclick = () => {
+                tg.openLink('https://principfloor.ru/');
+            };
             grid.appendChild(logoCard);
         }
 

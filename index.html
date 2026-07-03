@@ -75,7 +75,6 @@
             transition: transform 0.2s, box-shadow 0.2s;
             border: 1px solid rgba(255,255,255,0.2);
             width: 100%;
-            position: relative;
         }
         .card:active {
             transform: scale(0.96);
@@ -107,9 +106,6 @@
             color: #f5f0eb;
             text-transform: uppercase;
             text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
-        .card .badge {
-            display: none;
         }
 
         .back-link {
@@ -452,21 +448,18 @@
             color: rgba(255,255,255,0.8);
         }
 
-        /* ===== АНИМАЦИЯ ДЛЯ ЛОГОТИПА ===== */
+        /* ===== ЛОГОТИП ===== */
         .logo-wrapper {
             grid-column: 1 / -1;
             text-align: center;
             padding: 20px 14px 8px 14px;
             background: transparent !important;
             cursor: pointer;
-            position: relative;
-            overflow: visible;
             transition: transform 0.3s ease;
-            min-height: 80px;
         }
         
         .logo-wrapper:hover {
-            transform: scale(1.02);
+            transform: scale(1.05);
         }
         
         .logo-wrapper:active {
@@ -481,215 +474,10 @@
             background: transparent !important;
             filter: drop-shadow(0 4px 20px rgba(201, 168, 124, 0.3));
             transition: filter 0.3s ease;
-            position: relative;
-            z-index: 2;
         }
         
         .logo-wrapper:hover img {
             filter: drop-shadow(0 4px 30px rgba(201, 168, 124, 0.6));
-        }
-        
-        /* Пульсирующая анимация логотипа */
-        @keyframes logoFloat {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-5px);
-            }
-        }
-        
-        .logo-wrapper img {
-            animation: logoFloat 3s ease-in-out infinite;
-        }
-        
-        /* ===== ПАНДА НА КНОПКЕ "КОНСУЛЬТАЦИЯ" ===== */
-        .panda-container {
-            position: relative;
-            grid-column: 1 / -1;
-            overflow: hidden;
-            min-height: 140px;
-        }
-        
-        .panda-card {
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 28px 14px;
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.2s;
-            position: relative;
-            overflow: hidden;
-            min-height: 140px;
-        }
-        
-        .panda-card:active {
-            transform: scale(0.96);
-        }
-        
-        .panda-card .name {
-            font-weight: 300;
-            font-size: 16px;
-            letter-spacing: 1px;
-            color: #f5f0eb;
-            text-transform: uppercase;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-            position: relative;
-            z-index: 2;
-        }
-        
-        .panda {
-            position: absolute;
-            font-size: 48px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 3;
-            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
-            pointer-events: none;
-            left: -10%;
-            animation: pandaWalk 6s ease-in-out infinite;
-        }
-        
-        @keyframes pandaWalk {
-            0% {
-                left: -10%;
-                transform: translateY(-50%) scaleX(1);
-            }
-            10% {
-                transform: translateY(-70%) scaleX(1);
-            }
-            20% {
-                transform: translateY(-30%) scaleX(1);
-            }
-            30% {
-                transform: translateY(-60%) scaleX(1);
-            }
-            40% {
-                transform: translateY(-40%) scaleX(1);
-            }
-            50% {
-                transform: translateY(-65%) scaleX(1);
-            }
-            60% {
-                transform: translateY(-35%) scaleX(1);
-            }
-            70% {
-                transform: translateY(-55%) scaleX(1);
-            }
-            80% {
-                transform: translateY(-45%) scaleX(1);
-            }
-            90% {
-                transform: translateY(-60%) scaleX(1);
-            }
-            100% {
-                left: 85%;
-                transform: translateY(-50%) scaleX(1);
-            }
-        }
-        
-        /* Панда сидит в конце */
-        .panda-sitting {
-            position: absolute;
-            font-size: 48px;
-            top: 50%;
-            right: 5%;
-            transform: translateY(-50%);
-            z-index: 3;
-            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
-            pointer-events: none;
-            opacity: 0;
-            animation: pandaSit 6s ease-in-out infinite;
-        }
-        
-        @keyframes pandaSit {
-            0%, 70% {
-                opacity: 0;
-                transform: translateY(-50%) scale(0.5);
-            }
-            85% {
-                opacity: 1;
-                transform: translateY(-50%) scale(1.2);
-            }
-            95% {
-                transform: translateY(-50%) scale(0.9);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(-50%) scale(1);
-            }
-        }
-        
-        /* Следы панды */
-        .panda-footprints {
-            position: absolute;
-            font-size: 16px;
-            opacity: 0;
-            z-index: 1;
-            pointer-events: none;
-            animation: pandaFootprints 6s ease-in-out infinite;
-        }
-        
-        .footprint-1 {
-            left: 20%;
-            top: 70%;
-            animation-delay: 0.5s;
-        }
-        
-        .footprint-2 {
-            left: 40%;
-            top: 75%;
-            animation-delay: 1.5s;
-        }
-        
-        .footprint-3 {
-            left: 60%;
-            top: 65%;
-            animation-delay: 2.5s;
-        }
-        
-        .footprint-4 {
-            left: 75%;
-            top: 70%;
-            animation-delay: 3.5s;
-        }
-        
-        @keyframes pandaFootprints {
-            0%, 10% {
-                opacity: 0;
-                transform: scale(0.5);
-            }
-            20% {
-                opacity: 0.4;
-                transform: scale(1);
-            }
-            40% {
-                opacity: 0.2;
-                transform: scale(0.8);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(0.3);
-            }
-        }
-        
-        /* ===== АНИМАЦИЯ ПОЯВЛЕНИЯ ===== */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .logo-wrapper {
-            animation: fadeInUp 0.8s ease-out;
         }
     </style>
 </head>
@@ -1019,29 +807,23 @@
                 grid.appendChild(card);
             });
             
-            // Кнопка "Консультация" с пандой
-            const consultContainer = document.createElement('div');
-            consultContainer.className = 'panda-container';
-            consultContainer.innerHTML = `
-                <div class="panda-card" id="consultPandaBtn">
-                    <div class="panda" id="walkingPanda">🐼</div>
-                    <div class="panda-sitting" id="sittingPanda">🐼</div>
-                    <div class="panda-footprints footprint-1">🐾</div>
-                    <div class="panda-footprints footprint-2">🐾</div>
-                    <div class="panda-footprints footprint-3">🐾</div>
-                    <div class="panda-footprints footprint-4">🐾</div>
-                    <div class="name">Консультация</div>
+            // Консультация
+            const consultCard = document.createElement('div');
+            consultCard.className = 'card';
+            consultCard.style.cssText = 'grid-column: 1 / -1; background: rgba(255, 255, 255, 0.04); border-color: rgba(255, 255, 255, 0.1);';
+            consultCard.innerHTML = `
+                <div class="info" style="padding: 28px 14px;">
+                    <div class="name" style="font-size: 16px; letter-spacing: 1px; color: #f5f0eb;">Консультация</div>
                 </div>
             `;
-            
-            consultContainer.querySelector('#consultPandaBtn').onclick = () => {
+            consultCard.onclick = () => {
                 if (!showForm) {
                     showForm = true;
                     document.getElementById('gridContainer').style.display = 'none';
                     renderConsultForm();
                 }
             };
-            grid.appendChild(consultContainer);
+            grid.appendChild(consultCard);
 
             // Контакты
             const contactsCard = document.createElement('div');
@@ -1061,7 +843,7 @@
             };
             grid.appendChild(contactsCard);
 
-            // --- ЛОГОТИП ---
+            // Логотип
             const logoWrapper = document.createElement('div');
             logoWrapper.className = 'logo-wrapper';
             logoWrapper.innerHTML = `

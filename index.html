@@ -821,15 +821,15 @@
             };
             grid.appendChild(contactsCard);
 
-            // --- ЛОГОТИП (БЕЗ ФОНА, ОРИГИНАЛЬНЫЙ ЦВЕТ) ---
+            // --- ЛОГОТИП (АБСОЛЮТНО ПРОЗРАЧНЫЙ, ОРИГИНАЛЬНЫЙ ЦВЕТ) ---
             const logoCard = document.createElement('div');
             logoCard.className = 'card';
-            logoCard.style.cssText = 'grid-column: 1 / -1; background: transparent; border: none; box-shadow: none; cursor: pointer;';
+            logoCard.style.cssText = 'grid-column: 1 / -1; background: transparent !important; border: none !important; box-shadow: none !important; cursor: pointer;';
             logoCard.innerHTML = `
-                <div class="info" style="padding: 20px 14px 8px 14px; background: transparent;">
+                <div class="info" style="padding: 20px 14px 8px 14px; background: transparent !important;">
                     <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390" 
                          alt="PRINCIP FLOOR" 
-                         style="display: block; width: 180px; height: auto; margin: 0 auto;">
+                         style="display: block; width: 200px; height: auto; margin: 0 auto;">
                 </div>
             `;
             logoCard.onclick = () => {

@@ -821,6 +821,22 @@
                 }
             };
             grid.appendChild(contactsCard);
+
+            // --- ЛОГОТИП В ПОДВАЛЕ ---
+            const logoCard = document.createElement('div');
+            logoCard.className = 'card';
+            logoCard.style.cssText = 'grid-column: 1 / -1; background: transparent; border: none; box-shadow: none; cursor: default;';
+            logoCard.innerHTML = `
+                <div class="info" style="padding: 20px 14px 8px 14px;">
+                    <div style="font-size: 12px; letter-spacing: 3px; color: rgba(255,255,255,0.2); text-transform: uppercase; text-align: center;">
+                        PRINCIP FLOOR
+                    </div>
+                    <div style="font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,0.1); text-transform: uppercase; text-align: center; margin-top: 4px;">
+                        напольные покрытия
+                    </div>
+                </div>
+            `;
+            grid.appendChild(logoCard);
         }
 
         function renderSubMenu(categoryId) {

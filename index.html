@@ -477,7 +477,7 @@
             color: rgba(255,255,255,0.8);
         }
 
-        /* ===== ЛОГОТИП ===== */
+        /* ===== ЛОГОТИП С POWERED BY ===== */
         .logo-wrapper {
             grid-column: 1 / -1;
             text-align: center;
@@ -493,6 +493,16 @@
         
         .logo-wrapper:active {
             transform: scale(0.95);
+        }
+        
+        .logo-wrapper .powered {
+            font-size: 11px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
         
         .logo-wrapper img {
@@ -894,10 +904,11 @@
             };
             grid.appendChild(contactsCard);
 
-            // Логотип
+            // Логотип с Powered by
             const logoWrapper = document.createElement('div');
             logoWrapper.className = 'logo-wrapper';
             logoWrapper.innerHTML = `
+                <div class="powered">Powered by</div>
                 <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390" 
                      alt="PRINCIP FLOOR">
             `;

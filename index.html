@@ -32,12 +32,126 @@
             overflow: hidden;
             box-shadow: 0 8px 30px rgba(0,0,0,0.3);
             border-radius: 2px;
-            page-break-after: always;
             display: flex;
             flex-direction: column;
         }
 
-        /* Цвета бренда Princip Floor */
+        /* ---------- ПРАВИЛА ДЛЯ ПЕЧАТИ ---------- */
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+                margin: 0;
+                gap: 0;
+                display: block;
+            }
+
+            .page {
+                box-shadow: none;
+                border-radius: 0;
+                margin: 0;
+                padding: 18mm 16mm;
+                width: 210mm;
+                min-height: 297mm;
+                height: 297mm;
+                page-break-after: always;
+                page-break-inside: avoid;
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+            }
+
+            .page:last-child {
+                page-break-after: avoid;
+            }
+
+            /* Скрываем навигацию при печати */
+            .nav-controls {
+                display: none !important;
+            }
+
+            /* Сохраняем фоны */
+            .bg-dark {
+                background: #1a2a3a !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            .bg-light {
+                background: #f7f5f2 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            .bg-white {
+                background: #ffffff !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            .accent {
+                color: #b8860b !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            .photo-placeholder {
+                border: 1px solid #ccc !important;
+                background: #f5f0eb !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+                min-height: 80px !important;
+            }
+
+            .photo-placeholder img {
+                display: block !important;
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: cover !important;
+            }
+
+            .watermark {
+                opacity: 1 !important;
+            }
+
+            .step-table td {
+                border-bottom: 1px solid #e0d8d0 !important;
+            }
+
+            .cat-block {
+                background: rgba(255,255,255,0.04) !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            .bg-light .cat-block {
+                background: #f0ebe5 !important;
+            }
+
+            .contact-block {
+                background: #e8e2da !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            .bg-dark .contact-block {
+                background: rgba(255,255,255,0.05) !important;
+            }
+
+            /* Убираем лишние отступы */
+            .page .watermark {
+                position: absolute !important;
+            }
+        }
+
+        /* ---------- ЦВЕТА БРЕНДА ---------- */
         :root {
             --primary: #1a2a3a;
             --accent: #b8860b;
@@ -68,6 +182,9 @@
         }
         .accent-bg {
             background: var(--accent);
+        }
+        .text-muted-light {
+            color: #a09892;
         }
 
         /* ---------- ТИПОГРАФИКА ---------- */
@@ -109,9 +226,6 @@
             letter-spacing: 1px;
             color: var(--text-muted);
         }
-        .text-muted-light {
-            color: #a09892;
-        }
 
         /* ---------- СЕТКИ ---------- */
         .grid-2 {
@@ -123,11 +237,6 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             gap: 16px;
-        }
-        .grid-4 {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            gap: 10px;
         }
         .flex-col {
             display: flex;
@@ -141,8 +250,6 @@
         .mt-30 { margin-top: 30px; }
         .mb-10 { margin-bottom: 10px; }
         .mb-20 { margin-bottom: 20px; }
-        .gap-10 { gap: 10px; }
-        .gap-20 { gap: 20px; }
 
         /* ---------- КАРТОЧКИ ПРЕИМУЩЕСТВ ---------- */
         .advantage {
@@ -234,19 +341,10 @@
             display: none;
         }
 
-        /* Размеры фото */
-        .photo-large {
-            min-height: 160px;
-        }
-        .photo-medium {
-            min-height: 110px;
-        }
-        .photo-small {
-            min-height: 70px;
-        }
-        .photo-full {
-            min-height: 200px;
-        }
+        .photo-large { min-height: 160px; }
+        .photo-medium { min-height: 110px; }
+        .photo-small { min-height: 70px; }
+        .photo-full { min-height: 180px; }
 
         /* ---------- ТАБЛИЦЫ ---------- */
         .step-table {
@@ -271,7 +369,7 @@
             border-color: #3a4a5a;
         }
 
-        /* ---------- ДЕКОРАТИВНЫЙ ВОДЯНОЙ ЗНАК ---------- */
+        /* ---------- ВОДЯНОЙ ЗНАК ---------- */
         .watermark {
             position: absolute;
             right: -10px;
@@ -355,34 +453,6 @@
             text-align: center;
         }
 
-        /* ---------- ПЕЧАТЬ ---------- */
-        @media print {
-            body {
-                background: #fff;
-                padding: 0;
-                gap: 0;
-            }
-            .page {
-                box-shadow: none;
-                border-radius: 0;
-                margin: 0;
-                width: 100%;
-                min-height: 100vh;
-                padding: 18mm 16mm;
-                page-break-after: always;
-            }
-            .nav-controls {
-                display: none !important;
-            }
-            .watermark {
-                opacity: 1;
-            }
-            .photo-placeholder {
-                border-color: #ccc;
-                background: #f5f0eb;
-            }
-        }
-
         /* ---------- АДАПТИВ ---------- */
         @media screen and (max-width: 800px) {
             .page {
@@ -393,7 +463,7 @@
             }
             h1 { font-size: 30px; }
             h2 { font-size: 20px; }
-            .grid-2, .grid-3, .grid-4 {
+            .grid-2, .grid-3 {
                 grid-template-columns: 1fr 1fr;
             }
             .watermark { font-size: 100px; right: 0; bottom: 0; }
@@ -401,7 +471,7 @@
             .photo-full { min-height: 150px; }
         }
         @media screen and (max-width: 480px) {
-            .grid-2, .grid-3, .grid-4 {
+            .grid-2, .grid-3 {
                 grid-template-columns: 1fr;
             }
             h1 { font-size: 24px; }
@@ -418,12 +488,9 @@
     <div style="display: flex; flex-direction: column; justify-content: center; min-height: 100%; position: relative; z-index: 2; flex: 1;">
 
         <!-- === ФОТО НА ОБЛОЖКЕ === -->
-        <!-- ВСТАВИТЬ ФОТО: Крупный план текстуры пола (инженерная доска, паркет или SPC) -->
         <div class="photo-placeholder photo-full" style="margin-bottom: 20px; min-height: 180px; background: #2a3a4a;">
             <span class="label">📷 ФОТО: Крупный план текстуры покрытия</span>
-            <!-- Раскомментируйте и укажите путь к файлу:
-            <img src="images/cover-texture.jpg" alt="Текстура покрытия Princip Floor">
-            -->
+            <!-- <img src="images/cover-texture.jpg" alt="Текстура покрытия Princip Floor"> -->
         </div>
 
         <div style="border-left: 4px solid var(--accent); padding-left: 20px;">
@@ -468,8 +535,6 @@
                     С <strong>2017 года</strong> мы — надежный партнер для тысяч клиентов. Наша миссия — не просто поставить материал, а предложить комплексное решение, где каждый элемент подобран с учетом нагрузок, стилистики и бюджета проекта.
                 </p>
 
-                <!-- === ФОТО КОМАНДЫ ИЛИ ОФИСА === -->
-                <!-- ВСТАВИТЬ ФОТО: Команда, офис или склад -->
                 <div class="photo-placeholder photo-medium" style="margin-top: 12px; min-height: 80px;">
                     <span class="label">📷 ФОТО: Команда / Офис / Склад</span>
                     <!-- <img src="images/team.jpg" alt="Команда Princip Floor"> -->
@@ -484,7 +549,6 @@
             </div>
         </div>
 
-        <!-- 4 преимущества -->
         <h3 style="margin-top: 14px;">ПОЧЕМУ ВЫБИРАЮТ НАС</h3>
         <div class="grid-2" style="gap: 14px;">
             <div class="advantage">
@@ -513,7 +577,7 @@
 </div>
 
 <!-- ============================================================ -->
-<!-- СТРАНИЦА 3 — КАТАЛОГ ПРОДУКЦИИ (Тёмный фон)                  -->
+<!-- СТРАНИЦА 3 — КАТАЛОГ ПРОДУКЦИИ                               -->
 <!-- ============================================================ -->
 <div class="page bg-dark" data-page="2">
     <div style="display: flex; flex-direction: column; min-height: 100%; position: relative; z-index: 2; flex: 1;">
@@ -524,7 +588,6 @@
             Более 10 000 коллекций от ведущих мировых производителей
         </p>
 
-        <!-- Ряд 1: Спортивные, Медицинские, Офисные -->
         <div class="grid-3" style="margin-top: 8px; gap: 10px;">
             <div class="cat-block">
                 <h4>СПОРТИВНЫЕ</h4>
@@ -540,14 +603,11 @@
             </div>
         </div>
 
-        <!-- === ФОТО: Коллаж из 3-4 покрытий === -->
-        <!-- ВСТАВИТЬ ФОТО: Коллаж из разных покрытий (спорт, офис, премиум) -->
         <div class="photo-placeholder photo-medium" style="margin: 10px 0; min-height: 90px; background: #2a3a4a;">
             <span class="label">📷 ФОТО: Коллаж покрытий (спорт, офис, премиум)</span>
             <!-- <img src="images/catalog-collage.jpg" alt="Коллаж покрытий Princip Floor"> -->
         </div>
 
-        <!-- Ряд 2: Кварцвинил, Ковровые, Паркет -->
         <div class="grid-3" style="gap: 10px;">
             <div class="cat-block">
                 <h4>КВАРЦВИНИЛ И ЛАМИНАТ</h4>
@@ -563,7 +623,6 @@
             </div>
         </div>
 
-        <!-- Ряд 3: Наружные, Декор, Пробка -->
         <div class="grid-3" style="margin-top: 8px; gap: 10px;">
             <div class="cat-block">
                 <h4>НАРУЖНЫЕ РЕШЕНИЯ</h4>
@@ -579,7 +638,6 @@
             </div>
         </div>
 
-        <!-- Бренды -->
         <div style="margin-top: 10px; border-top: 1px solid #3a4a5a; padding-top: 10px; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;">
             <span style="color: #908880; font-size: 10px; letter-spacing: 2px;">GERFLOR</span>
             <span style="color: #908880; font-size: 10px; letter-spacing: 2px;">TARKETT</span>
@@ -594,7 +652,7 @@
 </div>
 
 <!-- ============================================================ -->
-<!-- СТРАНИЦА 4 — УСЛОВИЯ + ЭТАПЫ + КОНТАКТЫ (Светлый фон)        -->
+<!-- СТРАНИЦА 4 — УСЛОВИЯ + ЭТАПЫ + КОНТАКТЫ                      -->
 <!-- ============================================================ -->
 <div class="page bg-white" data-page="3">
     <div style="display: flex; flex-direction: column; min-height: 100%; position: relative; z-index: 2; flex: 1;">
@@ -613,8 +671,6 @@
                 </ul>
             </div>
             <div>
-                <!-- === ФОТО: Объект с покрытием Princip Floor === -->
-                <!-- ВСТАВИТЬ ФОТО: Реализованный объект (спортзал, офис, интерьер) -->
                 <div class="photo-placeholder photo-medium" style="min-height: 130px;">
                     <span class="label">📷 ФОТО: Реализованный объект</span>
                     <!-- <img src="images/realized-project.jpg" alt="Реализованный объект Princip Floor"> -->
@@ -686,7 +742,6 @@
 </div>
 
 <script>
-    // ---------- ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ ----------
     const pages = document.querySelectorAll('.page');
     const total = pages.length;
     let current = 0;

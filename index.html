@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Princip Floor — Брошюра</title>
+    <title>Princip Floor — Брошюра А4</title>
     <style>
-        /* ---------- ОБЩИЕ НАСТРОЙКИ ---------- */
+        /* ---------- СБРОС И БАЗА ---------- */
         * {
             margin: 0;
             padding: 0;
@@ -13,442 +13,567 @@
         }
 
         body {
-            font-family: 'Montserrat', 'Segoe UI', sans-serif;
-            background: #0a0a0a;
+            font-family: 'Montserrat', 'Segoe UI', 'Arial', sans-serif;
+            background: #d0c8c0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            min-height: 100vh;
             padding: 30px 20px;
+            gap: 30px;
         }
 
-        /* Контейнер брошюры */
-        .brochure-container {
-            max-width: 1200px;
-            width: 100%;
+        /* ---------- ФОРМАТ А4 (210×297 мм) ---------- */
+        .page {
+            width: 210mm;
+            min-height: 297mm;
             background: #ffffff;
-            border-radius: 4px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            padding: 25mm 20mm;
+            position: relative;
             overflow: hidden;
-            position: relative;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            border-radius: 2px;
+            page-break-after: always;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        /* Каждый слайд */
-        .slide {
-            display: none;
-            padding: 60px 70px;
-            min-height: 700px;
-            position: relative;
+        /* Цвета бренда Princip Floor */
+        :root {
+            --primary: #1a2a3a;      /* тёмно-синий/графит */
+            --accent: #b8860b;       /* терракотово-золотой */
+            --accent-light: #d4a843;
+            --light-bg: #f7f5f2;
+            --text-dark: #1a1a1a;
+            --text-light: #e8e4de;
+            --text-muted: #88807a;
+        }
+
+        .bg-dark {
+            background: var(--primary);
+            color: var(--text-light);
+        }
+
+        .bg-dark .text-muted {
+            color: #a09892;
+        }
+
+        .bg-light {
+            background: var(--light-bg);
+            color: var(--text-dark);
+        }
+
+        .bg-white {
             background: #ffffff;
-            animation: fadeIn 0.6s ease;
+            color: var(--text-dark);
         }
 
-        .slide.active {
-            display: block;
+        .accent {
+            color: var(--accent);
+        }
+        .accent-border {
+            border-color: var(--accent);
+        }
+        .accent-bg {
+            background: var(--accent);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ---------- ЦВЕТА И ШРИФТЫ ---------- */
-        .gold {
-            color: #C9A962;
-        }
-
-        .black-bg {
-            background: #1A1A1A;
-            color: #ffffff;
-        }
-
-        .black-bg .gold {
-            color: #C9A962;
-        }
-
-        .black-bg h1,
-        .black-bg h2,
-        .black-bg p {
-            color: #ffffff;
-        }
-
+        /* ---------- ТИПОГРАФИКА ---------- */
         h1 {
-            font-size: 58px;
+            font-size: 48px;
             font-weight: 700;
             letter-spacing: 2px;
             line-height: 1.1;
         }
 
         h2 {
-            font-size: 34px;
+            font-size: 28px;
             font-weight: 600;
             letter-spacing: 1px;
-            margin-bottom: 20px;
+            line-height: 1.2;
+            margin-bottom: 16px;
         }
 
         h3 {
-            font-size: 18px;
+            font-size: 14px;
             font-weight: 600;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: #C9A962;
-            margin-bottom: 8px;
-        }
-
-        .subtitle {
-            font-size: 20px;
-            font-weight: 300;
             letter-spacing: 4px;
             text-transform: uppercase;
-            color: #888;
-            margin-top: 10px;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        h4 {
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         p {
-            font-size: 18px;
-            line-height: 1.8;
-            color: #333;
-            max-width: 600px;
+            font-size: 15px;
+            line-height: 1.7;
+            max-width: 100%;
         }
 
-        .black-bg p {
-            color: #ddd;
+        .text-small {
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: var(--text-muted);
         }
 
-        /* ---------- СЕТКА ДЛЯ КОЛОНОК ---------- */
+        .text-large {
+            font-size: 80px;
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -4px;
+        }
+
+        /* ---------- СЕТКИ ---------- */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
         .grid-3 {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-top: 30px;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
         }
 
         .grid-4 {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-top: 30px;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
         }
 
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-top: 30px;
+        .flex-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        .advantage-item {
-            border-top: 2px solid #C9A962;
-            padding-top: 20px;
+        .flex-1 { flex: 1; }
+        .mt-10 { margin-top: 10px; }
+        .mt-20 { margin-top: 20px; }
+        .mt-30 { margin-top: 30px; }
+        .mb-10 { margin-bottom: 10px; }
+        .mb-20 { margin-bottom: 20px; }
+
+        /* ---------- КАРТОЧКИ ПРЕИМУЩЕСТВ ---------- */
+        .advantage {
+            border-top: 3px solid var(--accent);
+            padding-top: 14px;
         }
 
-        .advantage-item .number {
-            font-size: 36px;
+        .advantage .num {
+            font-size: 32px;
             font-weight: 700;
-            color: #C9A962;
+            color: var(--accent);
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
-        .advantage-item h4 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .advantage-item p {
+        .advantage h4 {
             font-size: 15px;
-            color: #666;
-            line-height: 1.6;
+            margin-bottom: 4px;
         }
 
-        .black-bg .advantage-item p {
-            color: #ccc;
-        }
-
-        /* Категории в 4 колонки */
-        .category-item {
-            text-align: center;
-            padding: 20px 10px;
-            border: 1px solid #eee;
-            transition: 0.3s;
-        }
-
-        .category-item:hover {
-            border-color: #C9A962;
-        }
-
-        .category-item h4 {
-            font-size: 16px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #1A1A1A;
-        }
-
-        .category-item p {
+        .advantage p {
             font-size: 13px;
-            color: #888;
-            margin-top: 6px;
+            color: var(--text-muted);
             line-height: 1.5;
         }
 
-        .black-bg .category-item {
-            border-color: #333;
+        .bg-dark .advantage p {
+            color: #b0a89e;
         }
 
-        .black-bg .category-item h4 {
-            color: #fff;
+        /* ---------- КАТЕГОРИИ ---------- */
+        .cat-item {
+            text-align: center;
+            padding: 14px 8px;
+            border: 1px solid #ddd;
+            transition: 0.3s;
         }
 
-        /* ---------- КНОПКИ НАВИГАЦИИ ---------- */
+        .bg-dark .cat-item {
+            border-color: #3a4a5a;
+        }
+
+        .cat-item h4 {
+            font-size: 13px;
+            letter-spacing: 2px;
+        }
+
+        .cat-item p {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            line-height: 1.4;
+        }
+
+        .bg-dark .cat-item p {
+            color: #a09892;
+        }
+
+        /* ---------- ДЕКОРАТИВНЫЙ ВОДЯНОЙ ЗНАК ---------- */
+        .watermark {
+            position: absolute;
+            right: -10px;
+            bottom: -30px;
+            font-size: 220px;
+            font-weight: 900;
+            color: rgba(184, 134, 11, 0.04);
+            letter-spacing: -12px;
+            line-height: 1;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .watermark-light {
+            color: rgba(255,255,255,0.03);
+        }
+
+        /* ---------- ПОЛОСА ---------- */
+        .accent-line {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin: 10px 0 16px;
+        }
+
+        /* ---------- КНОПКИ НАВИГАЦИИ (для просмотра) ---------- */
         .nav-controls {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            padding: 18px 70px;
-            background: #f8f8f8;
-            border-top: 1px solid #e0e0e0;
+            gap: 30px;
+            padding: 16px 30px;
+            background: #fff;
+            border-radius: 40px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            position: sticky;
+            bottom: 20px;
+            z-index: 100;
         }
 
         .nav-controls button {
-            background: none;
+            background: var(--primary);
             border: none;
-            font-size: 16px;
+            color: #fff;
+            font-size: 14px;
             font-weight: 600;
-            color: #1A1A1A;
+            padding: 10px 28px;
+            border-radius: 30px;
             cursor: pointer;
-            padding: 10px 24px;
             transition: 0.3s;
             letter-spacing: 1px;
         }
 
         .nav-controls button:hover {
-            color: #C9A962;
+            background: var(--accent);
         }
 
-        .nav-controls .page-indicator {
+        .nav-controls .indicator {
             font-size: 14px;
-            color: #999;
+            color: var(--text-muted);
             letter-spacing: 2px;
+            min-width: 80px;
+            text-align: center;
         }
 
-        /* ---------- ДЛЯ ПЕЧАТИ ---------- */
+        /* ---------- ПЕЧАТЬ ---------- */
         @media print {
-            .nav-controls { display: none; }
-            .slide { display: block !important; page-break-after: always; min-height: 100vh; padding: 40px 50px; }
-            .brochure-container { box-shadow: none; border-radius: 0; max-width: 100%; }
-            body { background: #fff; padding: 0; }
+            body {
+                background: #fff;
+                padding: 0;
+                gap: 0;
+            }
+            .page {
+                box-shadow: none;
+                border-radius: 0;
+                margin: 0;
+                width: 100%;
+                min-height: 100vh;
+                padding: 20mm 18mm;
+                page-break-after: always;
+            }
+            .nav-controls {
+                display: none !important;
+            }
+            .watermark {
+                opacity: 1;
+            }
         }
 
         /* ---------- АДАПТИВ ---------- */
-        @media (max-width: 768px) {
-            .slide { padding: 30px 25px; min-height: auto; }
-            h1 { font-size: 34px; }
-            h2 { font-size: 26px; }
-            .grid-3, .grid-4, .grid-2 { grid-template-columns: 1fr; gap: 20px; }
-            .nav-controls { padding: 12px 25px; flex-wrap: wrap; gap: 10px; }
-            .subtitle { font-size: 14px; letter-spacing: 2px; }
+        @media screen and (max-width: 800px) {
+            .page {
+                width: 100%;
+                min-height: auto;
+                padding: 30px 24px;
+                border-radius: 0;
+            }
+            h1 { font-size: 32px; }
+            h2 { font-size: 22px; }
+            .grid-2, .grid-3, .grid-4 {
+                grid-template-columns: 1fr 1fr;
+            }
+            .text-large { font-size: 48px; }
+            .watermark { font-size: 120px; right: 0; bottom: 0; }
+        }
+
+        @media screen and (max-width: 480px) {
+            .grid-2, .grid-3, .grid-4 {
+                grid-template-columns: 1fr;
+            }
+            h1 { font-size: 26px; }
+            .page { padding: 20px 16px; }
         }
     </style>
 </head>
 <body>
 
-<div class="brochure-container">
-
-    <!-- ======================================== -->
-    <!-- СЛАЙД 1 — ОБЛОЖКА (чёрный фон)           -->
-    <!-- ======================================== -->
-    <div class="slide active black-bg" data-slide="0">
-        <div style="display: flex; flex-direction: column; justify-content: center; min-height: 600px;">
-            <div style="border-left: 4px solid #C9A962; padding-left: 30px;">
-                <h3 style="color: #C9A962; letter-spacing: 4px;">EST. 2017</h3>
-                <h1 style="font-size: 72px; margin: 10px 0;">PRINCIP<br>FLOOR</h1>
-                <p style="font-size: 22px; color: #ccc; max-width: 500px; margin-top: 20px; letter-spacing: 1px;">
-                    Искусство напольных покрытий
-                </p>
-                <p style="font-size: 16px; color: #888; margin-top: 30px; max-width: 400px;">
-                    Создаём пространства, в которых хочется оставаться
-                </p>
-            </div>
-            <div style="margin-top: 60px; border-top: 1px solid #333; padding-top: 20px; display: flex; gap: 30px; flex-wrap: wrap;">
-                <span style="color: #666; font-size: 13px; letter-spacing: 2px;">ВЫСТАВКА 2026</span>
-                <span style="color: #666; font-size: 13px; letter-spacing: 2px;">СТЕНД № [Ваш номер]</span>
-            </div>
+<!-- ============================================================ -->
+<!-- СТРАНИЦА 1 — ОБЛОЖКА (Тёмный фон, как на сайте)              -->
+<!-- ============================================================ -->
+<div class="page bg-dark" data-page="0">
+    <div style="display: flex; flex-direction: column; justify-content: center; min-height: 100%; position: relative; z-index: 2;">
+        <!-- Логотип / бренд -->
+        <div style="border-left: 4px solid var(--accent); padding-left: 24px;">
+            <h3 style="color: var(--accent); letter-spacing: 5px; font-size: 13px;">EST. 2017</h3>
+            <h1 style="font-size: 58px; letter-spacing: 3px; line-height: 1.05;">
+                PRINCIP<br>
+                <span style="color: var(--accent);">FLOOR</span>
+            </h1>
+            <p style="font-size: 18px; color: #c8c0b8; letter-spacing: 2px; margin-top: 12px; max-width: 380px;">
+                Искусство напольных покрытий
+            </p>
+            <div class="accent-line" style="margin: 18px 0 8px;"></div>
+            <p style="font-size: 14px; color: #908880; max-width: 340px; letter-spacing: 0.5px; line-height: 1.6;">
+                Создаём пространства, в которых хочется оставаться
+            </p>
         </div>
-        <!-- Декоративный элемент -->
-        <div style="position: absolute; right: 60px; bottom: 60px; font-size: 160px; font-weight: 900; color: rgba(201, 169, 98, 0.06); letter-spacing: -10px; line-height: 1;">
-            PF
+
+        <!-- Нижняя часть -->
+        <div style="margin-top: 50px; border-top: 1px solid #3a4a5a; padding-top: 18px; display: flex; gap: 30px; flex-wrap: wrap;">
+            <span class="text-small" style="color: #908880;">ВЫСТАВКА 2026</span>
+            <span class="text-small" style="color: #908880;">СТЕНД № [Ваш номер]</span>
+            <span class="text-small" style="color: var(--accent);">#PRINCIPFLOOR</span>
         </div>
     </div>
 
-    <!-- ======================================== -->
-    <!-- СЛАЙД 2 — О КОМПАНИИ                      -->
-    <!-- ======================================== -->
-    <div class="slide" data-slide="1">
+    <!-- Декоративный водяной знак -->
+    <div class="watermark watermark-light">PF</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- СТРАНИЦА 2 — О КОМПАНИИ + ПРЕИМУЩЕСТВА (Светлый фон)         -->
+<!-- ============================================================ -->
+<div class="page bg-light" data-page="1">
+    <div style="display: flex; flex-direction: column; justify-content: center; min-height: 100%; position: relative; z-index: 2;">
         <h3>О КОМПАНИИ</h3>
-        <h2 style="max-width: 600px;">Эксперты в области<br>напольных покрытий</h2>
-        <div class="grid-2" style="margin-top: 30px;">
+        <h2>Эксперты в области<br>напольных покрытий</h2>
+
+        <div class="grid-2" style="margin-top: 8px;">
             <div>
-                <p style="font-size: 17px; line-height: 2; color: #444;">
-                    С 2017 года мы помогаем строителям, архитекторам и владельцам бизнеса экономить время и бюджет, исключая ошибки при выборе и укладке.
+                <p style="font-size: 14px; line-height: 1.8; color: #444;">
+                    С <strong>2017 года</strong> мы помогаем строителям, архитекторам и владельцам бизнеса экономить время и бюджет, исключая ошибки при выборе и укладке.
                 </p>
-                <p style="font-size: 17px; line-height: 2; color: #444; margin-top: 20px;">
-                    <span class="gold" style="font-weight: 600;">Наша философия:</span> качество без компромиссов. Мы не просто поставляем материалы — мы проектируем базу для вашего интерьера.
+                <p style="font-size: 14px; line-height: 1.8; color: #444; margin-top: 12px;">
+                    <span style="color: var(--accent); font-weight: 600;">Наша философия:</span> качество без компромиссов. Мы не просто поставляем материалы — мы проектируем базу для вашего интерьера.
                 </p>
             </div>
-            <div style="background: #f5f2ed; padding: 30px; display: flex; flex-direction: column; justify-content: center; border-left: 3px solid #C9A962;">
-                <span style="font-size: 48px; font-weight: 300; color: #C9A962;">8+</span>
-                <span style="font-size: 16px; color: #666; letter-spacing: 1px;">ЛЕТ НА РЫНКЕ</span>
-                <span style="font-size: 48px; font-weight: 300; color: #C9A962; margin-top: 20px;">1000+</span>
-                <span style="font-size: 16px; color: #666; letter-spacing: 1px;">ДОВОЛЬНЫХ КЛИЕНТОВ</span>
+            <div style="background: #e8e2da; padding: 24px 28px; display: flex; flex-direction: column; justify-content: center; border-left: 4px solid var(--accent);">
+                <span style="font-size: 44px; font-weight: 300; color: var(--accent);">8+</span>
+                <span style="font-size: 13px; color: #666; letter-spacing: 1px;">ЛЕТ НА РЫНКЕ</span>
+                <span style="font-size: 44px; font-weight: 300; color: var(--accent); margin-top: 18px;">1000+</span>
+                <span style="font-size: 13px; color: #666; letter-spacing: 1px;">ДОВОЛЬНЫХ КЛИЕНТОВ</span>
             </div>
         </div>
-    </div>
 
-    <!-- ======================================== -->
-    <!-- СЛАЙД 3 — ПРЕИМУЩЕСТВА                    -->
-    <!-- ======================================== -->
-    <div class="slide" data-slide="2">
-        <h3>ПРЕИМУЩЕСТВА</h3>
-        <h2>Почему выбирают нас</h2>
+        <!-- 3 преимущества -->
+        <h3 style="margin-top: 24px;">ПРЕИМУЩЕСТВА</h3>
         <div class="grid-3">
-            <div class="advantage-item">
-                <span class="number">01</span>
+            <div class="advantage">
+                <span class="num">01</span>
                 <h4>ВИЗУАЛИЗАЦИЯ</h4>
-                <p>Покажем, как покрытие впишется в ваш интерьер до покупки. Просто загрузите фото помещения — ИИ сделает 3D-рендер.</p>
+                <p>ИИ-рендер покрытия в вашем интерьере до покупки. Просто загрузите фото.</p>
             </div>
-            <div class="advantage-item">
-                <span class="number">02</span>
+            <div class="advantage">
+                <span class="num">02</span>
                 <h4>ЭКСПЕРТИЗА</h4>
-                <p>Проектируем полы для спортзалов, клиник, офисов и премиум-интерьеров. Знаем нагрузки лучше вас.</p>
+                <p>Проектируем полы для спортзалов, клиник, офисов и премиум-интерьеров.</p>
             </div>
-            <div class="advantage-item">
-                <span class="number">03</span>
+            <div class="advantage">
+                <span class="num">03</span>
                 <h4>НАДЁЖНОСТЬ</h4>
-                <p>Работаем с ТОП-фабриками: Gerflor, Tarkett, Unilin. Гарантия, сертификаты и поставка точно в срок.</p>
+                <p>Работаем с ТОП-фабриками. Гарантия, сертификаты, поставка точно в срок.</p>
             </div>
         </div>
     </div>
 
-    <!-- ======================================== -->
-    <!-- СЛАЙД 4 — КАТАЛОГ (4 колонки)             -->
-    <!-- ======================================== -->
-    <div class="slide" data-slide="3">
-        <h3>КАТАЛОГ</h3>
-        <h2>Навигация по продуктам</h2>
-        <div class="grid-4">
-            <div class="category-item">
-                <h4>СПОРТ</h4>
+    <div class="watermark">PF</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- СТРАНИЦА 3 — КАТАЛОГ (Тёмный фон)                            -->
+<!-- ============================================================ -->
+<div class="page bg-dark" data-page="2">
+    <div style="display: flex; flex-direction: column; justify-content: center; min-height: 100%; position: relative; z-index: 2;">
+        <h3 style="color: var(--accent);">КАТАЛОГ</h3>
+        <h2 style="color: #fff;">Навигация по продуктам</h2>
+        <p style="color: #b0a89e; font-size: 14px; max-width: 400px; margin-bottom: 4px;">
+            Более 10 000 коллекций от ведущих мировых производителей
+        </p>
+
+        <div class="grid-4" style="margin-top: 16px;">
+            <div class="cat-item">
+                <h4 style="color: #fff;">СПОРТ</h4>
                 <p>Резина Regupol<br>Паркет Карелия<br>Беговые покрытия</p>
             </div>
-            <div class="category-item">
-                <h4>МЕДИЦИНА</h4>
-                <p>Gerflor Mipolam<br>Tarkett Acczent<br>Антибактериальные полы</p>
+            <div class="cat-item">
+                <h4 style="color: #fff;">МЕДИЦИНА</h4>
+                <p>Gerflor Mipolam<br>Tarkett Acczent<br>Антибактериальные</p>
             </div>
-            <div class="category-item">
-                <h4>ОФИС</h4>
-                <p>Кварц-винил SPC<br>Ламинат 34 кл.<br>Износостойкие решения</p>
+            <div class="cat-item">
+                <h4 style="color: #fff;">ОФИС</h4>
+                <p>Кварц-винил SPC<br>Ламинат 34 кл.<br>Износостойкие</p>
             </div>
-            <div class="category-item">
-                <h4>ПРЕМИУМ</h4>
+            <div class="cat-item">
+                <h4 style="color: #fff;">ПРЕМИУМ</h4>
                 <p>Инженерная доска<br>Натуральные ковры<br>Массив и эксклюзив</p>
             </div>
         </div>
-        <p style="margin-top: 40px; font-size: 14px; color: #999; text-align: center; letter-spacing: 1px;">
-            Более 10 000 коллекций от ведущих мировых производителей
+
+        <!-- Дополнительные категории второй строкой -->
+        <div class="grid-4" style="margin-top: 10px;">
+            <div class="cat-item">
+                <h4 style="color: #fff;">КОВРОВЫЕ</h4>
+                <p>Jacaranda<br>Best Wool<br>Delarage</p>
+            </div>
+            <div class="cat-item">
+                <h4 style="color: #fff;">ПРОБКА</h4>
+                <p>Экологичные<br>Тёплые<br>Звукоизоляция</p>
+            </div>
+            <div class="cat-item">
+                <h4 style="color: #fff;">ТЕРРАСА</h4>
+                <p>Древесина ценных пород<br>Фасады<br>Для улицы</p>
+            </div>
+            <div class="cat-item">
+                <h4 style="color: #fff;">АКСЕССУАРЫ</h4>
+                <p>Плинтусы<br>Профили<br>Клеи и химия</p>
+            </div>
+        </div>
+
+        <!-- Строка с брендами -->
+        <div style="margin-top: 20px; border-top: 1px solid #3a4a5a; padding-top: 14px; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+            <span style="color: #908880; font-size: 12px; letter-spacing: 2px;">GERFLOR</span>
+            <span style="color: #908880; font-size: 12px; letter-spacing: 2px;">TARKETT</span>
+            <span style="color: #908880; font-size: 12px; letter-spacing: 2px;">UNILIN</span>
+            <span style="color: #908880; font-size: 12px; letter-spacing: 2px;">PERGO</span>
+            <span style="color: #908880; font-size: 12px; letter-spacing: 2px;">MODULEO</span>
+            <span style="color: var(--accent); font-size: 12px; letter-spacing: 2px;">И 200+ БРЕНДОВ</span>
+        </div>
+    </div>
+
+    <div class="watermark watermark-light">PF</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- СТРАНИЦА 4 — СПЕЦПРЕДЛОЖЕНИЕ + КОНТАКТЫ (Светлый фон)       -->
+<!-- ============================================================ -->
+<div class="page bg-white" data-page="3">
+    <div style="display: flex; flex-direction: column; justify-content: center; min-height: 100%; position: relative; z-index: 2;">
+        <h3>INVITATION</h3>
+        <h2 style="font-size: 34px; max-width: 500px;">Получите бесплатную<br>ИИ-визуализацию</h2>
+
+        <div style="display: flex; gap: 30px; flex-wrap: wrap; margin-top: 6px;">
+            <div style="flex: 1; min-width: 200px;">
+                <p style="font-size: 15px; line-height: 1.7; color: #444;">
+                    Просто покажите нам фото комнаты на стенде — мы покажем, как будет выглядеть ваше покрытие в 3D-рендере.
+                </p>
+                <div style="border-left: 4px solid var(--accent); padding-left: 18px; margin-top: 14px;">
+                    <p style="color: var(--accent); font-weight: 700; font-size: 16px;">Акция:</p>
+                    <p style="font-size: 14px; color: #444;">Скидка 5% на аксессуары для монтажа<br>при заказе от 100 м²</p>
+                </div>
+            </div>
+            <div style="flex: 1; min-width: 200px; background: var(--light-bg); padding: 22px 26px;">
+                <p style="font-size: 12px; color: var(--text-muted); letter-spacing: 2px;">ТЕЛЕФОН</p>
+                <p style="font-size: 18px; font-weight: 600; color: var(--primary);">+7 (XXX) XXX-XX-XX</p>
+                <p style="font-size: 12px; color: var(--text-muted); letter-spacing: 2px; margin-top: 12px;">EMAIL</p>
+                <p style="font-size: 18px; font-weight: 600; color: var(--primary);">info@principfloor.ru</p>
+                <p style="font-size: 12px; color: var(--text-muted); letter-spacing: 2px; margin-top: 12px;">САЙТ</p>
+                <p style="font-size: 18px; font-weight: 600; color: var(--primary);">principfloor.ru</p>
+            </div>
+        </div>
+
+        <!-- Нижняя часть -->
+        <div style="margin-top: 28px; border-top: 1px solid #e0d8d0; padding-top: 16px; display: flex; justify-content: space-between; flex-wrap: wrap;">
+            <span class="text-small">СТЕНД № [Ваш номер]</span>
+            <span class="text-small">ВЫСТАВКА 2026</span>
+            <span style="color: var(--accent); font-size: 12px; letter-spacing: 2px; font-weight: 600;">#PRINCIPFLOOR</span>
+        </div>
+
+        <!-- Короткая фраза внизу -->
+        <p style="font-size: 11px; color: #bbb; text-align: center; margin-top: 18px; letter-spacing: 2px;">
+            Сделано с душой. Princip Floor © 2026
         </p>
     </div>
 
-    <!-- ======================================== -->
-    <!-- СЛАЙД 5 — СПЕЦПРЕДЛОЖЕНИЕ + КОНТАКТЫ      -->
-    <!-- ======================================== -->
-    <div class="slide black-bg" data-slide="4">
-        <div style="display: flex; flex-direction: column; justify-content: center; min-height: 550px;">
-            <h3 style="color: #C9A962; letter-spacing: 4px;">INVITATION</h3>
-            <h2 style="font-size: 44px; max-width: 500px;">Получите бесплатную<br>ИИ-визуализацию</h2>
-            <p style="color: #ccc; max-width: 500px; margin: 20px 0 30px; font-size: 18px;">
-                Просто покажите нам фото комнаты на стенде — мы покажем, как будет выглядеть ваше покрытие.
-            </p>
-            <div style="border-left: 3px solid #C9A962; padding-left: 24px; margin-bottom: 30px;">
-                <p style="color: #C9A962; font-weight: 600; font-size: 18px;">Акция:</p>
-                <p style="color: #ddd; font-size: 16px;">Скидка 5% на аксессуары для монтажа при заказе от 100 м²</p>
-            </div>
-            <div style="display: flex; flex-wrap: wrap; gap: 30px; margin-top: 10px;">
-                <div>
-                    <p style="color: #888; font-size: 12px; letter-spacing: 2px;">ТЕЛЕФОН</p>
-                    <p style="color: #fff; font-size: 18px; font-weight: 500;">+7 (XXX) XXX-XX-XX</p>
-                </div>
-                <div>
-                    <p style="color: #888; font-size: 12px; letter-spacing: 2px;">EMAIL</p>
-                    <p style="color: #fff; font-size: 18px; font-weight: 500;">info@principfloor.ru</p>
-                </div>
-                <div>
-                    <p style="color: #888; font-size: 12px; letter-spacing: 2px;">САЙТ</p>
-                    <p style="color: #fff; font-size: 18px; font-weight: 500;">principfloor.ru</p>
-                </div>
-            </div>
-            <div style="margin-top: 40px; border-top: 1px solid #333; padding-top: 20px;">
-                <span style="color: #666; font-size: 13px; letter-spacing: 2px;">СТЕНД № [Ваш номер]</span>
-            </div>
-        </div>
-        <!-- Декоративный элемент -->
-        <div style="position: absolute; right: 50px; bottom: 50px; font-size: 120px; font-weight: 900; color: rgba(201, 169, 98, 0.05); letter-spacing: -8px; line-height: 1;">
-            PF
-        </div>
-    </div>
+    <div class="watermark">PF</div>
+</div>
 
-    <!-- ======================================== -->
-    <!-- УПРАВЛЕНИЕ НАВИГАЦИЕЙ                      -->
-    <!-- ======================================== -->
-    <div class="nav-controls">
-        <button id="prevSlide">← НАЗАД</button>
-        <span class="page-indicator" id="pageIndicator">1 / 5</span>
-        <button id="nextSlide">ВПЕРЁД →</button>
-    </div>
-
+<!-- ============================================================ -->
+<!-- НАВИГАЦИЯ ДЛЯ ПРОСМОТРА (не видна при печати)                -->
+<!-- ============================================================ -->
+<div class="nav-controls" id="navControls">
+    <button id="prevBtn">← НАЗАД</button>
+    <span class="indicator" id="pageIndicator">1 / 4</span>
+    <button id="nextBtn">ВПЕРЁД →</button>
 </div>
 
 <script>
-    // ---------- ЛОГИКА ПЕРЕКЛЮЧЕНИЯ СЛАЙДОВ ----------
-    const slides = document.querySelectorAll('.slide');
-    const totalSlides = slides.length;
-    let currentSlide = 0;
+    // ---------- ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ ----------
+    const pages = document.querySelectorAll('.page');
+    const total = pages.length;
+    let current = 0;
 
-    const prevBtn = document.getElementById('prevSlide');
-    const nextBtn = document.getElementById('nextSlide');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
     const indicator = document.getElementById('pageIndicator');
 
-    function goToSlide(index) {
-        if (index < 0) index = totalSlides - 1;
-        if (index >= totalSlides) index = 0;
+    function showPage(index) {
+        if (index < 0) index = total - 1;
+        if (index >= total) index = 0;
 
-        slides.forEach((slide, i) => {
-            slide.classList.remove('active');
-            if (i === index) {
-                slide.classList.add('active');
-            }
+        pages.forEach((p, i) => {
+            p.style.display = (i === index) ? 'flex' : 'none';
         });
 
-        currentSlide = index;
-        indicator.textContent = (currentSlide + 1) + ' / ' + totalSlides;
+        current = index;
+        indicator.textContent = (current + 1) + ' / ' + total;
+
+        // Прокрутка к началу страницы
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
-    nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+    prevBtn.addEventListener('click', () => showPage(current - 1));
+    nextBtn.addEventListener('click', () => showPage(current + 1));
 
-    // Клавиши влево/вправо
+    // Клавиши
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
-        if (e.key === 'ArrowRight') goToSlide(currentSlide + 1);
+        if (e.key === 'ArrowLeft') showPage(current - 1);
+        if (e.key === 'ArrowRight') showPage(current + 1);
     });
 
-    // ---------- АВТОМАТИЧЕСКАЯ СМЕНА (опционально) ----------
-    // Раскомментируйте, если хотите слайд-шоу на стенде:
-    // let autoSlide = setInterval(() => goToSlide(currentSlide + 1), 6000);
-    // При клике на кнопки сбрасываем таймер:
-    // prevBtn.addEventListener('click', () => { clearInterval(autoSlide); });
-    // nextBtn.addEventListener('click', () => { clearInterval(autoSlide); });
+    // Показываем первую страницу
+    showPage(0);
 </script>
 
 </body>

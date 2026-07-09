@@ -3,1044 +3,453 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Террасная доска</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <title>Princip Floor — Брошюра</title>
     <style>
+        /* ---------- ОБЩИЕ НАСТРОЙКИ ---------- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            min-height: 100vh;
-            padding: 12px;
-            color: #f5f0eb;
-            background-image: url('https://i.pinimg.com/1200x/fb/5a/a9/fb5aa9de090566b80e3112395cd4bcee.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(44, 40, 35, 0.45);
-            z-index: 0;
-        }
-        #app {
-            position: relative;
-            z-index: 1;
-        }
-        .header {
-            background: rgba(255, 252, 249, 0.055);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 20px;
-            padding: 28px 20px 24px 20px;
-            margin-bottom: 12px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-            border: 1px solid rgba(255,255,255,0.2);
-            min-height: 90px;
+            font-family: 'Montserrat', 'Segoe UI', sans-serif;
+            background: #0a0a0a;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 30px 20px;
         }
-        .header h1 {
-            font-size: 26px;
-            font-weight: 300;
+
+        /* Контейнер брошюры */
+        .brochure-container {
+            max-width: 1200px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 4px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Каждый слайд */
+        .slide {
+            display: none;
+            padding: 60px 70px;
+            min-height: 700px;
+            position: relative;
+            background: #ffffff;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ---------- ЦВЕТА И ШРИФТЫ ---------- */
+        .gold {
+            color: #C9A962;
+        }
+
+        .black-bg {
+            background: #1A1A1A;
+            color: #ffffff;
+        }
+
+        .black-bg .gold {
+            color: #C9A962;
+        }
+
+        .black-bg h1,
+        .black-bg h2,
+        .black-bg p {
+            color: #ffffff;
+        }
+
+        h1 {
+            font-size: 58px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-size: 34px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-size: 18px;
+            font-weight: 600;
             letter-spacing: 3px;
-            color: #f5f0eb;
             text-transform: uppercase;
-            margin-bottom: 0;
-            text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+            color: #C9A962;
+            margin-bottom: 8px;
         }
-        .grid {
+
+        .subtitle {
+            font-size: 20px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #888;
+            margin-top: 10px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+            max-width: 600px;
+        }
+
+        .black-bg p {
+            color: #ddd;
+        }
+
+        /* ---------- СЕТКА ДЛЯ КОЛОНОК ---------- */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            width: 100%;
+            gap: 40px;
+            margin-top: 30px;
         }
-        .grid.submenu {
-            grid-template-columns: 1fr;
+
+        .advantage-item {
+            border-top: 2px solid #C9A962;
+            padding-top: 20px;
         }
-        .card {
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            border: 1px solid rgba(255,255,255,0.2);
-            width: 100%;
-        }
-        .card:active {
-            transform: scale(0.96);
-        }
-        .card .image {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            background: #e0d6cc;
+
+        .advantage-item .number {
+            font-size: 36px;
+            font-weight: 700;
+            color: #C9A962;
             display: block;
-        }
-        .card .image-placeholder {
-            width: 100%;
-            height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 48px;
-            background: #f0ebe6;
-        }
-        .card .info {
-            padding: 12px 14px 14px 14px;
-            text-align: center;
-        }
-        .card .name {
-            font-weight: 300;
-            font-size: 16px;
-            letter-spacing: 1px;
-            color: #f5f0eb;
-            text-transform: uppercase;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            margin-bottom: 6px;
         }
 
-        .back-link {
-            display: inline-block;
-            padding: 6px 14px;
-            margin-bottom: 10px;
-            font-size: 13px;
-            font-weight: 300;
-            color: #f5f0eb;
-            background: rgba(255, 252, 249, 0.075);
-            backdrop-filter: blur(4px);
-            border-radius: 20px;
-            cursor: pointer;
-            transition: background 0.2s;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.15);
-            width: fit-content;
-            letter-spacing: 0.5px;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
-        .back-link:active {
-            background: rgba(255,255,255,0.15);
-        }
-        .submenu-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 10px;
-            padding: 0 4px;
-        }
-        .submenu-header .back-link {
-            margin-bottom: 0;
-        }
-        .submenu-header .category-title {
-            font-size: 14px;
-            font-weight: 300;
-            color: #f5f0eb;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
-
-        .info-block {
-            background: rgba(255, 252, 249, 0.06);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 16px;
-            padding: 20px;
-            margin-top: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        .info-block .image-full {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 16px;
-            background: #e0d6cc;
-        }
-        .info-block .image-full-placeholder {
-            width: 100%;
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 64px;
-            background: #f0ebe6;
-            border-radius: 12px;
-            margin-bottom: 16px;
-        }
-        .info-block h3 {
+        .advantage-item h4 {
             font-size: 20px;
-            font-weight: 300;
-            letter-spacing: 1px;
-            color: #f5f0eb;
-            text-transform: uppercase;
+            font-weight: 600;
             margin-bottom: 8px;
-            text-shadow: 0 2px 12px rgba(0,0,0,0.3);
-        }
-        .info-block .section {
-            margin-top: 18px;
-            padding-top: 18px;
-            border-top: 1px solid rgba(255,255,255,0.08);
-        }
-        .info-block .section h4 {
-            font-size: 13px;
-            font-weight: 300;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            color: #f5f0eb;
-            text-transform: uppercase;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
-        .info-block .section p {
-            font-size: 15px;
-            font-weight: 300;
-            line-height: 1.7;
-            color: #f5f0eb;
-            white-space: pre-line;
-            letter-spacing: 0.3px;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-        .info-block .price {
-            font-size: 20px;
-            font-weight: 300;
-            letter-spacing: 1px;
-            color: #e8c9a0;
-            margin-top: 8px;
-            text-transform: uppercase;
-            text-shadow: 0 2px 12px rgba(0,0,0,0.3);
         }
 
-        .recommendation {
-            background: rgba(245, 240, 235, 0.075);
-            border-radius: 12px;
-            padding: 18px 16px;
-            margin-top: 16px;
-            border-left: 3px solid #c9a87c;
-        }
-        .recommendation .item {
-            margin-bottom: 14px;
-            padding-bottom: 14px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .recommendation .item:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-        .recommendation .item b {
-            color: #f5f0eb;
-            font-weight: 400;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
-        .recommendation .item {
-            color: #f5f0eb;
+        .advantage-item p {
             font-size: 15px;
-            line-height: 1.7;
+            color: #666;
+            line-height: 1.6;
         }
-        .btn-site {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 28px;
-            background: rgba(255, 255, 255, 0.08);
-            color: #f5f0eb;
-            text-decoration: none;
-            border-radius: 24px;
-            border: 1px solid rgba(255,255,255,0.2);
-            font-weight: 300;
-            font-size: 14px;
-            transition: all 0.2s ease;
-            cursor: pointer;
+
+        .black-bg .advantage-item p {
+            color: #ccc;
+        }
+
+        /* Категории в 4 колонки */
+        .category-item {
             text-align: center;
-            letter-spacing: 0.5px;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
-        .btn-site:active {
-            background: rgba(255,255,255,0.15);
+            padding: 20px 10px;
+            border: 1px solid #eee;
+            transition: 0.3s;
         }
 
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 12px;
+        .category-item:hover {
+            border-color: #C9A962;
+        }
+
+        .category-item h4 {
             font-size: 16px;
-            font-weight: 300;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: center;
-            margin-top: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
             text-transform: uppercase;
+            color: #1A1A1A;
         }
-        .btn-success {
-            background: transparent;
-            color: #f5f0eb;
-            border: 1px solid rgba(255,255,255,0.25);
-            box-shadow: none;
-            transition: all 0.2s ease;
+
+        .category-item p {
+            font-size: 13px;
+            color: #888;
+            margin-top: 6px;
+            line-height: 1.5;
         }
-        .btn-success:active {
-            background: rgba(255,255,255,0.08);
-            transform: scale(0.98);
+
+        .black-bg .category-item {
+            border-color: #333;
         }
-        .hidden {
-            display: none !important;
+
+        .black-bg .category-item h4 {
+            color: #fff;
         }
-        .back-btn {
+
+        /* ---------- КНОПКИ НАВИГАЦИИ ---------- */
+        .nav-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 70px;
+            background: #f8f8f8;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .nav-controls button {
             background: none;
             border: none;
-            color: #f5f0eb;
-            font-size: 14px;
-            font-weight: 300;
-            letter-spacing: 0.5px;
-            cursor: pointer;
-            margin-bottom: 12px;
-            padding: 0;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
-        .back-btn:active {
-            opacity: 0.6;
-        }
-
-        .consult-form {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 16px;
-            padding: 24px 20px;
-            margin-top: 12px;
-            border: 1px solid rgba(255,255,255,0.15);
-        }
-        .consult-form h3 {
-            font-size: 18px;
-            font-weight: 300;
-            letter-spacing: 1px;
-            color: #f5f0eb;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-            text-align: center;
-        }
-        .consult-form input {
-            width: 100%;
-            padding: 12px 16px;
-            margin-bottom: 12px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 12px;
-            color: #f5f0eb;
-            font-size: 15px;
-            font-weight: 300;
-            letter-spacing: 0.3px;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-        .consult-form input::placeholder {
-            color: rgba(255, 255, 255, 0.4);
-        }
-        .consult-form input:focus {
-            border-color: rgba(201, 168, 124, 0.6);
-        }
-        .consult-form .btn-send {
-            width: 100%;
-            padding: 14px;
-            margin-top: 4px;
-            background: #c9a87c;
-            color: #1a1410;
-            border: none;
-            border-radius: 12px;
             font-size: 16px;
-            font-weight: 300;
+            font-weight: 600;
+            color: #1A1A1A;
+            cursor: pointer;
+            padding: 10px 24px;
+            transition: 0.3s;
             letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-transform: uppercase;
-        }
-        .consult-form .btn-send:active {
-            opacity: 0.85;
-            transform: scale(0.98);
-        }
-        
-        .consult-form .call-note {
-            text-align: center;
-            margin: 16px 0 8px 0;
-            padding: 12px;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            color: rgba(255,255,255,0.6);
-            font-size: 14px;
-            font-weight: 300;
-            letter-spacing: 0.3px;
-            line-height: 1.7;
-        }
-        .consult-form .call-note .phone-link {
-            color: #c9a87c;
-            text-decoration: none;
-            font-weight: 400;
-            font-size: 16px;
-            display: inline-block;
-            padding: 4px 8px;
-            border-radius: 8px;
-            transition: background 0.2s;
-            cursor: pointer;
-        }
-        .consult-form .call-note .phone-link:active {
-            background: rgba(201, 168, 124, 0.15);
-        }
-        
-        .consult-form .btn-close {
-            width: 100%;
-            padding: 12px;
-            margin-top: 8px;
-            background: transparent;
-            color: rgba(255,255,255,0.5);
-            border: none;
-            font-size: 14px;
-            font-weight: 300;
-            letter-spacing: 0.5px;
-            cursor: pointer;
-            text-decoration: underline;
-            text-underline-offset: 2px;
-        }
-        .consult-form .btn-close:active {
-            color: rgba(255,255,255,0.8);
         }
 
-        .contacts-card {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 16px;
-            padding: 24px 20px;
-            margin-top: 12px;
-            border: 1px solid rgba(255,255,255,0.15);
-        }
-        .contacts-card h3 {
-            font-size: 18px;
-            font-weight: 300;
-            letter-spacing: 1px;
-            color: #f5f0eb;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-            text-align: center;
-        }
-        .contacts-card .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            margin-bottom: 8px;
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.06);
-            transition: background 0.2s;
-            cursor: pointer;
-        }
-        .contacts-card .contact-item:active {
-            background: rgba(255, 255, 255, 0.08);
-        }
-        .contacts-card .contact-item .icon {
-            font-size: 18px;
-            min-width: 28px;
-            color: #c9a87c;
-        }
-        .contacts-card .contact-item .text {
-            font-size: 14px;
-            font-weight: 300;
-            letter-spacing: 0.3px;
-            color: #f5f0eb;
-            word-break: break-all;
-        }
-        .contacts-card .btn-close-contacts {
-            width: 100%;
-            padding: 12px;
-            margin-top: 12px;
-            background: transparent;
-            color: rgba(255,255,255,0.5);
-            border: none;
-            font-size: 14px;
-            font-weight: 300;
-            letter-spacing: 0.5px;
-            cursor: pointer;
-            text-decoration: underline;
-            text-underline-offset: 2px;
-        }
-        .contacts-card .btn-close-contacts:active {
-            color: rgba(255,255,255,0.8);
+        .nav-controls button:hover {
+            color: #C9A962;
         }
 
-        /* ===== ЛОГОТИП ===== */
-        .logo-wrapper {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 12px 14px 4px 14px;
-            background: transparent !important;
-            cursor: pointer;
-            transition: transform 0.3s ease;
+        .nav-controls .page-indicator {
+            font-size: 14px;
+            color: #999;
+            letter-spacing: 2px;
         }
-        
-        .logo-wrapper:hover {
-            transform: scale(1.05);
+
+        /* ---------- ДЛЯ ПЕЧАТИ ---------- */
+        @media print {
+            .nav-controls { display: none; }
+            .slide { display: block !important; page-break-after: always; min-height: 100vh; padding: 40px 50px; }
+            .brochure-container { box-shadow: none; border-radius: 0; max-width: 100%; }
+            body { background: #fff; padding: 0; }
         }
-        
-        .logo-wrapper:active {
-            transform: scale(0.95);
-        }
-        
-        .logo-wrapper img {
-            display: block;
-            width: 200px;
-            height: auto;
-            margin: 0 auto;
-            background: transparent !important;
-            filter: drop-shadow(0 4px 20px rgba(201, 168, 124, 0.3));
-            transition: filter 0.3s ease;
-        }
-        
-        .logo-wrapper:hover img {
-            filter: drop-shadow(0 4px 30px rgba(201, 168, 124, 0.6));
+
+        /* ---------- АДАПТИВ ---------- */
+        @media (max-width: 768px) {
+            .slide { padding: 30px 25px; min-height: auto; }
+            h1 { font-size: 34px; }
+            h2 { font-size: 26px; }
+            .grid-3, .grid-4, .grid-2 { grid-template-columns: 1fr; gap: 20px; }
+            .nav-controls { padding: 12px 25px; flex-wrap: wrap; gap: 10px; }
+            .subtitle { font-size: 14px; letter-spacing: 2px; }
         }
     </style>
 </head>
 <body>
 
-    <div id="app">
-        <div class="header">
-            <h1>Террасная доска</h1>
-        </div>
+<div class="brochure-container">
 
-        <div id="gridContainer">
-            <div class="grid" id="grid"></div>
+    <!-- ======================================== -->
+    <!-- СЛАЙД 1 — ОБЛОЖКА (чёрный фон)           -->
+    <!-- ======================================== -->
+    <div class="slide active black-bg" data-slide="0">
+        <div style="display: flex; flex-direction: column; justify-content: center; min-height: 600px;">
+            <div style="border-left: 4px solid #C9A962; padding-left: 30px;">
+                <h3 style="color: #C9A962; letter-spacing: 4px;">EST. 2017</h3>
+                <h1 style="font-size: 72px; margin: 10px 0;">PRINCIP<br>FLOOR</h1>
+                <p style="font-size: 22px; color: #ccc; max-width: 500px; margin-top: 20px; letter-spacing: 1px;">
+                    Искусство напольных покрытий
+                </p>
+                <p style="font-size: 16px; color: #888; margin-top: 30px; max-width: 400px;">
+                    Создаём пространства, в которых хочется оставаться
+                </p>
+            </div>
+            <div style="margin-top: 60px; border-top: 1px solid #333; padding-top: 20px; display: flex; gap: 30px; flex-wrap: wrap;">
+                <span style="color: #666; font-size: 13px; letter-spacing: 2px;">ВЫСТАВКА 2026</span>
+                <span style="color: #666; font-size: 13px; letter-spacing: 2px;">СТЕНД № [Ваш номер]</span>
+            </div>
         </div>
-
-        <div class="info-block hidden" id="detail">
-            <button class="back-btn" id="backBtn">← Назад</button>
-            <div id="detailImageContainer"></div>
-            <h3 id="detailName"></h3>
-            <p id="detailDesc" style="font-size:15px;font-weight:300;line-height:1.7;color:#f5f0eb;letter-spacing:0.3px;margin-bottom:12px;"></p>
-            
-            <div class="section">
-                <h4>➕ Плюсы</h4>
-                <p id="detailPros"></p>
-            </div>
-            
-            <div class="section">
-                <h4>➖ Минусы</h4>
-                <p id="detailCons"></p>
-            </div>
-            
-            <div class="section">
-                <h4>🧹 Уход</h4>
-                <p id="detailCare"></p>
-            </div>
-            
-            <div class="section">
-                <h4>📋 Характеристики</h4>
-                <p id="detailSpecs"></p>
-            </div>
-            
-            <div class="price" id="detailPrice"></div>
-            
-            <div id="recommendations"></div>
-            
-            <button class="btn btn-success" id="backToMenuBtn">В главное меню</button>
+        <!-- Декоративный элемент -->
+        <div style="position: absolute; right: 60px; bottom: 60px; font-size: 160px; font-weight: 900; color: rgba(201, 169, 98, 0.06); letter-spacing: -10px; line-height: 1;">
+            PF
         </div>
-
-        <div id="consultFormContainer"></div>
-        <div id="contactsContainer"></div>
     </div>
 
-    <script>
-        // ================================================================
-        // 1. ДАННЫЕ
-        // ================================================================
+    <!-- ======================================== -->
+    <!-- СЛАЙД 2 — О КОМПАНИИ                      -->
+    <!-- ======================================== -->
+    <div class="slide" data-slide="1">
+        <h3>О КОМПАНИИ</h3>
+        <h2 style="max-width: 600px;">Эксперты в области<br>напольных покрытий</h2>
+        <div class="grid-2" style="margin-top: 30px;">
+            <div>
+                <p style="font-size: 17px; line-height: 2; color: #444;">
+                    С 2017 года мы помогаем строителям, архитекторам и владельцам бизнеса экономить время и бюджет, исключая ошибки при выборе и укладке.
+                </p>
+                <p style="font-size: 17px; line-height: 2; color: #444; margin-top: 20px;">
+                    <span class="gold" style="font-weight: 600;">Наша философия:</span> качество без компромиссов. Мы не просто поставляем материалы — мы проектируем базу для вашего интерьера.
+                </p>
+            </div>
+            <div style="background: #f5f2ed; padding: 30px; display: flex; flex-direction: column; justify-content: center; border-left: 3px solid #C9A962;">
+                <span style="font-size: 48px; font-weight: 300; color: #C9A962;">8+</span>
+                <span style="font-size: 16px; color: #666; letter-spacing: 1px;">ЛЕТ НА РЫНКЕ</span>
+                <span style="font-size: 48px; font-weight: 300; color: #C9A962; margin-top: 20px;">1000+</span>
+                <span style="font-size: 16px; color: #666; letter-spacing: 1px;">ДОВОЛЬНЫХ КЛИЕНТОВ</span>
+            </div>
+        </div>
+    </div>
 
-        const categories = [
-            {
-                id: 'local',
-                name: 'Местные породы',
-                image: 'https://i.pinimg.com/736x/f4/85/f1/f485f13473e78c8fe19022f9c529d084.jpg',
-                materials: [
-                    { id: 'лиственница', name: 'Лиственница', badge: '' },
-                    { id: 'ясень', name: 'Ясень', badge: '' }
-                ]
-            },
-            {
-                id: 'exotic',
-                name: 'Экзотические породы',
-                image: 'https://i.pinimg.com/736x/37/ea/40/37ea400092963c619c00589fbc7cd146.jpg',
-                materials: [
-                    { id: 'кумару', name: 'Кумару', badge: '' },
-                    { id: 'ипе', name: 'Ипе', badge: '' },
-                    { id: 'тик', name: 'Тик', badge: '' }
-                ]
-            },
-            {
-                id: 'dpk',
-                name: 'ДПК',
-                image: 'https://i.pinimg.com/1200x/91/f6/a4/91f6a467c6f8ba04366db84b50ab542d.jpg',
-                materials: [
-                    { id: 'декинг', name: 'Декинг', badge: '' }
-                ]
-            },
-            {
-                id: 'montazh',
-                name: 'Монтаж',
-                image: 'https://i.pinimg.com/736x/3a/ff/75/3aff750d269c307cf95f01c21aedb07a.jpg',
-                materials: [
-                    { id: 'montazh_derevo', name: 'Дерево', badge: '' },
-                    { id: 'montazh_dpk', name: 'ДПК', badge: '' }
-                ]
-            }
-        ];
+    <!-- ======================================== -->
+    <!-- СЛАЙД 3 — ПРЕИМУЩЕСТВА                    -->
+    <!-- ======================================== -->
+    <div class="slide" data-slide="2">
+        <h3>ПРЕИМУЩЕСТВА</h3>
+        <h2>Почему выбирают нас</h2>
+        <div class="grid-3">
+            <div class="advantage-item">
+                <span class="number">01</span>
+                <h4>ВИЗУАЛИЗАЦИЯ</h4>
+                <p>Покажем, как покрытие впишется в ваш интерьер до покупки. Просто загрузите фото помещения — ИИ сделает 3D-рендер.</p>
+            </div>
+            <div class="advantage-item">
+                <span class="number">02</span>
+                <h4>ЭКСПЕРТИЗА</h4>
+                <p>Проектируем полы для спортзалов, клиник, офисов и премиум-интерьеров. Знаем нагрузки лучше вас.</p>
+            </div>
+            <div class="advantage-item">
+                <span class="number">03</span>
+                <h4>НАДЁЖНОСТЬ</h4>
+                <p>Работаем с ТОП-фабриками: Gerflor, Tarkett, Unilin. Гарантия, сертификаты и поставка точно в срок.</p>
+            </div>
+        </div>
+    </div>
 
-        const IMAGES = {
-            'лиственница': 'https://i.pinimg.com/736x/f4/85/f1/f485f13473e78c8fe19022f9c529d084.jpg',
-            'ясень': 'https://i.pinimg.com/736x/fb/7c/eb/fb7ceb406f68979c665a5f324a68e57b.jpg',
-            'кумару': 'https://i.pinimg.com/736x/37/ea/40/37ea400092963c619c00589fbc7cd146.jpg',
-            'ипе': 'https://i.pinimg.com/736x/37/ea/40/37ea400092963c619c00589fbc7cd146.jpg',
-            'тик': 'https://i.pinimg.com/736x/37/ea/40/37ea400092963c619c00589fbc7cd146.jpg',
-            'декинг': 'https://i.pinimg.com/1200x/91/f6/a4/91f6a467c6f8ba04366db84b50ab542d.jpg',
-            'montazh_derevo': 'https://i.pinimg.com/736x/3a/ff/75/3aff750d269c307cf95f01c21aedb07a.jpg',
-            'montazh_dpk': 'https://i.pinimg.com/736x/3a/ff/75/3aff750d269c307cf95f01c21aedb07a.jpg'
-        };
+    <!-- ======================================== -->
+    <!-- СЛАЙД 4 — КАТАЛОГ (4 колонки)             -->
+    <!-- ======================================== -->
+    <div class="slide" data-slide="3">
+        <h3>КАТАЛОГ</h3>
+        <h2>Навигация по продуктам</h2>
+        <div class="grid-4">
+            <div class="category-item">
+                <h4>СПОРТ</h4>
+                <p>Резина Regupol<br>Паркет Карелия<br>Беговые покрытия</p>
+            </div>
+            <div class="category-item">
+                <h4>МЕДИЦИНА</h4>
+                <p>Gerflor Mipolam<br>Tarkett Acczent<br>Антибактериальные полы</p>
+            </div>
+            <div class="category-item">
+                <h4>ОФИС</h4>
+                <p>Кварц-винил SPC<br>Ламинат 34 кл.<br>Износостойкие решения</p>
+            </div>
+            <div class="category-item">
+                <h4>ПРЕМИУМ</h4>
+                <p>Инженерная доска<br>Натуральные ковры<br>Массив и эксклюзив</p>
+            </div>
+        </div>
+        <p style="margin-top: 40px; font-size: 14px; color: #999; text-align: center; letter-spacing: 1px;">
+            Более 10 000 коллекций от ведущих мировых производителей
+        </p>
+    </div>
 
-        const EMOJI_PLACEHOLDER = {
-            'лиственница': '🌲',
-            'ясень': '🌳',
-            'кумару': '🪵',
-            'ипе': '🪵',
-            'тик': '🪵',
-            'декинг': '🪵',
-            'montazh_derevo': '🔧',
-            'montazh_dpk': '🔧'
-        };
-
-        const details = {
-            'лиственница': {
-                desc: 'Сибирская лиственница — это морозостойкая и влагостойкая древесина. Идеально подходит для террас в регионах с холодным климатом. Со временем становится только прочнее.',
-                pros: '✅ Морозостойкость\n✅ Влагостойкость\n✅ Доступная цена\n✅ Экологичный материал',
-                cons: '❌ Требует ухода (масло/лак)\n❌ Может трескаться\n❌ Со временем темнеет',
-                care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка раз в год',
-                specs: '⏳ Срок службы: 20-30 лет\n📊 Класс: Хвойная древесина\n💧 Водостойкость: Высокая',
-                price: 'от 4 500 ₽/м²'
-            },
-            'ясень': {
-                desc: 'Термообработанный ясень — это натуральная древесина, прошедшая термическую обработку при высоких температурах. Становится более устойчивой к влаге и перепадам температур.',
-                pros: '✅ Натуральный вид дерева\n✅ Устойчивость к влаге\n✅ Тёплый цвет\n✅ Экологичный материал',
-                cons: '❌ Дороже обычной древесины\n❌ Требует ухода\n❌ Может выцветать на солнце',
-                care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка раз в 2 года',
-                specs: '⏳ Срок службы: 20-25 лет\n📊 Класс: Термодревесина\n💧 Водостойкость: Высокая',
-                price: 'от 5 900 ₽/м²'
-            },
-            'кумару': {
-                desc: 'Кумару — это экзотическая порода дерева из Южной Америки. Отличается высокой плотностью, твёрдостью и устойчивостью к гниению. Идеальна для террас в сложных климатических условиях.',
-                pros: '✅ Экзотический вид\n✅ Высокая плотность и твёрдость\n✅ Устойчивость к гниению\n✅ Не боится насекомых',
-                cons: '❌ Высокая цена\n❌ Тяжёлый материал\n❌ Требует специального крепежа',
-                care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Рекомендуется масляная пропитка раз в 2 года',
-                specs: '⏳ Срок службы: 30-40 лет\n📊 Класс: Экзотическая древесина\n💧 Водостойкость: Высокая',
-                price: 'от 8 500 ₽/м²'
-            },
-            'ипе': {
-                desc: 'Ипе (бразильский орех) — одна из самых твёрдых и долговечных экзотических пород. Почти не гниёт и не поражается насекомыми. Идеальна для террас, причалов и зон с интенсивной нагрузкой.',
-                pros: '✅ Максимальная твёрдость\n✅ Устойчивость к гниению\n✅ Долговечность (до 50 лет)\n✅ Не боится насекомых',
-                cons: '❌ Очень высокая цена\n❌ Требует специального крепежа\n❌ Тяжёлый материал',
-                care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка раз в 2-3 года',
-                specs: '⏳ Срок службы: 40-50 лет\n📊 Класс: Экзотическая древесина\n💧 Водостойкость: Максимальная',
-                price: 'от 12 000 ₽/м²'
-            },
-            'тик': {
-                desc: 'Тик — это элитная экзотическая порода из Юго-Восточной Азии. Содержит природные масла, которые защищают древесину от влаги, грибка и насекомых. Ценится за красивую текстуру и золотистый оттенок.',
-                pros: '✅ Природная защита от влаги\n✅ Красивая текстура\n✅ Долговечность\n✅ Не требует частого ухода',
-                cons: '❌ Высокая цена\n❌ Ограниченный ресурс\n❌ Сложность обработки',
-                care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка по желанию',
-                specs: '⏳ Срок службы: 30-50 лет\n📊 Класс: Экзотическая древесина\n💧 Водостойкость: Максимальная',
-                price: 'от 11 000 ₽/м²'
-            },
-            'декинг': {
-                desc: 'Декинг (террасная доска) — это современное покрытие для открытых пространств. Изготавливается из ДПК (древесно-полимерного композита), который сочетает в себе эстетику дерева и практичность пластика. Не требует ухода, не гниёт и не выцветает.',
-                pros: '✅ Устойчивость к влаге\n✅ Не требует покраски\n✅ Противоскользящая поверхность\n✅ Долговечность (25-30 лет)',
-                cons: '❌ Высокая цена\n❌ Может нагреваться на солнце\n❌ Требует правильного монтажа',
-                care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🧽 Для пятен — мягкие моющие средства',
-                specs: '⏳ Срок службы: 25-30 лет\n📊 Класс: ДПК / Натуральная древесина\n💧 Водостойкость: Высокая',
-                price: 'от 3 500 ₽/м²'
-            },
-            'montazh_derevo': {
-                desc: 'Правильный монтаж деревянной террасной доски — залог долговечности. Важно использовать качественный крепёж, оставить зазоры для расширения и обеспечить вентиляцию.',
-                pros: '✅ Натуральный внешний вид\n✅ Экологичность\n✅ Возможность ремонта и замены\n✅ Классический стиль',
-                cons: '❌ Требует регулярного ухода\n❌ Чувствительность к влаге\n❌ Обработка антисептиками',
-                care: '🔧 Использовать нержавеющий крепёж\n📏 Соблюдать зазоры (5-8 мм)\n🌬️ Обеспечить вентиляцию снизу\n🛡️ Обработка маслом/антисептиком',
-                specs: '⏳ Срок службы: 15-30 лет (зависит от породы)\n📊 Рекомендации: Уклон 1-2% для стока воды\n💧 Требует защиты от влаги',
-                price: 'Стоимость монтажа: от 2 500 ₽/м²'
-            },
-            'montazh_dpk': {
-                desc: 'Монтаж террасной доски из ДПК (древесно-полимерного композита) — это современное решение, которое сочетает эстетику дерева и практичность пластика. Не требует сложного ухода, устойчиво к влаге и перепадам температур.',
-                pros: '✅ Минимальный уход\n✅ Влагостойкость\n✅ Не требует покраски\n✅ Долговечность',
-                cons: '❌ Высокая стоимость материала\n❌ Может нагреваться на солнце\n❌ Требует правильного монтажа',
-                care: '🔧 Использовать специальный крепёж для ДПК\n📏 Соблюдать зазоры (5-8 мм)\n🌬️ Обеспечить вентиляцию снизу\n🧽 Мыть водой из шланга',
-                specs: '⏳ Срок службы: 25-30 лет\n📊 Рекомендации: Уклон 1-2% для стока воды\n💧 Водостойкость: Высокая (не боится влаги)',
-                price: 'Стоимость монтажа: от 2 000 ₽/м²'
-            }
-        };
-
-        const recommendations = {
-            'декинг': [
-                { name: 'Декинг ДПК', brand: 'WoodLine', url: 'https://principfloor.ru/catalog/decking/dpk/', price: 'от 3 500 ₽/м²', desc: 'Композитная доска, не требует покраски' },
-                { name: 'Декинг термоясень', brand: 'WoodLine', url: 'https://principfloor.ru/catalog/decking/termoyasen/', price: 'от 5 900 ₽/м²', desc: 'Термообработанный ясень для террас' }
-            ],
-            'кумару': [
-                { name: 'Кумару премиум', brand: 'Tropical', url: 'https://principfloor.ru/catalog/decking/kumaru/', price: 'от 8 500 ₽/м²', desc: 'Экзотическая порода, высокая плотность' }
-            ],
-            'ясень': [
-                { name: 'Термоясень', brand: 'WoodLine', url: 'https://principfloor.ru/catalog/decking/termoyasen/', price: 'от 5 900 ₽/м²', desc: 'Термообработанный ясень для террас' }
-            ],
-            'лиственница': [
-                { name: 'Лиственница Сибирская', brand: 'SiberianWood', url: 'https://principfloor.ru/catalog/decking/larch/', price: 'от 4 500 ₽/м²', desc: 'Морозостойкая, влагостойкая' }
-            ],
-            'ипе': [
-                { name: 'Ипе премиум', brand: 'Tropical', url: 'https://principfloor.ru/catalog/decking/ipe/', price: 'от 12 000 ₽/м²', desc: 'Самый твёрдый и долговечный материал' }
-            ],
-            'тик': [
-                { name: 'Тик элит', brand: 'Tropical', url: 'https://principfloor.ru/catalog/decking/teak/', price: 'от 11 000 ₽/м²', desc: 'Элитная древесина с природными маслами' }
-            ]
-        };
-
-        // ================================================================
-        // 2. ЛОГИКА
-        // ================================================================
-
-        const tg = window.Telegram.WebApp;
-        tg.expand();
-
-        let currentView = 'main';
-        let currentCategoryId = null;
-        let showForm = false;
-        let showContacts = false;
-
-        function getImageUrl(id) {
-            return IMAGES[id] || null;
-        }
-
-        function getEmoji(id) {
-            return EMOJI_PLACEHOLDER[id] || '📦';
-        }
-
-        function makeCall() {
-            tg.sendData(JSON.stringify({
-                action: 'call',
-                phone: '+73433282772'
-            }));
-            
-            if (tg.platform === 'ios' || tg.platform === 'android') {
-                window.location.href = 'tel:+73433282772';
-            }
-        }
-
-        function renderConsultForm() {
-            const container = document.getElementById('consultFormContainer');
-            container.innerHTML = `
-                <div class="consult-form">
-                    <h3>Заявка на консультацию</h3>
-                    <input type="text" id="consultName" placeholder="Ваше имя" />
-                    <input type="text" id="consultPhone" placeholder="Номер телефона" />
-                    <input type="text" id="consultMessage" placeholder="Комментарий (необязательно)" />
-                    <button class="btn-send" id="consultSendBtn">Отправить</button>
-                    
-                    <div class="call-note">
-                        Или можете позвонить нам!<br>
-                        <span class="phone-link" id="callPhoneLink">+7 (343) 328-27-72</span>
-                    </div>
-                    
-                    <button class="btn-close" id="consultCloseBtn">Закрыть</button>
+    <!-- ======================================== -->
+    <!-- СЛАЙД 5 — СПЕЦПРЕДЛОЖЕНИЕ + КОНТАКТЫ      -->
+    <!-- ======================================== -->
+    <div class="slide black-bg" data-slide="4">
+        <div style="display: flex; flex-direction: column; justify-content: center; min-height: 550px;">
+            <h3 style="color: #C9A962; letter-spacing: 4px;">INVITATION</h3>
+            <h2 style="font-size: 44px; max-width: 500px;">Получите бесплатную<br>ИИ-визуализацию</h2>
+            <p style="color: #ccc; max-width: 500px; margin: 20px 0 30px; font-size: 18px;">
+                Просто покажите нам фото комнаты на стенде — мы покажем, как будет выглядеть ваше покрытие.
+            </p>
+            <div style="border-left: 3px solid #C9A962; padding-left: 24px; margin-bottom: 30px;">
+                <p style="color: #C9A962; font-weight: 600; font-size: 18px;">Акция:</p>
+                <p style="color: #ddd; font-size: 16px;">Скидка 5% на аксессуары для монтажа при заказе от 100 м²</p>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 30px; margin-top: 10px;">
+                <div>
+                    <p style="color: #888; font-size: 12px; letter-spacing: 2px;">ТЕЛЕФОН</p>
+                    <p style="color: #fff; font-size: 18px; font-weight: 500;">+7 (XXX) XXX-XX-XX</p>
                 </div>
-            `;
-
-            document.getElementById('consultSendBtn').onclick = () => {
-                const name = document.getElementById('consultName').value.trim();
-                const phone = document.getElementById('consultPhone').value.trim();
-                const message = document.getElementById('consultMessage').value.trim();
-
-                if (!name || !phone) {
-                    tg.showPopup({
-                        title: 'Ошибка',
-                        message: 'Пожалуйста, заполните имя и номер телефона.',
-                        buttons: [{ type: 'ok' }]
-                    });
-                    return;
-                }
-
-                tg.sendData(JSON.stringify({
-                    action: 'consult',
-                    name: name,
-                    phone: phone,
-                    message: message
-                }));
-
-                container.innerHTML = '';
-                showForm = false;
-                document.getElementById('gridContainer').style.display = 'block';
-                renderMainMenu();
-
-                tg.showPopup({
-                    title: 'Отправлено!',
-                    message: 'Спасибо! Мы свяжемся с вами в ближайшее время.',
-                    buttons: [{ type: 'ok' }]
-                });
-            };
-
-            document.getElementById('consultCloseBtn').onclick = () => {
-                container.innerHTML = '';
-                showForm = false;
-                document.getElementById('gridContainer').style.display = 'block';
-                renderMainMenu();
-            };
-
-            document.getElementById('callPhoneLink').onclick = (e) => {
-                e.stopPropagation();
-                makeCall();
-            };
-        }
-
-        function renderContactsCard() {
-            const container = document.getElementById('contactsContainer');
-            container.innerHTML = `
-                <div class="contacts-card">
-                    <h3>Контакты</h3>
-                    <div class="contact-item" onclick="makeCall();">
-                        <span class="icon">📞</span>
-                        <span class="text">+7 (343) 328-27-72</span>
-                    </div>
-                    <div class="contact-item" onclick="tg.sendData(JSON.stringify({ action: 'email' }));">
-                        <span class="icon">✉️</span>
-                        <span class="text">sl@principfloor.ru</span>
-                    </div>
-                    <div class="contact-item" onclick="tg.sendData(JSON.stringify({ action: 'site' }));">
-                        <span class="icon">🌐</span>
-                        <span class="text">principfloor.ru</span>
-                    </div>
-                    <button class="btn-close-contacts" id="contactsCloseBtn">Закрыть</button>
+                <div>
+                    <p style="color: #888; font-size: 12px; letter-spacing: 2px;">EMAIL</p>
+                    <p style="color: #fff; font-size: 18px; font-weight: 500;">info@principfloor.ru</p>
                 </div>
-            `;
-
-            document.getElementById('contactsCloseBtn').onclick = () => {
-                container.innerHTML = '';
-                showContacts = false;
-                document.getElementById('gridContainer').style.display = 'block';
-                renderMainMenu();
-            };
-        }
-
-        function renderMainMenu() {
-            currentView = 'main';
-            const grid = document.getElementById('grid');
-            grid.className = 'grid';
-            grid.innerHTML = '';
-            
-            categories.forEach(cat => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <img class="image" src="${cat.image}" alt="${cat.name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="image-placeholder" style="display:none;">📦</div>
-                    <div class="info">
-                        <div class="name">${cat.name}</div>
-                    </div>
-                `;
-                card.onclick = () => renderSubMenu(cat.id);
-                grid.appendChild(card);
-            });
-            
-            // Консультация
-            const consultCard = document.createElement('div');
-            consultCard.className = 'card';
-            consultCard.style.cssText = 'grid-column: 1 / -1; background: rgba(255, 255, 255, 0.04); border-color: rgba(255, 255, 255, 0.1);';
-            consultCard.innerHTML = `
-                <div class="info" style="padding: 28px 14px;">
-                    <div class="name" style="font-size: 16px; letter-spacing: 1px; color: #f5f0eb;">Консультация</div>
+                <div>
+                    <p style="color: #888; font-size: 12px; letter-spacing: 2px;">САЙТ</p>
+                    <p style="color: #fff; font-size: 18px; font-weight: 500;">principfloor.ru</p>
                 </div>
-            `;
-            consultCard.onclick = () => {
-                if (!showForm) {
-                    showForm = true;
-                    document.getElementById('gridContainer').style.display = 'none';
-                    renderConsultForm();
-                }
-            };
-            grid.appendChild(consultCard);
+            </div>
+            <div style="margin-top: 40px; border-top: 1px solid #333; padding-top: 20px;">
+                <span style="color: #666; font-size: 13px; letter-spacing: 2px;">СТЕНД № [Ваш номер]</span>
+            </div>
+        </div>
+        <!-- Декоративный элемент -->
+        <div style="position: absolute; right: 50px; bottom: 50px; font-size: 120px; font-weight: 900; color: rgba(201, 169, 98, 0.05); letter-spacing: -8px; line-height: 1;">
+            PF
+        </div>
+    </div>
 
-            // Контакты
-            const contactsCard = document.createElement('div');
-            contactsCard.className = 'card';
-            contactsCard.style.cssText = 'grid-column: 1 / -1; background: rgba(255, 255, 255, 0.04); border-color: rgba(255, 255, 255, 0.1);';
-            contactsCard.innerHTML = `
-                <div class="info" style="padding: 28px 14px;">
-                    <div class="name" style="font-size: 16px; letter-spacing: 1px; color: #f5f0eb;">Контакты</div>
-                </div>
-            `;
-            contactsCard.onclick = () => {
-                if (!showContacts) {
-                    showContacts = true;
-                    document.getElementById('gridContainer').style.display = 'none';
-                    renderContactsCard();
-                }
-            };
-            grid.appendChild(contactsCard);
+    <!-- ======================================== -->
+    <!-- УПРАВЛЕНИЕ НАВИГАЦИЕЙ                      -->
+    <!-- ======================================== -->
+    <div class="nav-controls">
+        <button id="prevSlide">← НАЗАД</button>
+        <span class="page-indicator" id="pageIndicator">1 / 5</span>
+        <button id="nextSlide">ВПЕРЁД →</button>
+    </div>
 
-            // Логотип
-            const logoWrapper = document.createElement('div');
-            logoWrapper.className = 'logo-wrapper';
-            logoWrapper.innerHTML = `
-                <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390" 
-                     alt="PRINCIP FLOOR">
-            `;
-            logoWrapper.onclick = () => {
-                tg.openLink('https://principfloor.ru/');
-            };
-            grid.appendChild(logoWrapper);
-        }
+</div>
 
-        function renderSubMenu(categoryId) {
-            currentView = 'submenu';
-            currentCategoryId = categoryId;
-            const category = categories.find(c => c.id === categoryId);
-            const grid = document.getElementById('grid');
-            grid.className = 'grid submenu';
-            grid.innerHTML = '';
+<script>
+    // ---------- ЛОГИКА ПЕРЕКЛЮЧЕНИЯ СЛАЙДОВ ----------
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    let currentSlide = 0;
 
-            const header = document.createElement('div');
-            header.className = 'submenu-header';
-            header.innerHTML = `
-                <span class="back-link" id="submenuBackBtn">← Назад</span>
-                <span class="category-title">${category.name}</span>
-            `;
-            grid.appendChild(header);
-            header.querySelector('#submenuBackBtn').onclick = () => {
-                document.getElementById('gridContainer').style.display = 'block';
-                renderMainMenu();
-            };
+    const prevBtn = document.getElementById('prevSlide');
+    const nextBtn = document.getElementById('nextSlide');
+    const indicator = document.getElementById('pageIndicator');
 
-            category.materials.forEach(mat => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                const imgUrl = getImageUrl(mat.id);
-                card.innerHTML = `
-                    ${imgUrl 
-                        ? `<img class="image" src="${imgUrl}" alt="${mat.name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`
-                        : ''
-                    }
-                    <div class="image-placeholder" style="${imgUrl ? 'display:none;' : ''}">${getEmoji(mat.id)}</div>
-                    <div class="info">
-                        <div class="name">${mat.name}</div>
-                    </div>
-                `;
-                card.onclick = () => showDetail(mat.id);
-                grid.appendChild(card);
-            });
-        }
+    function goToSlide(index) {
+        if (index < 0) index = totalSlides - 1;
+        if (index >= totalSlides) index = 0;
 
-        function renderRecommendations(materialId) {
-            const container = document.getElementById('recommendations');
-            const items = recommendations[materialId];
-            if (!items || items.length === 0) {
-                container.innerHTML = '';
-                return;
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            if (i === index) {
+                slide.classList.add('active');
             }
-            
-            let html = '<div class="recommendation"><h4 style="margin-bottom:12px; color: #f5f0eb; font-weight:300; letter-spacing:0.5px; text-transform:uppercase; text-shadow: 0 2px 8px rgba(0,0,0,0.3);">🛍️ Рекомендуемые товары</h4>';
-            items.forEach(item => {
-                html += `
-                    <div class="item">
-                        <b>${item.name}</b> (${item.brand})
-                        <br>📝 ${item.desc}
-                        <br>💰 <b>${item.price}</b>
-                        <br>
-                        <a href="${item.url}" target="_blank" class="btn-site">🔗 Перейти на сайт</a>
-                    </div>
-                `;
-            });
-            html += '</div>';
-            container.innerHTML = html;
-        }
+        });
 
-        function showDetail(id) {
-            currentView = 'detail';
-            const data = details[id];
-            const imgUrl = getImageUrl(id);
-            const name = details[id].name || id.charAt(0).toUpperCase() + id.slice(1);
+        currentSlide = index;
+        indicator.textContent = (currentSlide + 1) + ' / ' + totalSlides;
+    }
 
-            document.getElementById('grid').classList.add('hidden');
-            document.getElementById('detail').classList.remove('hidden');
+    prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+    nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
 
-            const container = document.getElementById('detailImageContainer');
-            if (imgUrl) {
-                container.innerHTML = `<img class="image-full" src="${imgUrl}" alt="${name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`;
-            } else {
-                container.innerHTML = `<div class="image-full-placeholder">${getEmoji(id)}</div>`;
-            }
+    // Клавиши влево/вправо
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
+        if (e.key === 'ArrowRight') goToSlide(currentSlide + 1);
+    });
 
-            document.getElementById('detailName').textContent = name;
-            document.getElementById('detailDesc').textContent = data.desc;
-            document.getElementById('detailPros').textContent = data.pros;
-            document.getElementById('detailCons').textContent = data.cons;
-            document.getElementById('detailCare').textContent = data.care;
-            document.getElementById('detailSpecs').textContent = data.specs;
-            document.getElementById('detailPrice').textContent = data.price;
+    // ---------- АВТОМАТИЧЕСКАЯ СМЕНА (опционально) ----------
+    // Раскомментируйте, если хотите слайд-шоу на стенде:
+    // let autoSlide = setInterval(() => goToSlide(currentSlide + 1), 6000);
+    // При клике на кнопки сбрасываем таймер:
+    // prevBtn.addEventListener('click', () => { clearInterval(autoSlide); });
+    // nextBtn.addEventListener('click', () => { clearInterval(autoSlide); });
+</script>
 
-            renderRecommendations(id);
-
-            tg.HapticFeedback.impactOccurred('medium');
-        }
-
-        function goToMainMenu() {
-            currentView = 'main';
-            document.getElementById('grid').classList.remove('hidden');
-            document.getElementById('detail').classList.add('hidden');
-            document.getElementById('consultFormContainer').innerHTML = '';
-            document.getElementById('contactsContainer').innerHTML = '';
-            showForm = false;
-            showContacts = false;
-            document.getElementById('gridContainer').style.display = 'block';
-            renderMainMenu();
-        }
-
-        // ================================================================
-        // 3. ОБРАБОТЧИКИ
-        // ================================================================
-
-        document.getElementById('backBtn').onclick = () => {
-            if (currentView === 'detail') {
-                document.getElementById('detail').classList.add('hidden');
-                document.getElementById('grid').classList.remove('hidden');
-                if (currentCategoryId) {
-                    renderSubMenu(currentCategoryId);
-                } else {
-                    renderMainMenu();
-                }
-            }
-        };
-        document.getElementById('backToMenuBtn').onclick = goToMainMenu;
-
-        // ================================================================
-        // 4. ЗАПУСК
-        // ================================================================
-
-        window.makeCall = makeCall;
-
-        renderMainMenu();
-
-        tg.MainButton.hide();
-    </script>
 </body>
 </html>

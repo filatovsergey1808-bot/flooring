@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Princip Floor — Премиальный каталог</title>
     <style>
-        /* ---------- ИМПОРТ ПРЕМИАЛЬНЫХ ШРИФТОВ ---------- */
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
-
         /* ---------- СБРОС И БАЗА ---------- */
         * {
             margin: 0;
@@ -31,7 +28,7 @@
             min-height: 297mm;
             height: 297mm;
             background: #ffffff;
-            padding: 18mm 18mm 16mm 18mm;
+            padding: 0;
             position: relative;
             overflow: hidden;
             box-shadow: 0 12px 40px rgba(0,0,0,0.06);
@@ -51,14 +48,14 @@
             pointer-events: none;
             z-index: 1;
         }
-        .stripe-top { top: 14mm; }
-        .stripe-bottom { bottom: 14mm; }
+        .stripe-top { top: 15mm; }
+        .stripe-bottom { bottom: 15mm; }
 
         .divider-line {
-            width: 50px;
-            height: 2px;
+            width: 60px;
+            height: 3px;
             background: #3b5999;
-            margin: 8px 0 12px;
+            margin: 8px 0 14px;
         }
 
         /* ---------- ЦВЕТА ---------- */
@@ -80,7 +77,7 @@
 
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 38px;
+            font-size: 40px;
             font-weight: 400;
             letter-spacing: 4px;
             line-height: 1.05;
@@ -90,68 +87,68 @@
 
         h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 26px;
+            font-size: 30px;
             font-weight: 400;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             line-height: 1.2;
             color: var(--text-primary);
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         h3 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 10px;
+            font-size: 13px;
             font-weight: 500;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
             text-transform: uppercase;
             color: var(--accent-blue);
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
 
         h4 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 13px;
+            font-size: 15px;
             font-weight: 600;
             letter-spacing: 1px;
             color: var(--text-primary);
-            margin: 0 0 4px 0;
+            margin: 0 0 3px 0;
         }
 
         p {
             font-family: 'Montserrat', sans-serif;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 300;
-            line-height: 1.7;
+            line-height: 1.6;
             color: var(--text-secondary);
             max-width: 100%;
         }
 
         .text-small {
-            font-size: 9px;
-            letter-spacing: 2px;
+            font-size: 11px;
+            letter-spacing: 3px;
             color: var(--text-muted);
             text-transform: uppercase;
             font-weight: 400;
         }
 
-        /* ---------- ШАПКА (НАД ВЕРХНЕЙ ПОЛОСОЙ) ---------- */
+        /* ---------- ВЕРХНЯЯ ЧАСТЬ ---------- */
         .header-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: relative;
             z-index: 2;
-            height: 32px;
+            height: 15mm;
             flex-shrink: 0;
-            margin-bottom: 2px;
+            padding: 0 18mm;
         }
         .logo-block {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         .logo-block .logo-box {
-            height: 28px;
+            height: 18px;
             width: auto;
             flex-shrink: 0;
             overflow: hidden;
@@ -167,86 +164,138 @@
         }
         .header-phone {
             font-family: 'Montserrat', sans-serif;
-            font-size: 14px;
-            font-weight: 400;
-            color: var(--text-primary);
-            letter-spacing: 1px;
+            font-size: 11px;
+            font-weight: 300;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
             white-space: nowrap;
         }
         .header-phone a {
-            color: var(--accent-blue);
+            color: var(--text-muted);
             text-decoration: none;
             border-bottom: 1px solid transparent;
             transition: 0.3s;
         }
         .header-phone a:hover {
+            color: var(--accent-blue);
             border-bottom-color: var(--accent-blue);
         }
 
-        /* ---------- ОСНОВНОЙ БЛОК (между полосами) ---------- */
+        /* ---------- ОСНОВНОЙ БЛОК ---------- */
         .content-wrapper {
             flex: 1;
             display: flex;
             flex-direction: column;
             position: relative;
             z-index: 2;
+            padding: 0 18mm;
         }
 
-        /* ---------- ПРИВЕТСТВИЕ (только на стр.1) ---------- */
+        /* ---------- ПРИВЕТСТВИЕ ---------- */
         .hero-section {
-            height: 48%;
+            height: 55%;
             display: flex;
             align-items: center;
             justify-content: flex-start;
         }
         .hero-section .hero-content {
-            border-left: 3px solid var(--accent-blue);
-            padding-left: 18px;
-            max-width: 320px;
+            border-left: 4px solid var(--accent-blue);
+            padding-left: 20px;
+            max-width: 480px;
+        }
+        .hero-section .hero-content .hero-text {
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            font-weight: 300;
+            margin-bottom: 8px;
+        }
+        .hero-section .hero-content .hero-text strong {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .hero-section .hero-content .hero-list {
+            list-style: none;
+            padding: 0;
+            margin: 6px 0 0 0;
+        }
+        .hero-section .hero-content .hero-list li {
+            font-size: 12px;
+            font-weight: 300;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            padding: 2px 0 2px 18px;
+            position: relative;
+        }
+        .hero-section .hero-content .hero-list li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+            font-weight: 400;
+        }
+        .hero-section .hero-content .hero-list li strong {
+            font-weight: 500;
+            color: var(--text-primary);
         }
 
-        /* ---------- КАТАЛОГ (единая система) ---------- */
+        /* ---------- КАТАЛОГ ---------- */
         .catalog-grid {
-            height: 48%;
+            height: 42%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             gap: 6px;
             padding: 4px 0;
         }
+        .catalog-grid.full {
+            height: 100%;
+            justify-content: center;
+        }
         .catalog-grid .catalog-header {
-            margin-bottom: 2px;
+            margin-bottom: 4px;
         }
         .catalog-grid .catalog-header h3 {
-            font-size: 10px;
-            letter-spacing: 4px;
+            font-size: 13px;
+            letter-spacing: 5px;
             color: var(--accent-blue);
             text-transform: uppercase;
-            margin-bottom: 2px;
+            margin-bottom: 3px;
         }
         .catalog-grid .catalog-header h2 {
-            font-size: 22px;
-            margin-bottom: 2px;
+            font-size: 30px;
+            margin-bottom: 4px;
         }
         .catalog-grid .catalog-header p {
-            font-size: 11px;
+            font-size: 14px;
             font-weight: 300;
             color: var(--text-muted);
         }
 
-        /* ---------- ШАХМАТНАЯ СЕТКА ---------- */
-        .chess-row {
+        /* ---------- ШАХМАТНАЯ СЕТКА (ПРАВИЛЬНАЯ) ---------- */
+        .chess-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
+            height: 100%;
+            align-content: center;
+        }
+
+        /* Каждый блок — это отдельная строка с двумя колонками */
+        .chess-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
             align-items: center;
-            height: 33%;
+            height: 50%;
         }
-        .chess-row.reverse {
-            direction: rtl;
+
+        /* Реверс: меняем порядок колонок местами */
+        .chess-item.reverse .chess-text {
+            order: 2;
         }
-        .chess-row.reverse > * {
-            direction: ltr;
+        .chess-item.reverse .chess-photo {
+            order: 1;
         }
 
         .chess-text {
@@ -256,7 +305,7 @@
             padding: 0 2px;
         }
         .chess-text h4 {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
             letter-spacing: 1px;
             margin-bottom: 2px;
@@ -264,7 +313,7 @@
         .chess-text p {
             font-size: 11px;
             font-weight: 300;
-            line-height: 1.5;
+            line-height: 1.4;
             color: var(--text-secondary);
             margin-bottom: 2px;
         }
@@ -274,11 +323,11 @@
             margin: 2px 0 0 0;
         }
         .chess-text ul li {
-            font-size: 10.5px;
+            font-size: 10px;
             font-weight: 300;
-            line-height: 1.4;
+            line-height: 1.3;
             color: var(--text-secondary);
-            padding: 1px 0 1px 14px;
+            padding: 1px 0 1px 12px;
             position: relative;
         }
         .chess-text ul li::before {
@@ -291,11 +340,11 @@
 
         .chess-photo {
             height: 100%;
-            min-height: 75px;
-            background: #f4f2ef;
+            min-height: 70px;
+            background: transparent;
             position: relative;
             overflow: hidden;
-            border-radius: 2px;
+            border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -311,72 +360,29 @@
         .chess-photo .label {
             position: relative;
             z-index: 2;
-            background: rgba(255,255,255,0.85);
-            padding: 3px 14px;
+            background: rgba(255,255,255,0.75);
+            padding: 3px 12px;
             font-size: 9px;
             letter-spacing: 1px;
-            color: #888;
+            color: #999;
             font-weight: 300;
-        }
-
-        /* ---------- КОНТАКТНЫЙ БЛОК ---------- */
-        .contact-block {
-            background: var(--bg-light);
-            padding: 14px 20px;
             border-radius: 2px;
-            border-left: 3px solid var(--accent-blue);
-            flex-shrink: 0;
-            margin-top: 10px;
-        }
-        .contact-block .contact-row {
-            display: flex;
-            align-items: baseline;
-            gap: 10px;
-            margin: 2px 0;
-            flex-wrap: wrap;
-        }
-        .contact-block .contact-label {
-            font-size: 8px;
-            letter-spacing: 2px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            min-width: 60px;
-            font-weight: 500;
-        }
-        .contact-block .contact-value {
-            font-size: 12px;
-            color: var(--text-primary);
-            font-weight: 300;
-            word-break: break-word;
-        }
-        .contact-block .contact-value a {
-            color: var(--accent-blue);
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: 0.3s;
-            font-weight: 400;
-        }
-        .contact-block .contact-value a:hover {
-            border-bottom-color: var(--accent-blue);
-        }
-        .contact-block .contact-divider {
-            border-top: 1px solid #e8e4de;
-            margin: 4px 0;
         }
 
-        /* ---------- НИЖНИЕ ПОДПИСИ (ПОД ПОЛОСАМИ) ---------- */
+        /* ---------- НИЖНЯЯ ЧАСТЬ ---------- */
         .footer-tags {
             display: flex;
             justify-content: center;
-            gap: 24px;
+            gap: 20px;
             flex-wrap: wrap;
             flex-shrink: 0;
-            padding-top: 8px;
-            margin-top: 2px;
+            height: 15mm;
+            align-items: center;
+            padding: 0 18mm;
         }
         .footer-tags span {
-            font-size: 8px;
-            letter-spacing: 2px;
+            font-size: 9px;
+            letter-spacing: 2.5px;
             color: var(--text-muted);
             text-transform: uppercase;
             font-weight: 300;
@@ -386,13 +392,69 @@
             font-weight: 400;
         }
 
+        /* ---------- КОНТАКТНАЯ КАРТОЧКА ---------- */
+        .contact-card {
+            background: var(--bg-light);
+            padding: 14px 20px;
+            border-radius: 2px;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            margin-top: 0;
+        }
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: var(--accent-blue);
+        }
+        .contact-card .contact-row {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin: 2px 0;
+            flex-wrap: wrap;
+            padding-left: 10px;
+        }
+        .contact-card .contact-label {
+            font-size: 9px;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            min-width: 60px;
+            font-weight: 500;
+        }
+        .contact-card .contact-value {
+            font-size: 14px;
+            color: var(--text-primary);
+            font-weight: 300;
+            word-break: break-word;
+        }
+        .contact-card .contact-value a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: 0.3s;
+            font-weight: 400;
+        }
+        .contact-card .contact-value a:hover {
+            border-bottom-color: var(--accent-blue);
+        }
+        .contact-card .contact-divider {
+            border-top: 1px solid #e8e4de;
+            margin: 4px 0 4px 10px;
+        }
+
         /* ---------- ВОДЯНОЙ ЗНАК ---------- */
         .watermark {
             position: absolute;
             right: -15px;
             bottom: -30px;
             font-family: 'Playfair Display', serif;
-            font-size: 140px;
+            font-size: 160px;
             font-weight: 400;
             color: rgba(59, 89, 153, 0.03);
             letter-spacing: -8px;
@@ -456,7 +518,7 @@
                 box-shadow: none;
                 border-radius: 0;
                 margin: 0;
-                padding: 16mm 14mm;
+                padding: 0;
                 width: 210mm;
                 min-height: 297mm;
                 height: 297mm;
@@ -473,8 +535,10 @@
             .page:last-child { page-break-after: avoid; }
             .nav-controls { display: none !important; }
             .accent-stripe { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
-            .contact-block { background: #f8f7f5 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+            .contact-card { background: #f8f7f5 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+            .contact-card::before { background: var(--accent-blue) !important; }
             .watermark { opacity: 1 !important; }
+            .chess-photo { background: transparent !important; }
         }
 
         /* ---------- АДАПТИВ ---------- */
@@ -483,38 +547,62 @@
                 width: 100%;
                 height: auto;
                 min-height: auto;
-                padding: 16px 14px;
+                padding: 0;
                 border-radius: 0;
             }
-            h1 { font-size: 32px; letter-spacing: 3px; }
-            h2 { font-size: 20px; }
-            .header-row { flex-direction: column; align-items: flex-start; gap: 4px; height: auto; }
-            .header-phone { font-size: 13px; align-self: flex-end; }
-            .chess-row {
-                grid-template-columns: 1fr;
-                gap: 10px;
-                height: auto;
+            h1 { font-size: 34px; letter-spacing: 2px; }
+            h2 { font-size: 24px; }
+            .header-row { 
+                flex-direction: column; 
+                align-items: flex-start; 
+                gap: 2px; 
+                height: auto; 
+                padding: 8px 12px;
+                min-height: 15mm;
             }
-            .chess-row.reverse { direction: ltr; }
-            .chess-photo { min-height: 80px; height: auto; }
+            .header-phone { font-size: 11px; align-self: flex-end; }
+            .chess-grid { grid-template-columns: 1fr; gap: 12px; height: auto; }
+            .chess-item { grid-template-columns: 1fr; gap: 8px; height: auto; }
+            .chess-item.reverse .chess-text { order: 1; }
+            .chess-item.reverse .chess-photo { order: 2; }
+            .chess-photo { min-height: 60px; height: auto; }
             .watermark { font-size: 80px; }
             .accent-stripe { display: none; }
-            .logo-block .logo-box { height: 24px; }
-            .contact-block .contact-row { flex-direction: column; gap: 2px; }
-            .contact-block .contact-label { min-width: auto; }
-            .footer-tags { gap: 12px; flex-wrap: wrap; }
+            .logo-block .logo-box { height: 16px; }
+            .contact-card .contact-row { flex-direction: column; gap: 2px; }
+            .contact-card .contact-label { min-width: auto; }
+            .footer-tags { 
+                gap: 10px; 
+                flex-wrap: wrap; 
+                height: auto; 
+                padding: 8px 12px;
+                min-height: 15mm;
+            }
             .hero-section { height: auto; padding: 10px 0; }
+            .hero-section .hero-content .hero-text { font-size: 12px; }
+            .hero-section .hero-content .hero-list li { font-size: 11px; }
             .catalog-grid { height: auto; padding: 10px 0; }
-            .catalog-grid .catalog-header h2 { font-size: 18px; }
+            .catalog-grid.full { height: auto; }
+            .content-wrapper { padding: 0 12px; }
+            .catalog-grid .catalog-header h2 { font-size: 24px; }
         }
         @media screen and (max-width: 480px) {
-            h1 { font-size: 24px; }
-            .page { padding: 12px 10px; }
-            .logo-block .logo-box { height: 20px; }
-            .header-phone { font-size: 11px; }
-            .chess-photo { min-height: 60px; }
-            .footer-tags { gap: 8px; flex-direction: column; align-items: center; }
-            .catalog-grid .catalog-header h2 { font-size: 16px; }
+            h1 { font-size: 28px; }
+            .page { padding: 0; }
+            .logo-block .logo-box { height: 14px; }
+            .header-phone { font-size: 10px; }
+            .chess-photo { min-height: 50px; }
+            .footer-tags { gap: 6px; flex-direction: column; align-items: center; }
+            .header-row { padding: 6px 10px; }
+            .footer-tags { padding: 6px 10px; }
+            .content-wrapper { padding: 0 10px; }
+            .catalog-grid .catalog-header h2 { font-size: 20px; }
+            .hero-section .hero-content { max-width: 100%; }
+            .hero-section .hero-content .hero-text { font-size: 11px; }
+            .hero-section .hero-content .hero-list li { font-size: 10px; }
+            .chess-text h4 { font-size: 13px; }
+            .chess-text p { font-size: 11px; }
+            .chess-text ul li { font-size: 10px; }
         }
     </style>
 </head>
@@ -527,7 +615,7 @@
     <div class="header-row">
         <div class="logo-block">
             <div class="logo-box">
-                <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390?v=1601247390" alt="Princip Floor" onerror="this.parentElement.innerHTML='<span style=\'font-size:16px;color:#3b5999;font-weight:400;\'>PF</span>'">
+                <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390?v=1601247390" alt="Princip Floor" onerror="this.parentElement.innerHTML='<span style=\'font-size:12px;color:#999;font-weight:300;\'>PF</span>'">
             </div>
         </div>
         <div class="header-phone">
@@ -535,62 +623,65 @@
         </div>
     </div>
 
-    <div style="flex: 1; display: flex; flex-direction: column; position: relative;">
-        <div class="accent-stripe stripe-top"></div>
-        <div class="accent-stripe stripe-bottom"></div>
+    <div class="accent-stripe stripe-top"></div>
+    <div class="accent-stripe stripe-bottom"></div>
 
-        <div class="content-wrapper">
-            <!-- ПРИВЕТСТВИЕ (верхняя половина) -->
-            <div class="hero-section">
-                <div class="hero-content">
-                    <p class="text-small" style="color: var(--accent-blue); letter-spacing: 5px; margin-bottom: 4px;">Основан в 2017</p>
-                    <h1 style="font-size: 36px; letter-spacing: 3px;">
-                        <span class="light">PRINCIP</span><br>
-                        <span style="color: var(--accent-blue);">FLOOR</span>
-                    </h1>
-                    <p style="font-size: 12px; color: var(--text-secondary); font-weight: 300; letter-spacing: 2px; margin-top: 4px; max-width: 300px;">
-                        Архитектура напольных покрытий
-                    </p>
-                    <div class="divider-line" style="margin: 6px 0 8px;"></div>
-                    <p style="font-size: 10.5px; color: var(--text-muted); max-width: 260px; letter-spacing: 0.5px; line-height: 1.6; font-weight: 300;">
-                        Комплексные решения для интерьеров высшего уровня
-                    </p>
+    <div class="content-wrapper">
+        <div class="hero-section">
+            <div class="hero-content">
+                <p class="text-small" style="color: var(--accent-blue); letter-spacing: 5px; margin-bottom: 4px;">Основан в 2017</p>
+                <h1>
+                    <span class="light">PRINCIP</span><br>
+                    <span style="color: var(--accent-blue);">FLOOR</span>
+                </h1>
+                <p class="hero-text">
+                    <strong>Princip Floor</strong> — эксперт в области напольных покрытий, создающий среду, в которой комфортно жить, работать и заниматься спортом.
+                </p>
+                <p class="hero-text" style="margin-bottom: 4px;">
+                    С <strong>2017 года</strong> мы — надежный партнер для тысяч клиентов. Наша миссия — не просто поставить материал, а предложить комплексное решение, где каждый элемент подобран с учетом нагрузок, стилистики и бюджета проекта.
+                </p>
+                <ul class="hero-list">
+                    <li><strong>Компетенция.</strong> Глубоко понимаем специфику каждого типа покрытия. Знаем, как работает каждый материал в реальных условиях.</li>
+                    <li><strong>Широта выбора.</strong> Один поставщик — сотни брендов и тысячи коллекций. Экономим ваше время на поисках.</li>
+                    <li><strong>Личный подход.</strong> Не навязываем, а консультируем. Всегда на связи на всех этапах — от выбора до монтажа.</li>
+                    <li><strong>Надёжность.</strong> Работаем с ведущими производителями. Гарантируем качество и соблюдение сроков поставки.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="catalog-grid">
+            <div class="catalog-header">
+                <h3>Мы предлагаем</h3>
+                <h2>Более 10 000 коллекций</h2>
+                <p>от ведущих мировых производителей</p>
+            </div>
+
+            <!-- Блок 1: ТЕКСТ → ФОТО -->
+            <div class="chess-item">
+                <div class="chess-text">
+                    <h4>Спортивные покрытия</h4>
+                    <ul>
+                        <li>Резиновые и каучуковые покрытия</li>
+                        <li>Искусственная трава, беговые дорожки</li>
+                        <li>Спортивный паркет Gerflor, Karelia</li>
+                    </ul>
+                </div>
+                <div class="chess-photo" style="min-height: 70px;">
+                    <span class="label">Фото: Спортзал</span>
                 </div>
             </div>
 
-            <!-- КАТАЛОГ (нижняя половина) -->
-            <div class="catalog-grid">
-                <div class="catalog-header">
-                    <h3>Каталог</h3>
-                    <h2>Более 10 000 коллекций</h2>
-                    <p>от ведущих мировых производителей</p>
+            <!-- Блок 2: ФОТО → ТЕКСТ (reverse) -->
+            <div class="chess-item reverse">
+                <div class="chess-text">
+                    <h4>Медицинские покрытия</h4>
+                    <ul>
+                        <li>Gerflor — антибактериальные</li>
+                        <li>Tarkett — для ЛПУ и детских учреждений</li>
+                    </ul>
                 </div>
-
-                <div class="chess-row">
-                    <div class="chess-text">
-                        <h4>Спортивные покрытия</h4>
-                        <ul>
-                            <li>Резиновые и каучуковые покрытия</li>
-                            <li>Искусственная трава, беговые дорожки</li>
-                            <li>Спортивный паркет Gerflor, Karelia</li>
-                        </ul>
-                    </div>
-                    <div class="chess-photo">
-                        <span class="label">Фото: Спортзал</span>
-                    </div>
-                </div>
-
-                <div class="chess-row reverse">
-                    <div class="chess-text">
-                        <h4>Медицинские покрытия</h4>
-                        <ul>
-                            <li>Gerflor — гомогенные и гетерогенные</li>
-                            <li>Tarkett — для ЛПУ</li>
-                        </ul>
-                    </div>
-                    <div class="chess-photo">
-                        <span class="label">Фото: Медицинский центр</span>
-                    </div>
+                <div class="chess-photo" style="min-height: 70px;">
+                    <span class="label">Фото: Медицинский центр</span>
                 </div>
             </div>
         </div>
@@ -608,13 +699,13 @@
 </div>
 
 <!-- ============================================================ -->
-<!-- СТРАНИЦА 2 — КАТАЛОГ                                          -->
+<!-- СТРАНИЦА 2 — КАТАЛОГ (4 блока, шахматный порядок)            -->
 <!-- ============================================================ -->
 <div class="page" data-page="1">
     <div class="header-row">
         <div class="logo-block">
             <div class="logo-box">
-                <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390?v=1601247390" alt="Princip Floor" onerror="this.parentElement.innerHTML='<span style=\'font-size:16px;color:#3b5999;font-weight:400;\'>PF</span>'">
+                <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390?v=1601247390" alt="Princip Floor" onerror="this.parentElement.innerHTML='<span style=\'font-size:12px;color:#999;font-weight:300;\'>PF</span>'">
             </div>
         </div>
         <div class="header-phone">
@@ -622,13 +713,14 @@
         </div>
     </div>
 
-    <div style="flex: 1; display: flex; flex-direction: column; position: relative;">
-        <div class="accent-stripe stripe-top"></div>
-        <div class="accent-stripe stripe-bottom"></div>
+    <div class="accent-stripe stripe-top"></div>
+    <div class="accent-stripe stripe-bottom"></div>
 
-        <div class="content-wrapper">
-            <div class="catalog-grid" style="height: 90%; justify-content: center; padding-top: 0;">
-                <div class="chess-row">
+    <div class="content-wrapper">
+        <div class="catalog-grid full">
+            <div class="chess-grid">
+                <!-- Блок 1: ТЕКСТ → ФОТО (Офисные) -->
+                <div class="chess-item">
                     <div class="chess-text">
                         <h4>Офисные покрытия</h4>
                         <ul>
@@ -641,13 +733,14 @@
                     </div>
                 </div>
 
-                <div class="chess-row reverse">
+                <!-- Блок 2: ФОТО → ТЕКСТ (Кварцвинил) -->
+                <div class="chess-item reverse">
                     <div class="chess-text">
                         <h4>Кварцвинил и ламинат</h4>
                         <ul>
-                            <li>Fargo, Strong Step, Planker, Aqua Floor, Vinilam</li>
-                            <li>MyStep, Pergo, Moduleo, Куберпол, EVO Floor</li>
-                            <li>Laminext, My Floor, Bonkeel, Tarkett</li>
+                            <li>Fargo, Strong Step, Planker, Aqua Floor</li>
+                            <li>Vinilam, MyStep, Pergo, Moduleo, Куберпол</li>
+                            <li>EVO Floor, Laminext, My Floor, Bonkeel, Tarkett</li>
                         </ul>
                     </div>
                     <div class="chess-photo">
@@ -655,16 +748,32 @@
                     </div>
                 </div>
 
-                <div class="chess-row">
+                <!-- Блок 3: ТЕКСТ → ФОТО (Ковровые) -->
+                <div class="chess-item">
                     <div class="chess-text">
                         <h4>Ковровые покрытия и плитка</h4>
                         <ul>
-                            <li><strong>Рулонные:</strong> AW, Balsan, EDEL, Condor, Bonkeel</li>
-                            <li><strong>Плитка:</strong> AW, Balsan, IVC, Mohawk, Betap, Belgotex, Innovflor</li>
+                            <li><strong>Рулонные:</strong> AW, Balsan, EDEL, Condor, Bonkeel, Haima, EGE Carpets, Apoluza, Vertigo</li>
+                            <li><strong>Плитка:</strong> AW, Balsan, IVC, Mohawk, Betap, Belgotex, Innovflor, Vertigo, Bonkeel</li>
                         </ul>
                     </div>
                     <div class="chess-photo">
                         <span class="label">Фото: Ковровое покрытие</span>
+                    </div>
+                </div>
+
+                <!-- Блок 4: ФОТО → ТЕКСТ (Натуральные ковры) -->
+                <div class="chess-item reverse">
+                    <div class="chess-text">
+                        <h4>Натуральные ковры</h4>
+                        <ul>
+                            <li><strong>Jacaranda</strong> — TENCEL® и натуральная шерсть</li>
+                            <li><strong>Best Wool</strong> — 100% новозеландская шерсть</li>
+                            <li><strong>Delarage</strong> — ковры ручной работы из Индии</li>
+                        </ul>
+                    </div>
+                    <div class="chess-photo">
+                        <span class="label">Фото: Премиум интерьер</span>
                     </div>
                 </div>
             </div>
@@ -681,13 +790,13 @@
 </div>
 
 <!-- ============================================================ -->
-<!-- СТРАНИЦА 3 — КАТАЛОГ                                          -->
+<!-- СТРАНИЦА 3 — КАТАЛОГ (4 блока, шахматный порядок)            -->
 <!-- ============================================================ -->
 <div class="page" data-page="2">
     <div class="header-row">
         <div class="logo-block">
             <div class="logo-box">
-                <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390?v=1601247390" alt="Princip Floor" onerror="this.parentElement.innerHTML='<span style=\'font-size:16px;color:#3b5999;font-weight:400;\'>PF</span>'">
+                <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390?v=1601247390" alt="Princip Floor" onerror="this.parentElement.innerHTML='<span style=\'font-size:12px;color:#999;font-weight:300;\'>PF</span>'">
             </div>
         </div>
         <div class="header-phone">
@@ -695,27 +804,14 @@
         </div>
     </div>
 
-    <div style="flex: 1; display: flex; flex-direction: column; position: relative;">
-        <div class="accent-stripe stripe-top"></div>
-        <div class="accent-stripe stripe-bottom"></div>
+    <div class="accent-stripe stripe-top"></div>
+    <div class="accent-stripe stripe-bottom"></div>
 
-        <div class="content-wrapper">
-            <div class="catalog-grid" style="height: 90%; justify-content: center; padding-top: 0;">
-                <div class="chess-row">
-                    <div class="chess-text">
-                        <h4>Натуральные ковры</h4>
-                        <ul>
-                            <li><strong>Jacaranda</strong> — TENCEL® и натуральная шерсть</li>
-                            <li><strong>Best Wool</strong> — 100% новозеландская шерсть</li>
-                            <li><strong>Delarage</strong> — ковры ручной работы из Индии</li>
-                        </ul>
-                    </div>
-                    <div class="chess-photo">
-                        <span class="label">Фото: Премиум интерьер</span>
-                    </div>
-                </div>
-
-                <div class="chess-row reverse">
+    <div class="content-wrapper">
+        <div class="catalog-grid full">
+            <div class="chess-grid">
+                <!-- Блок 1: ТЕКСТ → ФОТО (Паркет) -->
+                <div class="chess-item">
                     <div class="chess-text">
                         <h4>Паркет и инженерная доска</h4>
                         <ul>
@@ -730,17 +826,46 @@
                     </div>
                 </div>
 
-                <div class="chess-row">
+                <!-- Блок 2: ФОТО → ТЕКСТ (Терраса) -->
+                <div class="chess-item reverse">
                     <div class="chess-text">
                         <h4>Террасная доска и фасады</h4>
                         <ul>
-                            <li>Кумару, ИПЕ, Тик, Мербау, Термо Ясень</li>
+                            <li>Кумару, ИПЕ, Тик, Мербау, Термо Ясень, Лиственница</li>
                             <li>Террасы, открытые площадки, фасады</li>
                             <li>Садовый паркет из экзотических пород</li>
                         </ul>
                     </div>
                     <div class="chess-photo">
                         <span class="label">Фото: Терраса</span>
+                    </div>
+                </div>
+
+                <!-- Блок 3: ТЕКСТ → ФОТО (Пробка) -->
+                <div class="chess-item">
+                    <div class="chess-text">
+                        <h4>Пробковые покрытия</h4>
+                        <ul>
+                            <li>Izora, CorkArt, Wicanders</li>
+                            <li>Экологичные и теплые материалы</li>
+                        </ul>
+                    </div>
+                    <div class="chess-photo">
+                        <span class="label">Фото: Пробка</span>
+                    </div>
+                </div>
+
+                <!-- Блок 4: ФОТО → ТЕКСТ (Клеи) -->
+                <div class="chess-item reverse">
+                    <div class="chess-text">
+                        <h4>Клеи и химия</h4>
+                        <ul>
+                            <li>Lechner, Home Expert, Loba, Probond, NPT, Bona</li>
+                            <li>Для профессионального монтажа</li>
+                        </ul>
+                    </div>
+                    <div class="chess-photo">
+                        <span class="label">Фото: Материалы</span>
                     </div>
                 </div>
             </div>
@@ -757,13 +882,13 @@
 </div>
 
 <!-- ============================================================ -->
-<!-- СТРАНИЦА 4 — ЗАВЕРШЕНИЕ + УСЛОВИЯ + КОНТАКТЫ                 -->
+<!-- СТРАНИЦА 4 — ЗАВЕРШЕНИЕ (Ротанг, Декор, Условия, Контакты)   -->
 <!-- ============================================================ -->
 <div class="page" data-page="3">
     <div class="header-row">
         <div class="logo-block">
             <div class="logo-box">
-                <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390?v=1601247390" alt="Princip Floor" onerror="this.parentElement.innerHTML='<span style=\'font-size:16px;color:#3b5999;font-weight:400;\'>PF</span>'">
+                <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390?v=1601247390" alt="Princip Floor" onerror="this.parentElement.innerHTML='<span style=\'font-size:12px;color:#999;font-weight:300;\'>PF</span>'">
             </div>
         </div>
         <div class="header-phone">
@@ -771,91 +896,87 @@
         </div>
     </div>
 
-    <div style="flex: 1; display: flex; flex-direction: column; position: relative;">
-        <div class="accent-stripe stripe-top"></div>
-        <div class="accent-stripe stripe-bottom"></div>
+    <div class="accent-stripe stripe-top"></div>
+    <div class="accent-stripe stripe-bottom"></div>
 
-        <div class="content-wrapper" style="justify-content: space-between;">
-            <div>
-                <div class="catalog-grid" style="height: auto; padding-top: 0;">
-                    <div class="chess-row">
-                        <div class="chess-text">
-                            <h4>Мебель из ротанга</h4>
-                            <p>От производителя «РИТОРИКА».</p>
-                            <ul>
-                                <li>Стальной каркас с полимерно-порошковым покрытием</li>
-                                <li>Мягкие подушки из водоотталкивающих тканей</li>
-                                <li>Кресла-коконы, подвесные кресла, обеденные группы</li>
-                            </ul>
-                        </div>
-                        <div class="chess-photo">
-                            <span class="label">Фото: Ротанг</span>
-                        </div>
-                    </div>
-
-                    <div class="chess-row reverse">
-                        <div class="chess-text">
-                            <h4>Декор и аксессуары</h4>
-                            <ul>
-                                <li><strong>Металл:</strong> Progress Profiles, Русский Профиль</li>
-                                <li><strong>Лепной декор:</strong> ORAC DECOR, Decomaster, HiWood, NMC</li>
-                                <li><strong>Дерево:</strong> Tarsi, Karelia</li>
-                            </ul>
-                        </div>
-                        <div class="chess-photo">
-                            <span class="label">Фото: Декор</span>
-                        </div>
-                    </div>
+    <div class="content-wrapper">
+        <div class="catalog-grid" style="height: 58%; margin-top: 20mm; margin-bottom: 20mm; gap: 16px;">
+            <!-- Блок 1: ТЕКСТ → ФОТО (Ротанг) -->
+            <div class="chess-item" style="height: auto; flex: 1;">
+                <div class="chess-text">
+                    <h4>Мебель из ротанга</h4>
+                    <p>От производителя «РИТОРИКА».</p>
+                    <ul>
+                        <li>Стальной каркас с полимерно-порошковым покрытием</li>
+                        <li>Мягкие подушки из водоотталкивающих тканей</li>
+                        <li>Кресла-коконы, подвесные кресла, обеденные группы</li>
+                    </ul>
+                </div>
+                <div class="chess-photo">
+                    <span class="label">Фото: Ротанг</span>
                 </div>
             </div>
 
-            <!-- УСЛОВИЯ -->
-            <div style="margin-top: 8px; border-top: 1px solid var(--border-light); padding-top: 8px;">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                    <div>
-                        <h4 style="font-size: 10px; letter-spacing: 2px; margin-bottom: 4px;">УСЛОВИЯ СОТРУДНИЧЕСТВА</h4>
-                        <ul style="list-style: none; padding: 0; margin: 0;">
-                            <li style="font-size: 10px; font-weight: 300; line-height: 1.5; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative;">— Индивидуальный расчёт</li>
-                            <li style="font-size: 10px; font-weight: 300; line-height: 1.5; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative;">— Консультационная поддержка</li>
-                            <li style="font-size: 10px; font-weight: 300; line-height: 1.5; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative;">— Сертифицированная продукция</li>
-                            <li style="font-size: 10px; font-weight: 300; line-height: 1.5; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative;">— Комплексные поставки</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 style="font-size: 10px; letter-spacing: 2px; margin-bottom: 4px;">ЭТАПЫ РАБОТЫ</h4>
-                        <ul style="list-style: none; padding: 0; margin: 0;">
-                            <li style="font-size: 10px; font-weight: 300; line-height: 1.5; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative;"><strong style="font-weight: 500;">1.</strong> Заявка</li>
-                            <li style="font-size: 10px; font-weight: 300; line-height: 1.5; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative;"><strong style="font-weight: 500;">2.</strong> Консультация</li>
-                            <li style="font-size: 10px; font-weight: 300; line-height: 1.5; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative;"><strong style="font-weight: 500;">3.</strong> Расчёт и КП</li>
-                            <li style="font-size: 10px; font-weight: 300; line-height: 1.5; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative;"><strong style="font-weight: 500;">4.</strong> Поставка и сервис</li>
-                        </ul>
-                    </div>
+            <!-- Блок 2: ФОТО → ТЕКСТ (Декор) -->
+            <div class="chess-item reverse" style="height: auto; flex: 1;">
+                <div class="chess-text">
+                    <h4>Декор, профили и плинтусы</h4>
+                    <ul>
+                        <li><strong>Металл:</strong> Progress Profiles, Русский Профиль, Элитпроф</li>
+                        <li><strong>Лепной декор:</strong> ORAC DECOR, Decomaster, HiWood, NMC, Paolo Arte, COSCA, Европласт</li>
+                        <li><strong>Дерево:</strong> Tarsi, Karelia</li>
+                    </ul>
+                </div>
+                <div class="chess-photo">
+                    <span class="label">Фото: Декор</span>
                 </div>
             </div>
+        </div>
 
-            <!-- КОНТАКТЫ -->
-            <div class="contact-block" style="margin-top: 10px; padding: 16px 24px;">
-                <div class="contact-row">
-                    <span class="contact-label">Сайт</span>
-                    <span class="contact-value"><a href="https://principfloor.ru" target="_blank">principfloor.ru</a></span>
+        <div style="margin-bottom: 20mm;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                <div style="text-align: center;">
+                    <h4 style="font-size: 10px; letter-spacing: 2px; margin-bottom: 4px;">УСЛОВИЯ СОТРУДНИЧЕСТВА</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0; display: inline-block; text-align: left;">
+                        <li style="font-size: 10.5px; font-weight: 300; line-height: 1.5; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative;">— Индивидуальный расчёт</li>
+                        <li style="font-size: 10.5px; font-weight: 300; line-height: 1.5; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative;">— Консультационная поддержка</li>
+                        <li style="font-size: 10.5px; font-weight: 300; line-height: 1.5; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative;">— Сертифицированная продукция</li>
+                        <li style="font-size: 10.5px; font-weight: 300; line-height: 1.5; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative;">— Комплексные поставки</li>
+                    </ul>
                 </div>
-                <div class="contact-row">
-                    <span class="contact-label">Instagram</span>
-                    <span class="contact-value"><a href="https://instagram.com/principfloor" target="_blank">@principfloor</a></span>
+                <div style="text-align: center;">
+                    <h4 style="font-size: 10px; letter-spacing: 2px; margin-bottom: 4px;">ЭТАПЫ РАБОТЫ</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0; display: inline-block; text-align: left;">
+                        <li style="font-size: 10.5px; font-weight: 300; line-height: 1.5; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative;"><strong style="font-weight: 500;">1.</strong> Заявка</li>
+                        <li style="font-size: 10.5px; font-weight: 300; line-height: 1.5; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative;"><strong style="font-weight: 500;">2.</strong> Консультация</li>
+                        <li style="font-size: 10.5px; font-weight: 300; line-height: 1.5; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative;"><strong style="font-weight: 500;">3.</strong> Расчёт и КП</li>
+                        <li style="font-size: 10.5px; font-weight: 300; line-height: 1.5; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative;"><strong style="font-weight: 500;">4.</strong> Поставка и сервис</li>
+                    </ul>
                 </div>
-                <div class="contact-row">
-                    <span class="contact-label">Telegram</span>
-                    <span class="contact-value"><a href="https://t.me/principfloor" target="_blank">@principfloor</a></span>
-                </div>
-                <div class="contact-divider"></div>
-                <div class="contact-row">
-                    <span class="contact-label">Адрес</span>
-                    <span class="contact-value">Екатеринбург, ул. Цвиллинга, 1<br>ИЦ ASTROOM (галерея А, эт. 5)</span>
-                </div>
-                <div class="contact-row">
-                    <span class="contact-label">Телефон</span>
-                    <span class="contact-value"><a href="tel:+79221882772">+7 922 188-27-72</a> · <a href="tel:+73433282772">+7 343 328-27-72</a></span>
-                </div>
+            </div>
+        </div>
+
+        <div class="contact-card" style="margin-bottom: 20mm;">
+            <div class="contact-row">
+                <span class="contact-label">Сайт</span>
+                <span class="contact-value"><a href="https://principfloor.ru" target="_blank">principfloor.ru</a></span>
+            </div>
+            <div class="contact-row">
+                <span class="contact-label">Instagram</span>
+                <span class="contact-value"><a href="https://instagram.com/principfloor" target="_blank">@principfloor</a></span>
+            </div>
+            <div class="contact-row">
+                <span class="contact-label">Telegram</span>
+                <span class="contact-value"><a href="https://t.me/principfloor" target="_blank">@principfloor</a></span>
+            </div>
+            <div class="contact-divider"></div>
+            <div class="contact-row">
+                <span class="contact-label">Адрес</span>
+                <span class="contact-value">Екатеринбург, ул. Цвиллинга, 1<br>ИЦ ASTROOM (галерея А, эт. 5)</span>
+            </div>
+            <div class="contact-row">
+                <span class="contact-label">Телефон</span>
+                <span class="contact-value"><a href="tel:+79221882772">+7 922 188-27-72</a> · <a href="tel:+73433282772">+7 343 328-27-72</a></span>
             </div>
         </div>
     </div>

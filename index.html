@@ -192,13 +192,12 @@
             z-index: 2;
         }
 
-        /* ---------- ВЕРХНЯЯ ПОЛОВИНА: ПРИВЕТСТВИЕ (только на стр.1) ---------- */
+        /* ---------- ПРИВЕТСТВИЕ (только на стр.1) ---------- */
         .hero-section {
-            flex: 1;
+            height: 48%;
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            padding: 10px 0 6px 0;
         }
         .hero-section .hero-content {
             border-left: 3px solid var(--accent-blue);
@@ -206,13 +205,14 @@
             max-width: 320px;
         }
 
-        /* ---------- КАТАЛОГ (единая система для всех страниц) ---------- */
+        /* ---------- КАТАЛОГ (единая система) ---------- */
         .catalog-grid {
-            flex: 1;
+            height: 48%;
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            padding-top: 6px;
+            justify-content: center;
+            gap: 6px;
+            padding: 4px 0;
         }
         .catalog-grid .catalog-header {
             margin-bottom: 2px;
@@ -239,8 +239,8 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
-            flex: 1;
             align-items: center;
+            height: 33%;
         }
         .chess-row.reverse {
             direction: rtl;
@@ -290,7 +290,8 @@
         }
 
         .chess-photo {
-            min-height: 85px;
+            height: 100%;
+            min-height: 75px;
             background: #f4f2ef;
             position: relative;
             overflow: hidden;
@@ -492,16 +493,18 @@
             .chess-row {
                 grid-template-columns: 1fr;
                 gap: 10px;
+                height: auto;
             }
             .chess-row.reverse { direction: ltr; }
-            .chess-photo { min-height: 80px; }
+            .chess-photo { min-height: 80px; height: auto; }
             .watermark { font-size: 80px; }
             .accent-stripe { display: none; }
             .logo-block .logo-box { height: 24px; }
             .contact-block .contact-row { flex-direction: column; gap: 2px; }
             .contact-block .contact-label { min-width: auto; }
             .footer-tags { gap: 12px; flex-wrap: wrap; }
-            .hero-section { padding: 4px 0; }
+            .hero-section { height: auto; padding: 10px 0; }
+            .catalog-grid { height: auto; padding: 10px 0; }
             .catalog-grid .catalog-header h2 { font-size: 18px; }
         }
         @media screen and (max-width: 480px) {
@@ -518,7 +521,7 @@
 <body>
 
 <!-- ============================================================ -->
-<!-- СТРАНИЦА 1 — ОБЛОЖКА (приветствие + каталог)                 -->
+<!-- СТРАНИЦА 1 — ОБЛОЖКА                                          -->
 <!-- ============================================================ -->
 <div class="page" data-page="0">
     <div class="header-row">
@@ -537,7 +540,7 @@
         <div class="accent-stripe stripe-bottom"></div>
 
         <div class="content-wrapper">
-            <!-- ВЕРХНЯЯ ПОЛОВИНА: ПРИВЕТСТВИЕ -->
+            <!-- ПРИВЕТСТВИЕ (верхняя половина) -->
             <div class="hero-section">
                 <div class="hero-content">
                     <p class="text-small" style="color: var(--accent-blue); letter-spacing: 5px; margin-bottom: 4px;">Основан в 2017</p>
@@ -555,7 +558,7 @@
                 </div>
             </div>
 
-            <!-- НИЖНЯЯ ПОЛОВИНА: КАТАЛОГ С ЗАГОЛОВКОМ -->
+            <!-- КАТАЛОГ (нижняя половина) -->
             <div class="catalog-grid">
                 <div class="catalog-header">
                     <h3>Каталог</h3>
@@ -563,7 +566,7 @@
                     <p>от ведущих мировых производителей</p>
                 </div>
 
-                <div class="chess-row" style="flex: 1;">
+                <div class="chess-row">
                     <div class="chess-text">
                         <h4>Спортивные покрытия</h4>
                         <ul>
@@ -572,12 +575,12 @@
                             <li>Спортивный паркет Gerflor, Karelia</li>
                         </ul>
                     </div>
-                    <div class="chess-photo" style="min-height: 85px;">
+                    <div class="chess-photo">
                         <span class="label">Фото: Спортзал</span>
                     </div>
                 </div>
 
-                <div class="chess-row reverse" style="flex: 1;">
+                <div class="chess-row reverse">
                     <div class="chess-text">
                         <h4>Медицинские покрытия</h4>
                         <ul>
@@ -585,7 +588,7 @@
                             <li>Tarkett — для ЛПУ</li>
                         </ul>
                     </div>
-                    <div class="chess-photo" style="min-height: 85px;">
+                    <div class="chess-photo">
                         <span class="label">Фото: Медицинский центр</span>
                     </div>
                 </div>
@@ -624,8 +627,8 @@
         <div class="accent-stripe stripe-bottom"></div>
 
         <div class="content-wrapper">
-            <div class="catalog-grid" style="padding-top: 0;">
-                <div class="chess-row" style="flex: 1;">
+            <div class="catalog-grid" style="height: 90%; justify-content: center; padding-top: 0;">
+                <div class="chess-row">
                     <div class="chess-text">
                         <h4>Офисные покрытия</h4>
                         <ul>
@@ -638,7 +641,7 @@
                     </div>
                 </div>
 
-                <div class="chess-row reverse" style="flex: 1;">
+                <div class="chess-row reverse">
                     <div class="chess-text">
                         <h4>Кварцвинил и ламинат</h4>
                         <ul>
@@ -652,7 +655,7 @@
                     </div>
                 </div>
 
-                <div class="chess-row" style="flex: 1;">
+                <div class="chess-row">
                     <div class="chess-text">
                         <h4>Ковровые покрытия и плитка</h4>
                         <ul>
@@ -697,8 +700,8 @@
         <div class="accent-stripe stripe-bottom"></div>
 
         <div class="content-wrapper">
-            <div class="catalog-grid" style="padding-top: 0;">
-                <div class="chess-row" style="flex: 1;">
+            <div class="catalog-grid" style="height: 90%; justify-content: center; padding-top: 0;">
+                <div class="chess-row">
                     <div class="chess-text">
                         <h4>Натуральные ковры</h4>
                         <ul>
@@ -712,7 +715,7 @@
                     </div>
                 </div>
 
-                <div class="chess-row reverse" style="flex: 1;">
+                <div class="chess-row reverse">
                     <div class="chess-text">
                         <h4>Паркет и инженерная доска</h4>
                         <ul>
@@ -727,7 +730,7 @@
                     </div>
                 </div>
 
-                <div class="chess-row" style="flex: 1;">
+                <div class="chess-row">
                     <div class="chess-text">
                         <h4>Террасная доска и фасады</h4>
                         <ul>
@@ -774,8 +777,8 @@
 
         <div class="content-wrapper" style="justify-content: space-between;">
             <div>
-                <div class="catalog-grid" style="padding-top: 0;">
-                    <div class="chess-row" style="flex: 1;">
+                <div class="catalog-grid" style="height: auto; padding-top: 0;">
+                    <div class="chess-row">
                         <div class="chess-text">
                             <h4>Мебель из ротанга</h4>
                             <p>От производителя «РИТОРИКА».</p>
@@ -790,7 +793,7 @@
                         </div>
                     </div>
 
-                    <div class="chess-row reverse" style="flex: 1;">
+                    <div class="chess-row reverse">
                         <div class="chess-text">
                             <h4>Декор и аксессуары</h4>
                             <ul>

@@ -134,16 +134,15 @@
             font-weight: 400;
         }
 
-        /* ---------- ШАПКА (логотип + телефон над линией) ---------- */
+        /* ---------- ШАПКА НАД ЛИНИЕЙ ---------- */
         .header-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 4px;
-            flex-shrink: 0;
             position: relative;
             z-index: 2;
             padding: 0 0 2px 0;
+            height: 32px;
         }
         .logo-block {
             display: flex;
@@ -151,7 +150,7 @@
             gap: 10px;
         }
         .logo-block .logo-box {
-            height: 32px;
+            height: 28px;
             width: auto;
             flex-shrink: 0;
             overflow: hidden;
@@ -275,7 +274,7 @@
             font-weight: 300;
         }
 
-        /* ---------- КОНТАКТНЫЙ БЛОК (последняя страница) ---------- */
+        /* ---------- КОНТАКТНЫЙ БЛОК ---------- */
         .contact-block {
             background: var(--bg-light);
             padding: 14px 20px;
@@ -320,7 +319,7 @@
             margin: 4px 0;
         }
 
-        /* ---------- НИЖНИЕ ПОДПИСИ (под синей линией) ---------- */
+        /* ---------- НИЖНИЕ ПОДПИСИ (ПОД ЛИНИЕЙ) ---------- */
         .footer-tags {
             display: flex;
             justify-content: center;
@@ -444,7 +443,7 @@
             }
             h1 { font-size: 32px; letter-spacing: 3px; }
             h2 { font-size: 20px; }
-            .header-row { flex-direction: column; align-items: flex-start; gap: 4px; }
+            .header-row { flex-direction: column; align-items: flex-start; gap: 4px; height: auto; }
             .header-phone { font-size: 13px; align-self: flex-end; }
             .chess-row {
                 grid-template-columns: 1fr;
@@ -455,7 +454,7 @@
             .chess-photo { min-height: 80px; }
             .watermark { font-size: 80px; }
             .accent-stripe { display: none; }
-            .logo-block .logo-box { height: 28px; }
+            .logo-block .logo-box { height: 24px; }
             .contact-block .contact-row { flex-direction: column; gap: 2px; }
             .contact-block .contact-label { min-width: auto; }
             .footer-tags { gap: 12px; flex-wrap: wrap; }
@@ -463,7 +462,7 @@
         @media screen and (max-width: 480px) {
             h1 { font-size: 24px; }
             .page { padding: 12px 10px; }
-            .logo-block .logo-box { height: 24px; }
+            .logo-block .logo-box { height: 20px; }
             .header-phone { font-size: 11px; }
             .chess-photo { min-height: 60px; }
             .footer-tags { gap: 8px; flex-direction: column; align-items: center; }
@@ -481,11 +480,11 @@
 
     <div style="display: flex; flex-direction: column; min-height: 100%; position: relative; z-index: 2; flex: 1;">
 
-        <!-- ШАПКА (над верхней линией) -->
+        <!-- ШАПКА НАД ВЕРХНЕЙ ЛИНИЕЙ -->
         <div class="header-row">
             <div class="logo-block">
                 <div class="logo-box">
-                    <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390?v=1601247390" alt="Princip Floor" onerror="this.parentElement.innerHTML='<span style=\'font-size:18px;color:#3b5999;font-weight:400;\'>PF</span>'">
+                    <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390?v=1601247390" alt="Princip Floor" onerror="this.parentElement.innerHTML='<span style=\'font-size:16px;color:#3b5999;font-weight:400;\'>PF</span>'">
                 </div>
             </div>
             <div class="header-phone">
@@ -493,57 +492,60 @@
             </div>
         </div>
 
-        <!-- ЗАГОЛОВОК -->
-        <div style="margin-bottom: 8px;">
-            <div style="border-left: 3px solid var(--accent-blue); padding-left: 18px;">
-                <p class="text-small" style="color: var(--accent-blue); letter-spacing: 5px; margin-bottom: 4px;">Основан в 2017</p>
-                <h1 style="font-size: 38px; letter-spacing: 4px;">
-                    <span class="light">PRINCIP</span><br>
-                    <span style="color: var(--accent-blue);">FLOOR</span>
-                </h1>
-                <p style="font-size: 13px; color: var(--text-secondary); font-weight: 300; letter-spacing: 3px; margin-top: 6px; max-width: 320px;">
-                    Архитектура напольных покрытий
-                </p>
-                <div class="divider-line" style="margin: 8px 0 8px;"></div>
-                <p style="font-size: 11px; color: var(--text-muted); max-width: 280px; letter-spacing: 0.5px; line-height: 1.6; font-weight: 300;">
-                    Комплексные решения для интерьеров высшего уровня
-                </p>
+        <!-- ОСНОВНОЙ КОНТЕНТ (МЕЖДУ ЛИНИЯМИ) -->
+        <div style="flex: 1; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 4px;">
+            <!-- Заголовок -->
+            <div style="margin-bottom: 8px;">
+                <div style="border-left: 3px solid var(--accent-blue); padding-left: 18px;">
+                    <p class="text-small" style="color: var(--accent-blue); letter-spacing: 5px; margin-bottom: 4px;">Основан в 2017</p>
+                    <h1 style="font-size: 38px; letter-spacing: 4px;">
+                        <span class="light">PRINCIP</span><br>
+                        <span style="color: var(--accent-blue);">FLOOR</span>
+                    </h1>
+                    <p style="font-size: 13px; color: var(--text-secondary); font-weight: 300; letter-spacing: 3px; margin-top: 6px; max-width: 320px;">
+                        Архитектура напольных покрытий
+                    </p>
+                    <div class="divider-line" style="margin: 8px 0 8px;"></div>
+                    <p style="font-size: 11px; color: var(--text-muted); max-width: 280px; letter-spacing: 0.5px; line-height: 1.6; font-weight: 300;">
+                        Комплексные решения для интерьеров высшего уровня
+                    </p>
+                </div>
+            </div>
+
+            <!-- Блоки каталога -->
+            <div style="border-top: 1px solid var(--border-light); padding-top: 10px; margin-top: 4px; flex: 1;">
+                <div class="chess-row" style="margin-bottom: 8px; flex: 1;">
+                    <div class="chess-text">
+                        <h4>Спортивные покрытия</h4>
+                        <p>Профессиональные решения для объектов любого уровня.</p>
+                        <ul>
+                            <li>Резиновые и каучуковые покрытия</li>
+                            <li>Искусственная трава, беговые дорожки</li>
+                            <li>Спортивный паркет Gerflor, Karelia</li>
+                        </ul>
+                    </div>
+                    <div class="chess-photo" style="min-height: 90px;">
+                        <span class="label">Фото: Спортзал</span>
+                    </div>
+                </div>
+
+                <div class="chess-row reverse" style="margin-bottom: 0; flex: 1;">
+                    <div class="chess-text">
+                        <h4>Медицинские покрытия</h4>
+                        <p>Антибактериальные материалы для ЛПУ и детских учреждений.</p>
+                        <ul>
+                            <li>Gerflor — гомогенные и гетерогенные</li>
+                            <li>Tarkett — для ЛПУ</li>
+                        </ul>
+                    </div>
+                    <div class="chess-photo" style="min-height: 90px;">
+                        <span class="label">Фото: Медицинский центр</span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- ПЕРВЫЕ БЛОКИ КАТАЛОГА -->
-        <div style="border-top: 1px solid var(--border-light); padding-top: 10px; margin-top: 4px; flex: 1; display: flex; flex-direction: column; justify-content: flex-start;">
-            <div class="chess-row" style="margin-bottom: 8px; flex: 1;">
-                <div class="chess-text">
-                    <h4>Спортивные покрытия</h4>
-                    <p>Профессиональные решения для объектов любого уровня.</p>
-                    <ul>
-                        <li>Резиновые и каучуковые покрытия</li>
-                        <li>Искусственная трава, беговые дорожки</li>
-                        <li>Спортивный паркет Gerflor, Karelia</li>
-                    </ul>
-                </div>
-                <div class="chess-photo" style="min-height: 90px;">
-                    <span class="label">Фото: Спортзал</span>
-                </div>
-            </div>
-
-            <div class="chess-row reverse" style="margin-bottom: 0; flex: 1;">
-                <div class="chess-text">
-                    <h4>Медицинские покрытия</h4>
-                    <p>Антибактериальные материалы для ЛПУ и детских учреждений.</p>
-                    <ul>
-                        <li>Gerflor — гомогенные и гетерогенные</li>
-                        <li>Tarkett — для ЛПУ</li>
-                    </ul>
-                </div>
-                <div class="chess-photo" style="min-height: 90px;">
-                    <span class="label">Фото: Медицинский центр</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- НИЖНИЕ ПОДПИСИ (под нижней линией) -->
+        <!-- НИЖНИЕ ПОДПИСИ ПОД НИЖНЕЙ ЛИНИЕЙ -->
         <div class="footer-tags">
             <span>Комплексные решения</span>
             <span class="highlight">•</span>
@@ -556,7 +558,7 @@
 </div>
 
 <!-- ============================================================ -->
-<!-- СТРАНИЦА 2 — КАТАЛОГ (продолжение)                            -->
+<!-- СТРАНИЦА 2 — КАТАЛОГ                                          -->
 <!-- ============================================================ -->
 <div class="page" data-page="1">
     <div class="accent-stripe stripe-top"></div>
@@ -567,7 +569,7 @@
         <div class="header-row">
             <div class="logo-block">
                 <div class="logo-box">
-                    <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390?v=1601247390" alt="Princip Floor" onerror="this.parentElement.innerHTML='<span style=\'font-size:18px;color:#3b5999;font-weight:400;\'>PF</span>'">
+                    <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390?v=1601247390" alt="Princip Floor" onerror="this.parentElement.innerHTML='<span style=\'font-size:16px;color:#3b5999;font-weight:400;\'>PF</span>'">
                 </div>
             </div>
             <div class="header-phone">
@@ -575,46 +577,48 @@
             </div>
         </div>
 
-        <div class="chess-row">
-            <div class="chess-text">
-                <h4>Офисные покрытия</h4>
-                <p>Надёжные и ремонтопригодные решения для бизнес-центров.</p>
-                <ul>
-                    <li>Gerflor, Unilin, Pergo, Moduleo</li>
-                </ul>
-                <p style="margin-top: 4px;">Для общественных пространств с высокой проходимостью.</p>
+        <div style="flex: 1; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 4px;">
+            <div class="chess-row">
+                <div class="chess-text">
+                    <h4>Офисные покрытия</h4>
+                    <p>Надёжные и ремонтопригодные решения для бизнес-центров.</p>
+                    <ul>
+                        <li>Gerflor, Unilin, Pergo, Moduleo</li>
+                    </ul>
+                    <p style="margin-top: 4px;">Для общественных пространств с высокой проходимостью.</p>
+                </div>
+                <div class="chess-photo">
+                    <span class="label">Фото: Офисное пространство</span>
+                </div>
             </div>
-            <div class="chess-photo">
-                <span class="label">Фото: Офисное пространство</span>
-            </div>
-        </div>
 
-        <div class="chess-row reverse">
-            <div class="chess-text">
-                <h4>Кварцвинил и ламинат</h4>
-                <p>Влагостойкие и ударопрочные материалы для дома и офиса.</p>
-                <ul>
-                    <li>Fargo, Strong Step, Planker, Aqua Floor, Vinilam</li>
-                    <li>MyStep, Pergo, Moduleo, Куберпол, EVO Floor</li>
-                    <li>Laminext, My Floor, Bonkeel, Tarkett</li>
-                </ul>
+            <div class="chess-row reverse">
+                <div class="chess-text">
+                    <h4>Кварцвинил и ламинат</h4>
+                    <p>Влагостойкие и ударопрочные материалы для дома и офиса.</p>
+                    <ul>
+                        <li>Fargo, Strong Step, Planker, Aqua Floor, Vinilam</li>
+                        <li>MyStep, Pergo, Moduleo, Куберпол, EVO Floor</li>
+                        <li>Laminext, My Floor, Bonkeel, Tarkett</li>
+                    </ul>
+                </div>
+                <div class="chess-photo">
+                    <span class="label">Фото: Интерьер с кварцвинилом</span>
+                </div>
             </div>
-            <div class="chess-photo">
-                <span class="label">Фото: Интерьер с кварцвинилом</span>
-            </div>
-        </div>
 
-        <div class="chess-row">
-            <div class="chess-text">
-                <h4>Ковровые покрытия и плитка</h4>
-                <p>Уют и акустический комфорт для любых пространств.</p>
-                <ul>
-                    <li><strong>Рулонные:</strong> AW, Balsan, EDEL, Condor, Bonkeel</li>
-                    <li><strong>Плитка:</strong> AW, Balsan, IVC, Mohawk, Betap, Belgotex, Innovflor</li>
-                </ul>
-            </div>
-            <div class="chess-photo">
-                <span class="label">Фото: Ковровое покрытие</span>
+            <div class="chess-row">
+                <div class="chess-text">
+                    <h4>Ковровые покрытия и плитка</h4>
+                    <p>Уют и акустический комфорт для любых пространств.</p>
+                    <ul>
+                        <li><strong>Рулонные:</strong> AW, Balsan, EDEL, Condor, Bonkeel</li>
+                        <li><strong>Плитка:</strong> AW, Balsan, IVC, Mohawk, Betap, Belgotex, Innovflor</li>
+                    </ul>
+                </div>
+                <div class="chess-photo">
+                    <span class="label">Фото: Ковровое покрытие</span>
+                </div>
             </div>
         </div>
 
@@ -639,7 +643,7 @@
         <div class="header-row">
             <div class="logo-block">
                 <div class="logo-box">
-                    <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390?v=1601247390" alt="Princip Floor" onerror="this.parentElement.innerHTML='<span style=\'font-size:18px;color:#3b5999;font-weight:400;\'>PF</span>'">
+                    <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390?v=1601247390" alt="Princip Floor" onerror="this.parentElement.innerHTML='<span style=\'font-size:16px;color:#3b5999;font-weight:400;\'>PF</span>'">
                 </div>
             </div>
             <div class="header-phone">
@@ -647,49 +651,51 @@
             </div>
         </div>
 
-        <div class="chess-row reverse">
-            <div class="chess-text">
-                <h4>Натуральные ковры</h4>
-                <p>Экологичные решения из чистых природных материалов.</p>
-                <ul>
-                    <li><strong>Jacaranda</strong> — TENCEL® и натуральная шерсть</li>
-                    <li><strong>Best Wool</strong> — 100% новозеландская шерсть</li>
-                    <li><strong>Delarage</strong> — ковры ручной работы из Индии</li>
-                </ul>
+        <div style="flex: 1; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 4px;">
+            <div class="chess-row reverse">
+                <div class="chess-text">
+                    <h4>Натуральные ковры</h4>
+                    <p>Экологичные решения из чистых природных материалов.</p>
+                    <ul>
+                        <li><strong>Jacaranda</strong> — TENCEL® и натуральная шерсть</li>
+                        <li><strong>Best Wool</strong> — 100% новозеландская шерсть</li>
+                        <li><strong>Delarage</strong> — ковры ручной работы из Индии</li>
+                    </ul>
+                </div>
+                <div class="chess-photo">
+                    <span class="label">Фото: Премиальный интерьер</span>
+                </div>
             </div>
-            <div class="chess-photo">
-                <span class="label">Фото: Премиальный интерьер</span>
-            </div>
-        </div>
 
-        <div class="chess-row">
-            <div class="chess-text">
-                <h4>Паркет и инженерная доска</h4>
-                <p>Природная красота и современные технологии.</p>
-                <ul>
-                    <li>AnticWood, Karelia, Тамбовский дом паркета</li>
-                    <li>Quartz Parquet, MyStep Aqua Wood</li>
-                    <li>FParket — для общественных зон</li>
-                    <li><strong>Bersaglieri:</strong> до 600 мм × до 7 м</li>
-                </ul>
+            <div class="chess-row">
+                <div class="chess-text">
+                    <h4>Паркет и инженерная доска</h4>
+                    <p>Природная красота и современные технологии.</p>
+                    <ul>
+                        <li>AnticWood, Karelia, Тамбовский дом паркета</li>
+                        <li>Quartz Parquet, MyStep Aqua Wood</li>
+                        <li>FParket — для общественных зон</li>
+                        <li><strong>Bersaglieri:</strong> до 600 мм × до 7 м</li>
+                    </ul>
+                </div>
+                <div class="chess-photo">
+                    <span class="label">Фото: Паркет в интерьере</span>
+                </div>
             </div>
-            <div class="chess-photo">
-                <span class="label">Фото: Паркет в интерьере</span>
-            </div>
-        </div>
 
-        <div class="chess-row reverse">
-            <div class="chess-text">
-                <h4>Террасная доска и фасады</h4>
-                <p>Древесина ценных пород для наружного использования.</p>
-                <ul>
-                    <li>Кумару, ИПЕ, Тик, Мербау, Термо Ясень</li>
-                    <li>Террасы, открытые площадки, фасады</li>
-                    <li>Садовый паркет из экзотических пород</li>
-                </ul>
-            </div>
-            <div class="chess-photo">
-                <span class="label">Фото: Терраса</span>
+            <div class="chess-row reverse">
+                <div class="chess-text">
+                    <h4>Террасная доска и фасады</h4>
+                    <p>Древесина ценных пород для наружного использования.</p>
+                    <ul>
+                        <li>Кумару, ИПЕ, Тик, Мербау, Термо Ясень</li>
+                        <li>Террасы, открытые площадки, фасады</li>
+                        <li>Садовый паркет из экзотических пород</li>
+                    </ul>
+                </div>
+                <div class="chess-photo">
+                    <span class="label">Фото: Терраса</span>
+                </div>
             </div>
         </div>
 
@@ -714,7 +720,7 @@
         <div class="header-row">
             <div class="logo-block">
                 <div class="logo-box">
-                    <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390?v=1601247390" alt="Princip Floor" onerror="this.parentElement.innerHTML='<span style=\'font-size:18px;color:#3b5999;font-weight:400;\'>PF</span>'">
+                    <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390?v=1601247390" alt="Princip Floor" onerror="this.parentElement.innerHTML='<span style=\'font-size:16px;color:#3b5999;font-weight:400;\'>PF</span>'">
                 </div>
             </div>
             <div class="header-phone">
@@ -722,54 +728,56 @@
             </div>
         </div>
 
-        <div class="chess-row">
-            <div class="chess-text">
-                <h4>Мебель из ротанга</h4>
-                <p>От производителя «РИТОРИКА».</p>
-                <ul>
-                    <li>Стальной каркас с полимерно-порошковым покрытием</li>
-                    <li>Мягкие подушки из водоотталкивающих тканей</li>
-                    <li>Кресла-коконы, подвесные кресла, обеденные группы</li>
-                </ul>
+        <div style="flex: 1; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 4px;">
+            <div class="chess-row">
+                <div class="chess-text">
+                    <h4>Мебель из ротанга</h4>
+                    <p>От производителя «РИТОРИКА».</p>
+                    <ul>
+                        <li>Стальной каркас с полимерно-порошковым покрытием</li>
+                        <li>Мягкие подушки из водоотталкивающих тканей</li>
+                        <li>Кресла-коконы, подвесные кресла, обеденные группы</li>
+                    </ul>
+                </div>
+                <div class="chess-photo">
+                    <span class="label">Фото: Мебель из ротанга</span>
+                </div>
             </div>
-            <div class="chess-photo">
-                <span class="label">Фото: Мебель из ротанга</span>
+
+            <div class="chess-row reverse">
+                <div class="chess-text">
+                    <h4>Декор и аксессуары</h4>
+                    <p>Идеальное завершение интерьера.</p>
+                    <ul>
+                        <li><strong>Металл:</strong> Progress Profiles, Русский Профиль</li>
+                        <li><strong>Лепной декор:</strong> ORAC DECOR, Decomaster, HiWood, NMC</li>
+                        <li><strong>Дерево:</strong> Tarsi, Karelia</li>
+                    </ul>
+                </div>
+                <div class="chess-photo">
+                    <span class="label">Фото: Интерьер с декором</span>
+                </div>
+            </div>
+
+            <div class="chess-row">
+                <div class="chess-text">
+                    <h4>Пробковые покрытия</h4>
+                    <p>Экологичные и тёплые материалы.</p>
+                    <ul>
+                        <li>Izora, CorkArt, Wicanders</li>
+                    </ul>
+                    <h4 style="margin-top: 6px;">Клеи и химия</h4>
+                    <ul>
+                        <li>Lechner, Home Expert, Loba, Probond, NPT, Bona</li>
+                    </ul>
+                </div>
+                <div class="chess-photo">
+                    <span class="label">Фото: Пробковое покрытие</span>
+                </div>
             </div>
         </div>
 
-        <div class="chess-row reverse">
-            <div class="chess-text">
-                <h4>Декор и аксессуары</h4>
-                <p>Идеальное завершение интерьера.</p>
-                <ul>
-                    <li><strong>Металл:</strong> Progress Profiles, Русский Профиль</li>
-                    <li><strong>Лепной декор:</strong> ORAC DECOR, Decomaster, HiWood, NMC</li>
-                    <li><strong>Дерево:</strong> Tarsi, Karelia</li>
-                </ul>
-            </div>
-            <div class="chess-photo">
-                <span class="label">Фото: Интерьер с декором</span>
-            </div>
-        </div>
-
-        <div class="chess-row">
-            <div class="chess-text">
-                <h4>Пробковые покрытия</h4>
-                <p>Экологичные и тёплые материалы.</p>
-                <ul>
-                    <li>Izora, CorkArt, Wicanders</li>
-                </ul>
-                <h4 style="margin-top: 6px;">Клеи и химия</h4>
-                <ul>
-                    <li>Lechner, Home Expert, Loba, Probond, NPT, Bona</li>
-                </ul>
-            </div>
-            <div class="chess-photo">
-                <span class="label">Фото: Пробковое покрытие</span>
-            </div>
-        </div>
-
-        <!-- УСЛОВИЯ И КОНТАКТЫ -->
+        <!-- УСЛОВИЯ -->
         <div style="margin-top: 6px; border-top: 1px solid var(--border-light); padding-top: 8px;">
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
                 <div>

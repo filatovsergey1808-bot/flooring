@@ -58,7 +58,7 @@
             width: 50px;
             height: 2px;
             background: #3b5999;
-            margin: 10px 0 14px;
+            margin: 8px 0 12px;
         }
 
         /* ---------- ЦВЕТА ---------- */
@@ -80,9 +80,9 @@
 
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 42px;
+            font-size: 38px;
             font-weight: 400;
-            letter-spacing: 5px;
+            letter-spacing: 4px;
             line-height: 1.05;
             color: var(--text-primary);
         }
@@ -198,8 +198,8 @@
         .chess-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 12px;
+            gap: 16px;
+            margin-bottom: 8px;
             flex: 1;
             align-items: center;
         }
@@ -217,15 +217,15 @@
             padding: 0 2px;
         }
         .chess-text h4 {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
-            letter-spacing: 1.5px;
-            margin-bottom: 4px;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
         }
         .chess-text p {
-            font-size: 11.5px;
+            font-size: 11px;
             font-weight: 300;
-            line-height: 1.6;
+            line-height: 1.5;
             color: var(--text-secondary);
             margin-bottom: 2px;
         }
@@ -235,9 +235,9 @@
             margin: 2px 0 0 0;
         }
         .chess-text ul li {
-            font-size: 11px;
+            font-size: 10.5px;
             font-weight: 300;
-            line-height: 1.5;
+            line-height: 1.4;
             color: var(--text-secondary);
             padding: 1px 0 1px 14px;
             position: relative;
@@ -258,7 +258,7 @@
         }
 
         .chess-photo {
-            min-height: 100px;
+            min-height: 90px;
             background: #f4f2ef;
             position: relative;
             overflow: hidden;
@@ -293,7 +293,7 @@
             border-radius: 2px;
             border-left: 3px solid var(--accent-blue);
             flex-shrink: 0;
-            margin-top: 6px;
+            margin-top: 10px;
         }
         .contact-block .contact-row {
             display: flex;
@@ -484,10 +484,10 @@
 <body>
 
 <!-- ============================================================ -->
-<!-- СТРАНИЦА 1 — ОБЛОЖКА                                          -->
+<!-- СТРАНИЦА 1 — ОБЛОЖКА (3 блока каталога)                       -->
 <!-- ============================================================ -->
 <div class="page" data-page="0">
-    <!-- ШАПКА (НАД ВСЕМИ ПОЛОСАМИ) -->
+    <!-- ШАПКА С ЛОГОТИПОМ (НАД ВЕРХНЕЙ ПОЛОСОЙ) -->
     <div class="header-row">
         <div class="logo-block">
             <div class="logo-box">
@@ -499,45 +499,42 @@
         </div>
     </div>
 
-    <!-- ОСНОВНОЙ БЛОК С ПОЛОСАМИ И КОНТЕНТОМ -->
+    <!-- ОСНОВНОЙ БЛОК -->
     <div style="flex: 1; display: flex; flex-direction: column; position: relative;">
-        <!-- ПОЛОСЫ ВНУТРИ ЭТОГО БЛОКА -->
         <div class="accent-stripe stripe-top"></div>
         <div class="accent-stripe stripe-bottom"></div>
 
-        <!-- КОНТЕНТ МЕЖДУ ПОЛОСАМИ -->
         <div class="content-wrapper">
-            <!-- Заголовок -->
+            <!-- ПРИВЕТСТВИЕ (ПОД ВЕРХНЕЙ ПОЛОСОЙ) -->
             <div style="margin-bottom: 8px;">
                 <div style="border-left: 3px solid var(--accent-blue); padding-left: 18px;">
                     <p class="text-small" style="color: var(--accent-blue); letter-spacing: 5px; margin-bottom: 4px;">Основан в 2017</p>
-                    <h1 style="font-size: 38px; letter-spacing: 4px;">
+                    <h1 style="font-size: 36px; letter-spacing: 3px;">
                         <span class="light">PRINCIP</span><br>
                         <span style="color: var(--accent-blue);">FLOOR</span>
                     </h1>
-                    <p style="font-size: 13px; color: var(--text-secondary); font-weight: 300; letter-spacing: 3px; margin-top: 6px; max-width: 320px;">
+                    <p style="font-size: 12px; color: var(--text-secondary); font-weight: 300; letter-spacing: 2px; margin-top: 4px; max-width: 300px;">
                         Архитектура напольных покрытий
                     </p>
-                    <div class="divider-line" style="margin: 8px 0 8px;"></div>
-                    <p style="font-size: 11px; color: var(--text-muted); max-width: 280px; letter-spacing: 0.5px; line-height: 1.6; font-weight: 300;">
+                    <div class="divider-line" style="margin: 6px 0 8px;"></div>
+                    <p style="font-size: 10.5px; color: var(--text-muted); max-width: 260px; letter-spacing: 0.5px; line-height: 1.6; font-weight: 300;">
                         Комплексные решения для интерьеров высшего уровня
                     </p>
                 </div>
             </div>
 
-            <!-- Блоки каталога -->
-            <div style="border-top: 1px solid var(--border-light); padding-top: 10px; margin-top: 4px; flex: 1;">
-                <div class="chess-row" style="margin-bottom: 8px; flex: 1;">
+            <!-- Три блока каталога -->
+            <div style="border-top: 1px solid var(--border-light); padding-top: 8px; margin-top: 2px; flex: 1; display: flex; flex-direction: column; gap: 6px;">
+                <div class="chess-row" style="margin-bottom: 0; flex: 1;">
                     <div class="chess-text">
                         <h4>Спортивные покрытия</h4>
-                        <p>Профессиональные решения для объектов любого уровня.</p>
                         <ul>
                             <li>Резиновые и каучуковые покрытия</li>
                             <li>Искусственная трава, беговые дорожки</li>
                             <li>Спортивный паркет Gerflor, Karelia</li>
                         </ul>
                     </div>
-                    <div class="chess-photo" style="min-height: 90px;">
+                    <div class="chess-photo" style="min-height: 80px;">
                         <span class="label">Фото: Спортзал</span>
                     </div>
                 </div>
@@ -545,21 +542,33 @@
                 <div class="chess-row reverse" style="margin-bottom: 0; flex: 1;">
                     <div class="chess-text">
                         <h4>Медицинские покрытия</h4>
-                        <p>Антибактериальные материалы для ЛПУ и детских учреждений.</p>
                         <ul>
                             <li>Gerflor — гомогенные и гетерогенные</li>
                             <li>Tarkett — для ЛПУ</li>
                         </ul>
                     </div>
-                    <div class="chess-photo" style="min-height: 90px;">
+                    <div class="chess-photo" style="min-height: 80px;">
                         <span class="label">Фото: Медицинский центр</span>
+                    </div>
+                </div>
+
+                <div class="chess-row" style="margin-bottom: 0; flex: 1;">
+                    <div class="chess-text">
+                        <h4>Офисные покрытия</h4>
+                        <ul>
+                            <li>Gerflor, Unilin, Pergo, Moduleo</li>
+                            <li>Для бизнес-центров и общественных пространств</li>
+                        </ul>
+                    </div>
+                    <div class="chess-photo" style="min-height: 80px;">
+                        <span class="label">Фото: Офис</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ПОДПИСИ (ПОД ВСЕМИ ПОЛОСАМИ) -->
+    <!-- ПОДПИСИ (ПОД НИЖНЕЙ ПОЛОСОЙ) -->
     <div class="footer-tags">
         <span>Комплексные решения</span>
         <span class="highlight">•</span>
@@ -591,24 +600,15 @@
         <div class="accent-stripe stripe-bottom"></div>
 
         <div class="content-wrapper">
-            <div class="chess-row">
-                <div class="chess-text">
-                    <h4>Офисные покрытия</h4>
-                    <p>Надёжные и ремонтопригодные решения для бизнес-центров.</p>
-                    <ul>
-                        <li>Gerflor, Unilin, Pergo, Moduleo</li>
-                    </ul>
-                    <p style="margin-top: 4px;">Для общественных пространств с высокой проходимостью.</p>
-                </div>
-                <div class="chess-photo">
-                    <span class="label">Фото: Офисное пространство</span>
-                </div>
+            <div style="margin-bottom: 8px;">
+                <h3>Каталог</h3>
+                <h2>Более 10 000 коллекций</h2>
+                <p style="font-size: 11px; font-weight: 300;">от ведущих мировых производителей</p>
             </div>
 
             <div class="chess-row reverse">
                 <div class="chess-text">
                     <h4>Кварцвинил и ламинат</h4>
-                    <p>Влагостойкие и ударопрочные материалы для дома и офиса.</p>
                     <ul>
                         <li>Fargo, Strong Step, Planker, Aqua Floor, Vinilam</li>
                         <li>MyStep, Pergo, Moduleo, Куберпол, EVO Floor</li>
@@ -616,14 +616,13 @@
                     </ul>
                 </div>
                 <div class="chess-photo">
-                    <span class="label">Фото: Интерьер с кварцвинилом</span>
+                    <span class="label">Фото: Кварцвинил</span>
                 </div>
             </div>
 
             <div class="chess-row">
                 <div class="chess-text">
                     <h4>Ковровые покрытия и плитка</h4>
-                    <p>Уют и акустический комфорт для любых пространств.</p>
                     <ul>
                         <li><strong>Рулонные:</strong> AW, Balsan, EDEL, Condor, Bonkeel</li>
                         <li><strong>Плитка:</strong> AW, Balsan, IVC, Mohawk, Betap, Belgotex, Innovflor</li>
@@ -633,13 +632,27 @@
                     <span class="label">Фото: Ковровое покрытие</span>
                 </div>
             </div>
+
+            <div class="chess-row reverse">
+                <div class="chess-text">
+                    <h4>Натуральные ковры</h4>
+                    <ul>
+                        <li><strong>Jacaranda</strong> — TENCEL® и натуральная шерсть</li>
+                        <li><strong>Best Wool</strong> — 100% новозеландская шерсть</li>
+                        <li><strong>Delarage</strong> — ковры ручной работы из Индии</li>
+                    </ul>
+                </div>
+                <div class="chess-photo">
+                    <span class="label">Фото: Премиум интерьер</span>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="footer-tags">
-        <span>Более 10 000 коллекций</span>
+        <span>Эксклюзивные коллекции</span>
         <span class="highlight">•</span>
-        <span>Ведущие производители</span>
+        <span>Индивидуальные решения</span>
     </div>
 
     <div class="watermark">PF</div>
@@ -665,25 +678,14 @@
         <div class="accent-stripe stripe-bottom"></div>
 
         <div class="content-wrapper">
-            <div class="chess-row reverse">
-                <div class="chess-text">
-                    <h4>Натуральные ковры</h4>
-                    <p>Экологичные решения из чистых природных материалов.</p>
-                    <ul>
-                        <li><strong>Jacaranda</strong> — TENCEL® и натуральная шерсть</li>
-                        <li><strong>Best Wool</strong> — 100% новозеландская шерсть</li>
-                        <li><strong>Delarage</strong> — ковры ручной работы из Индии</li>
-                    </ul>
-                </div>
-                <div class="chess-photo">
-                    <span class="label">Фото: Премиальный интерьер</span>
-                </div>
+            <div style="margin-bottom: 8px;">
+                <h3>Каталог</h3>
+                <h2>Продолжение</h2>
             </div>
 
             <div class="chess-row">
                 <div class="chess-text">
                     <h4>Паркет и инженерная доска</h4>
-                    <p>Природная красота и современные технологии.</p>
                     <ul>
                         <li>AnticWood, Karelia, Тамбовский дом паркета</li>
                         <li>Quartz Parquet, MyStep Aqua Wood</li>
@@ -692,14 +694,13 @@
                     </ul>
                 </div>
                 <div class="chess-photo">
-                    <span class="label">Фото: Паркет в интерьере</span>
+                    <span class="label">Фото: Паркет</span>
                 </div>
             </div>
 
             <div class="chess-row reverse">
                 <div class="chess-text">
                     <h4>Террасная доска и фасады</h4>
-                    <p>Древесина ценных пород для наружного использования.</p>
                     <ul>
                         <li>Кумару, ИПЕ, Тик, Мербау, Термо Ясень</li>
                         <li>Террасы, открытые площадки, фасады</li>
@@ -710,20 +711,35 @@
                     <span class="label">Фото: Терраса</span>
                 </div>
             </div>
+
+            <div class="chess-row">
+                <div class="chess-text">
+                    <h4>Мебель из ротанга</h4>
+                    <p>От производителя «РИТОРИКА».</p>
+                    <ul>
+                        <li>Стальной каркас с полимерно-порошковым покрытием</li>
+                        <li>Мягкие подушки из водоотталкивающих тканей</li>
+                        <li>Кресла-коконы, подвесные кресла, обеденные группы</li>
+                    </ul>
+                </div>
+                <div class="chess-photo">
+                    <span class="label">Фото: Ротанг</span>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="footer-tags">
-        <span>Эксклюзивные коллекции</span>
+        <span>Натуральные материалы</span>
         <span class="highlight">•</span>
-        <span>Индивидуальные решения</span>
+        <span>Премиум-качество</span>
     </div>
 
     <div class="watermark">PF</div>
 </div>
 
 <!-- ============================================================ -->
-<!-- СТРАНИЦА 4 — КАТАЛОГ (завершение) + УСЛОВИЯ + КОНТАКТЫ        -->
+<!-- СТРАНИЦА 4 — ЗАВЕРШЕНИЕ + УСЛОВИЯ + КОНТАКТЫ                 -->
 <!-- ============================================================ -->
 <div class="page" data-page="3">
     <div class="header-row">
@@ -741,80 +757,70 @@
         <div class="accent-stripe stripe-top"></div>
         <div class="accent-stripe stripe-bottom"></div>
 
-        <div class="content-wrapper">
-            <div class="chess-row">
-                <div class="chess-text">
-                    <h4>Мебель из ротанга</h4>
-                    <p>От производителя «РИТОРИКА».</p>
-                    <ul>
-                        <li>Стальной каркас с полимерно-порошковым покрытием</li>
-                        <li>Мягкие подушки из водоотталкивающих тканей</li>
-                        <li>Кресла-коконы, подвесные кресла, обеденные группы</li>
-                    </ul>
+        <div class="content-wrapper" style="justify-content: space-between;">
+            <div>
+                <div style="margin-bottom: 6px;">
+                    <h3>Завершение</h3>
+                    <h2>Полный спектр решений</h2>
                 </div>
-                <div class="chess-photo">
-                    <span class="label">Фото: Мебель из ротанга</span>
-                </div>
-            </div>
 
-            <div class="chess-row reverse">
-                <div class="chess-text">
-                    <h4>Декор и аксессуары</h4>
-                    <p>Идеальное завершение интерьера.</p>
-                    <ul>
-                        <li><strong>Металл:</strong> Progress Profiles, Русский Профиль</li>
-                        <li><strong>Лепной декор:</strong> ORAC DECOR, Decomaster, HiWood, NMC</li>
-                        <li><strong>Дерево:</strong> Tarsi, Karelia</li>
-                    </ul>
+                <div class="chess-row reverse" style="margin-bottom: 6px;">
+                    <div class="chess-text">
+                        <h4>Декор и аксессуары</h4>
+                        <ul>
+                            <li><strong>Металл:</strong> Progress Profiles, Русский Профиль</li>
+                            <li><strong>Лепной декор:</strong> ORAC DECOR, Decomaster, HiWood, NMC</li>
+                            <li><strong>Дерево:</strong> Tarsi, Karelia</li>
+                        </ul>
+                    </div>
+                    <div class="chess-photo">
+                        <span class="label">Фото: Декор</span>
+                    </div>
                 </div>
-                <div class="chess-photo">
-                    <span class="label">Фото: Интерьер с декором</span>
-                </div>
-            </div>
 
-            <div class="chess-row">
-                <div class="chess-text">
-                    <h4>Пробковые покрытия</h4>
-                    <p>Экологичные и тёплые материалы.</p>
-                    <ul>
-                        <li>Izora, CorkArt, Wicanders</li>
-                    </ul>
-                    <h4 style="margin-top: 6px;">Клеи и химия</h4>
-                    <ul>
-                        <li>Lechner, Home Expert, Loba, Probond, NPT, Bona</li>
-                    </ul>
-                </div>
-                <div class="chess-photo">
-                    <span class="label">Фото: Пробковое покрытие</span>
+                <div class="chess-row" style="margin-bottom: 6px;">
+                    <div class="chess-text">
+                        <h4>Пробковые покрытия</h4>
+                        <ul>
+                            <li>Izora, CorkArt, Wicanders</li>
+                        </ul>
+                        <h4 style="margin-top: 6px;">Клеи и химия</h4>
+                        <ul>
+                            <li>Lechner, Home Expert, Loba, Probond, NPT, Bona</li>
+                        </ul>
+                    </div>
+                    <div class="chess-photo">
+                        <span class="label">Фото: Пробка</span>
+                    </div>
                 </div>
             </div>
 
             <!-- УСЛОВИЯ -->
-            <div style="margin-top: 6px; border-top: 1px solid var(--border-light); padding-top: 8px;">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div style="margin-top: 8px; border-top: 1px solid var(--border-light); padding-top: 10px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
                     <div>
-                        <h4 style="font-size: 10px; letter-spacing: 2px; margin-bottom: 4px;">УСЛОВИЯ СОТРУДНИЧЕСТВА</h4>
+                        <h4 style="font-size: 10px; letter-spacing: 2px; margin-bottom: 6px;">УСЛОВИЯ СОТРУДНИЧЕСТВА</h4>
                         <ul style="list-style: none; padding: 0; margin: 0;">
-                            <li style="font-size: 10px; font-weight: 300; line-height: 1.5; color: var(--text-secondary); padding: 1px 0 1px 14px; position: relative;">— Индивидуальный расчёт</li>
-                            <li style="font-size: 10px; font-weight: 300; line-height: 1.5; color: var(--text-secondary); padding: 1px 0 1px 14px; position: relative;">— Консультационная поддержка</li>
-                            <li style="font-size: 10px; font-weight: 300; line-height: 1.5; color: var(--text-secondary); padding: 1px 0 1px 14px; position: relative;">— Сертифицированная продукция</li>
-                            <li style="font-size: 10px; font-weight: 300; line-height: 1.5; color: var(--text-secondary); padding: 1px 0 1px 14px; position: relative;">— Комплексные поставки</li>
+                            <li style="font-size: 10px; font-weight: 300; line-height: 1.6; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative;">— Индивидуальный расчёт</li>
+                            <li style="font-size: 10px; font-weight: 300; line-height: 1.6; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative;">— Консультационная поддержка</li>
+                            <li style="font-size: 10px; font-weight: 300; line-height: 1.6; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative;">— Сертифицированная продукция</li>
+                            <li style="font-size: 10px; font-weight: 300; line-height: 1.6; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative;">— Комплексные поставки</li>
                         </ul>
                     </div>
                     <div>
-                        <h4 style="font-size: 10px; letter-spacing: 2px; margin-bottom: 4px;">ЭТАПЫ РАБОТЫ</h4>
+                        <h4 style="font-size: 10px; letter-spacing: 2px; margin-bottom: 6px;">ЭТАПЫ РАБОТЫ</h4>
                         <ul style="list-style: none; padding: 0; margin: 0;">
-                            <li style="font-size: 10px; font-weight: 300; line-height: 1.5; color: var(--text-secondary); padding: 1px 0 1px 14px; position: relative;"><strong style="font-weight: 500;">1.</strong> Заявка</li>
-                            <li style="font-size: 10px; font-weight: 300; line-height: 1.5; color: var(--text-secondary); padding: 1px 0 1px 14px; position: relative;"><strong style="font-weight: 500;">2.</strong> Консультация</li>
-                            <li style="font-size: 10px; font-weight: 300; line-height: 1.5; color: var(--text-secondary); padding: 1px 0 1px 14px; position: relative;"><strong style="font-weight: 500;">3.</strong> Расчёт и КП</li>
-                            <li style="font-size: 10px; font-weight: 300; line-height: 1.5; color: var(--text-secondary); padding: 1px 0 1px 14px; position: relative;"><strong style="font-weight: 500;">4.</strong> Поставка и сервис</li>
+                            <li style="font-size: 10px; font-weight: 300; line-height: 1.6; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative;"><strong style="font-weight: 500;">1.</strong> Заявка</li>
+                            <li style="font-size: 10px; font-weight: 300; line-height: 1.6; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative;"><strong style="font-weight: 500;">2.</strong> Консультация</li>
+                            <li style="font-size: 10px; font-weight: 300; line-height: 1.6; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative;"><strong style="font-weight: 500;">3.</strong> Расчёт и КП</li>
+                            <li style="font-size: 10px; font-weight: 300; line-height: 1.6; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative;"><strong style="font-weight: 500;">4.</strong> Поставка и сервис</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
             <!-- КОНТАКТЫ -->
-            <div class="contact-block" style="margin-top: 6px;">
+            <div class="contact-block" style="margin-top: 12px; padding: 16px 24px;">
                 <div class="contact-row">
                     <span class="contact-label">Сайт</span>
                     <span class="contact-value"><a href="https://principfloor.ru" target="_blank">principfloor.ru</a></span>

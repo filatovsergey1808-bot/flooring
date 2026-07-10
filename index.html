@@ -38,13 +38,13 @@
             flex-shrink: 0;
         }
 
-        /* ---------- АКЦЕНТНЫЕ СИНИЕ ПОЛОСЫ ---------- */
+        /* ---------- АКЦЕНТНЫЕ СИНИЕ ПОЛОСЫ (в 4 раза шире) ---------- */
         .accent-stripe {
             position: absolute;
             left: 0;
             width: 100%;
-            height: 10px;
-            background: #4a7a9c;
+            height: 40px;
+            background: #0066cc;
             pointer-events: none;
             z-index: 1;
         }
@@ -55,10 +55,10 @@
             bottom: 12mm;
         }
 
-        /* ---------- ЦВЕТА ---------- */
+        /* ---------- ЦВЕТА (только синий) ---------- */
         :root {
-            --accent-blue: #4a7a9c;
-            --accent-gold: #b8860b;
+            --accent-blue: #0066cc;
+            --accent-blue-light: #3385ff;
             --text-dark: #1a1a1a;
             --text-muted: #555555;
             --text-light: #888888;
@@ -67,13 +67,10 @@
         .accent-blue {
             color: var(--accent-blue);
         }
-        .accent-gold {
-            color: var(--accent-gold);
-        }
         .accent-line {
             width: 50px;
             height: 3px;
-            background: var(--accent-gold);
+            background: var(--accent-blue);
             margin: 6px 0 12px;
         }
 
@@ -98,7 +95,7 @@
             font-weight: 600;
             letter-spacing: 4px;
             text-transform: uppercase;
-            color: var(--accent-gold);
+            color: var(--accent-blue);
             margin-bottom: 2px;
         }
         h4 {
@@ -156,7 +153,7 @@
             color: var(--text-dark);
         }
         .logo-placeholder .logo-text .accent {
-            color: var(--accent-gold);
+            color: var(--accent-blue);
         }
 
         /* ---------- СЕТКИ ---------- */
@@ -230,7 +227,7 @@
         /* ---------- КАТЕГОРИИ КАТАЛОГА ---------- */
         .cat-block {
             background: #f7f9fc;
-            border-left: 3px solid var(--accent-gold);
+            border-left: 3px solid var(--accent-blue);
             padding: 5px 10px;
             margin-bottom: 3px;
             border-radius: 0 3px 3px 0;
@@ -258,7 +255,7 @@
             content: "•";
             position: absolute;
             left: 0;
-            color: var(--accent-gold);
+            color: var(--accent-blue);
             font-size: 12px;
         }
         .cat-block p {
@@ -286,7 +283,7 @@
             content: "✓";
             position: absolute;
             left: 0;
-            color: var(--accent-gold);
+            color: var(--accent-blue);
             font-weight: 700;
             font-size: 14px;
         }
@@ -305,7 +302,7 @@
             border-bottom: 1px solid #eef0f2;
         }
         .step-table .step-num {
-            color: var(--accent-gold);
+            color: var(--accent-blue);
             font-weight: 700;
             width: 24px;
             font-size: 13px;
@@ -326,7 +323,7 @@
             background: #f4f6f9;
             padding: 10px 14px;
             border-radius: 3px;
-            border-left: 3px solid var(--accent-gold);
+            border-left: 3px solid var(--accent-blue);
             flex-shrink: 0;
         }
         .contact-block p {
@@ -348,7 +345,7 @@
             bottom: -20px;
             font-size: 140px;
             font-weight: 900;
-            color: rgba(74, 122, 156, 0.04);
+            color: rgba(0, 102, 204, 0.04);
             letter-spacing: -10px;
             line-height: 1;
             pointer-events: none;
@@ -383,7 +380,7 @@
             letter-spacing: 1px;
         }
         .nav-controls button:hover {
-            background: var(--accent-gold);
+            background: var(--accent-blue-light);
         }
         .nav-controls .indicator {
             font-size: 12px;
@@ -504,7 +501,7 @@
         <!-- ЛОГОТИП -->
         <div class="logo-placeholder">
             <div class="logo-box">
-                <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390?v=1601247390" alt="Princip Floor" onerror="this.parentElement.innerHTML='<span style=\'font-size:18px;color:#4a7a9c;font-weight:700;\'>PF</span>'">
+                <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390?v=1601247390" alt="Princip Floor" onerror="this.parentElement.innerHTML='<span style=\'font-size:18px;color:#0066cc;font-weight:700;\'>PF</span>'">
             </div>
             <div class="logo-text">
                 PRINCIP <span class="accent">FLOOR</span>
@@ -512,11 +509,11 @@
         </div>
 
         <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 10px 0;">
-            <div style="border-left: 4px solid var(--accent-gold); padding-left: 20px;">
-                <h3 style="color: var(--accent-gold); letter-spacing: 5px; font-size: 11px;">С 2017 ГОДА</h3>
+            <div style="border-left: 4px solid var(--accent-blue); padding-left: 20px;">
+                <h3 style="color: var(--accent-blue); letter-spacing: 5px; font-size: 11px;">С 2017 ГОДА</h3>
                 <h1 style="font-size: 48px; letter-spacing: 3px; line-height: 1.05;">
                     PRINCIP<br>
-                    <span style="color: var(--accent-gold);">FLOOR</span>
+                    <span style="color: var(--accent-blue);">FLOOR</span>
                 </h1>
                 <p style="font-size: 15px; color: var(--text-muted); letter-spacing: 2px; margin-top: 6px; max-width: 380px;">
                     Профессиональные напольные покрытия<br>для бизнеса, спорта и премиум-интерьеров
@@ -531,7 +528,7 @@
         <div style="border-top: 1px solid #eef0f2; padding-top: 10px; display: flex; gap: 20px; flex-wrap: wrap; flex-shrink: 0;">
             <span class="text-small">КОМПЛЕКСНЫЕ РЕШЕНИЯ</span>
             <span class="text-small">ИНДИВИДУАЛЬНЫЙ ПОДХОД</span>
-            <span class="text-small" style="color: var(--accent-gold);">#PRINCIPFLOOR</span>
+            <span class="text-small" style="color: var(--accent-blue);">#PRINCIPFLOOR</span>
         </div>
     </div>
     <div class="watermark">PF</div>
@@ -549,7 +546,7 @@
         <!-- ЛОГОТИП -->
         <div class="logo-placeholder">
             <div class="logo-box">
-                <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390?v=1601247390" alt="Princip Floor" onerror="this.parentElement.innerHTML='<span style=\'font-size:18px;color:#4a7a9c;font-weight:700;\'>PF</span>'">
+                <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390?v=1601247390" alt="Princip Floor" onerror="this.parentElement.innerHTML='<span style=\'font-size:18px;color:#0066cc;font-weight:700;\'>PF</span>'">
             </div>
             <div class="logo-text">
                 PRINCIP <span class="accent">FLOOR</span>
@@ -664,7 +661,7 @@
         <!-- ЛОГОТИП -->
         <div class="logo-placeholder">
             <div class="logo-box">
-                <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390?v=1601247390" alt="Princip Floor" onerror="this.parentElement.innerHTML='<span style=\'font-size:18px;color:#4a7a9c;font-weight:700;\'>PF</span>'">
+                <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390?v=1601247390" alt="Princip Floor" onerror="this.parentElement.innerHTML='<span style=\'font-size:18px;color:#0066cc;font-weight:700;\'>PF</span>'">
             </div>
             <div class="logo-text">
                 PRINCIP <span class="accent">FLOOR</span>
@@ -772,7 +769,7 @@
             <span style="color: var(--text-light); font-size: 9px; letter-spacing: 2px;">PERGO</span>
             <span style="color: var(--text-light); font-size: 9px; letter-spacing: 2px;">MODULEO</span>
             <span style="color: var(--text-light); font-size: 9px; letter-spacing: 2px;">KARELIA</span>
-            <span style="color: var(--accent-gold); font-size: 9px; letter-spacing: 2px; font-weight: 600;">200+ БРЕНДОВ</span>
+            <span style="color: var(--accent-blue); font-size: 9px; letter-spacing: 2px; font-weight: 600;">200+ БРЕНДОВ</span>
         </div>
 
     </div>
@@ -791,7 +788,7 @@
         <!-- ЛОГОТИП -->
         <div class="logo-placeholder">
             <div class="logo-box">
-                <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390?v=1601247390" alt="Princip Floor" onerror="this.parentElement.innerHTML='<span style=\'font-size:18px;color:#4a7a9c;font-weight:700;\'>PF</span>'">
+                <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390?v=1601247390" alt="Princip Floor" onerror="this.parentElement.innerHTML='<span style=\'font-size:18px;color:#0066cc;font-weight:700;\'>PF</span>'">
             </div>
             <div class="logo-text">
                 PRINCIP <span class="accent">FLOOR</span>
